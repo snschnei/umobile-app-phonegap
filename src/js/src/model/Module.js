@@ -22,7 +22,7 @@
 			fname: 'fname',
 			title: 'Title',
 			url: 'url',
-			iconUrl: 'imgUrl',
+			iconUrl: 'iconUrl', // original was imgUrl
 			newItemCount: 0,
 			isNative: false
 		},

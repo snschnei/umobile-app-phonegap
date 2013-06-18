@@ -115,7 +115,28 @@ var umobile = {
 			// Iterate over portlets.
 			_.each(portlets, function (portlet, idx) {
 				portlet.id = portlet.fname;
+                function grabIcon(){
+                    var imagePath;
+                    var url = 'https://mysail.oakland.edu' + portlet.iconUrl;
+                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                        imagePath = fs.root.fullPath + portlet.iconUrl;
+                        var fileTransfer = new FileTransfer();
 
+                        fileTransfer.download(
+                            url,
+                            imagePath,
+                        function (entry) {
+                                console.log("downoad complete: " + entry.fullPath);
+                            },
+                        function (error) {
+                                console.log("download error source " + error.source);
+                                console.log("download error target " + error.target);
+                                console.log("upload error code " + error.code);
+                            }
+                        );
+                    })
+                    return imagePath; 
+                }
 				// Parse the config.nativeIcons object for a property
 				// that matches the portlet.fname. If one is found, set
 				// the icon url to leverage a locally stored icon. If a
@@ -124,7 +145,9 @@ var umobile = {
 				if (config.nativeIcons[portlet.fname]) {
 					portlet.iconUrl = 'images/icons/' + config.nativeIcons[portlet.fname];
 				} else {
-					portlet.iconUrl = config.uPortalServerUrl + portlet.iconUrl;
+                    var path = grabIcon();
+                    console.log("PATH ========= " + path);
+					portlet.iconUrl = path;
 				}
 
 				// Parse the config.nativeModules object for a property that
