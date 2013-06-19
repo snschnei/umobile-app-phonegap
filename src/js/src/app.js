@@ -117,7 +117,7 @@ var umobile = {
 				portlet.id = portlet.fname;
                 function grabIcon(){
                     var imagePath;
-                    var url = 'https://mysail.oakland.edu' + portlet.iconUrl;
+                    var url = config.uMobileServerUrl + portlet.iconUrl;
                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
                         imagePath = fs.root.fullPath + portlet.iconUrl;
                         var fileTransfer = new FileTransfer();
