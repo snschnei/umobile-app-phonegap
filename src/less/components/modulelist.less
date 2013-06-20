@@ -36,7 +36,7 @@
 		display: block;
 		position: relative;
 		color: @moduleLinkColor;
-		text-shadow: 1px 1px 3px @moduleLinkShadowColor;
+		//text-shadow: 1px 1px 3px @moduleLinkShadowColor;
 		margin: 0 15px 20px 15px;
 
 		// New item indicator
@@ -54,19 +54,24 @@
 
 		// Title
 		.um-title {
-			width: 55px;
+			width: 50%;
+            color: @black;
 			overflow: hidden;
-			padding: 10px 0 0 0;
-			font-size: 12px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+			padding:  20px 0 0 20px;
+			font-size: 18px;
 			font-weight: bold;
 		}
 
 		// Icon
 		.um-icon {
 			img {
-                align: left;
-				width: 57px;
-				height: 57px;
+                //height: 90%
+                padding: 5px 0 5px 0;
+                float: left;
+				width: 75px;
+				height: 75px;
 			}
 		}
 	}

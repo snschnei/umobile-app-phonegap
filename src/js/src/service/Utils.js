@@ -38,7 +38,7 @@
 		@param {String} suffix Characters appended to truncated string.
 		**/
 		truncate: function (str, length, suffix) {
-			length = (!length) ? 9 : length;
+			length = (!length) ? 60 : length;
 			suffix = (!suffix) ? '...' : suffix;
 			return (str.length > length) ? str.substring(0, (length - suffix.length)) + suffix : str;
 		},
