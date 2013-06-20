@@ -23,6 +23,7 @@
 			title: 'Title',
 			url: 'url',
 			iconUrl: 'iconUrl', // original was imgUrl
+            description: 'description',
 			newItemCount: 0,
 			isNative: false
 		},

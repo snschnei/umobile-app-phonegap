@@ -16,7 +16,7 @@
 		list-style: none;
 	}
 
-	// List
+	// ListView
 	.um-module-list li {
         width: 100%;
         float: left;
@@ -37,7 +37,6 @@
 		position: relative;
 		color: @moduleLinkColor;
 		//text-shadow: 1px 1px 3px @moduleLinkShadowColor;
-		margin: 0 15px 20px 15px;
 
 		// New item indicator
 		.um-new {
@@ -54,13 +53,25 @@
 
 		// Title
 		.um-title {
-			width: 50%;
+			width: 60%;
             color: @black;
 			overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
 			padding:  20px 0 0 20px;
 			font-size: 18px;
+			font-weight: bold;
+		}
+
+		// Description
+		.um-description {
+			width: 60%;
+            color: @black;
+			overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+			padding:  5px 0 0 20px;
+			font-size: 12px;
 			font-weight: bold;
 		}
 
@@ -72,6 +83,16 @@
                 float: left;
 				width: 75px;
 				height: 75px;
+			}
+		}
+
+		// Arror Icon
+		.um-arrow {
+			img {
+                padding: 0 10px 0 0;
+                float: right;
+				width: 20px;
+				height: 20px;
 			}
 		}
 	}
