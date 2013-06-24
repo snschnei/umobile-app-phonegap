@@ -65,8 +65,8 @@
 					login.removeClass('hidden');
 					logout.addClass('hidden');
 				} else {
-					login.removeClass('hidden');
-					logout.addClass('hidden');
+					login.addClass('hidden');
+					logout.removeClass('hidden');
 				}
 
 				console.log(this.currentRoute);
