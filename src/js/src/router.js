@@ -63,6 +63,12 @@
 			umobile.app.viewManager.show(module);
 		},
 
+        view: null,
+        
+        getView: function () {
+            return this.view;
+        }, 
+
 		/**
 		Listens for the route to change. When triggered,
 		it updates the class name on the html container
@@ -73,14 +79,14 @@
 		**/
 		onRouteChanged: function (route, routeParam) {
 			// Define.
-			var className, root, view, path;
+			var className, root, path;
 
 			// Initialize.
 			root = $('html');
 			route = route.split(':');
-			view = route[1];
-			path = (!routeParam) ? view : view + '/' + routeParam;
-			className = ('um-' + view);
+			this.view = route[1];
+			path = (!routeParam) ? this.view : this.view + '/' + routeParam;
+			className = ('um-' + this.view);
 
 			// Remove the class from the container when generated className
 			// is different from the stored currentViewClass.
@@ -96,7 +102,7 @@
 			umobile.app.stateModel.save({currentView: path});
 
 			// Broadcast route changed event.
-			$.publish('route.changed', {name: view});
+			$.publish('route.changed', {name: this.view});
 		},
 
 		/**

@@ -323,11 +323,33 @@ var umobile = {
     onDeviceReady: function () {
         'use strict';
 
+        // add listener for the back button
+        document.addEventListener('backbutton', umobile.onBackKeyDown, false);
+
         umobile.initEventListeners();
         umobile.initModels();
         umobile.initRouter();
         umobile.updateAppState();
     },
+
+    /**
+      This function will listen for the backbutton press. If the backbutton is pressed
+      while the user is viewing the dashboard then the app will close. Other wise it will
+      go back in the page history.
+
+      @method onBackKeyDown
+     **/
+    onBackKeyDown: function () {
+        // get the current view that the user is looking at.
+        var currentPage = umobile.app.router.getView();
+        if (currentPage === 'dashboard') {
+            navigator.app.exitApp();
+        }
+        else {
+            navigator.app.backHistory()
+        }
+    },
+    
 
     /**
       Entry point for the umobile application.
