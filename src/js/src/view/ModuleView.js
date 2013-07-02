@@ -39,6 +39,7 @@
 		@method cleanContainers
 		**/
 		cleanContainers: function () {
+            console.log("Awesome debug ModuleView.js - cleanContainers");
 			var notifier = this.loc('notifier'),
 				frame = this.loc('frame');
 
@@ -52,6 +53,7 @@
 		@method renderNotifier
 		**/
 		renderNotifier: function () {
+            console.log("Awesome debug ModuleView.js - renderNotifier");
 			// Define.
 			var notifier, notifierModel, notifierView;
 
@@ -68,6 +70,7 @@
 		@method renderFrame
 		**/
 		renderFrame: function () {
+            console.log("Awesome debug ModuleView.js - renderFrame");
 			var frame = this.loc('frame').show();
 		},
 
@@ -79,6 +82,7 @@
 		@override LoadedView
 		**/
 		renderError: function () {
+            console.log("Awesome debug ModuleView.js - renderError");
 			this.cleanContainers();
 			this.renderNotifier();
 		},
@@ -92,6 +96,7 @@
 		@override LoadedView
 		**/
 		renderContent: function (collection) {
+            console.log("Awesome debug ModuleView.js - renderContent");
 			this.cleanContainers();
 			this.renderFrame();
 		}

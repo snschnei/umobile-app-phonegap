@@ -45,6 +45,7 @@
 		@param {Object} view The current view.
 		**/
 		toggleVisibility: function () {
+            console.log("Awesome debug Footer.js - toggleVisibility");
 			// Define & initialize.
 			var username = this.credModel.get('username');
 
@@ -65,6 +66,7 @@
 		@override Base
 		**/
 		onCredChanged: function (model) {
+            console.log("Awesome debug Footer.js - onCredChanged");
 			this.toggleVisibility();
 		},
 
@@ -75,6 +77,7 @@
 		@override Base
 		**/
 		onRouteChanged: function (view) {
+            console.log("Awesome debug Footer.js - onRouteChanged");
 			this.currentRoute = view.name;
 			this.toggleVisibility();
 		}

@@ -27,6 +27,7 @@
 		@param {Object} options Success and error callbacks.
 		**/
 		save: function (options) {
+            console.log("Awesome debug ModuleCollection.js - save");
 			this.sync('update', this, options);
 		},
 
@@ -38,6 +39,7 @@
 		@param {Object} options Success and error callbacks.
 		**/
 		fetch: function (options) {
+            console.log("Awesome debug ModuleCollection.js - fetch");
 			this.sync('read', this, options);
 		},
 

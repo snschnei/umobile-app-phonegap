@@ -26,6 +26,7 @@
 			@return {Object} Reference to the current view.
 			**/
 			getCurrentView: function () {
+                console.log("Awesome debug ViewManager.js - getCurrentView");
 				return this.currentView;
 			},
 
@@ -36,6 +37,7 @@
 			@param {Object} view Reference to current view.
 			**/
 			show: function (view) {
+                console.log("Awesome debug ViewManager.js - show");
 				if (this.currentView) {
 					this.currentView.destroy();
 					delete this.currentView;

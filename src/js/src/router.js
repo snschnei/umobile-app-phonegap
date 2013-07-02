@@ -27,7 +27,9 @@
 		routes: {
 			'dashboard': 'dashboard',
 			'login': 'login',
+            'logout': 'logout',
 			'modules/*module': 'modules',
+            'forgotPassword': 'forgotPassword',
 			'*other': 'dashboard'
 		},
 
@@ -37,6 +39,7 @@
 		@method dashboard
 		**/
 		dashboard: function () {
+            console.log("Awesome debug router.js - dashboard");
 			var dashboard = new umobile.view.DashboardView();
 			umobile.app.viewManager.show(dashboard);
 		},
@@ -47,8 +50,20 @@
 		@method login
 		**/
 		login: function () {
+            console.log("Awesome debug router.js - login");
 			var login = new umobile.view.LoginView();
 			umobile.app.viewManager.show(login);
+		},
+
+		/**
+		Method initializes the logout view.
+
+		@method logout
+		**/
+		logout: function () {
+            console.log("Awesome debug router.js - logout");
+            umobile.app.auth.removeCredentials();
+            umobile.app.viewManager.show(new umobile.view.DashboardView());
 		},
 
 		/**
@@ -57,15 +72,25 @@
 		@method modules
 		**/
 		modules: function () {
+            console.log("Awesome debug router.js - modules");
 			var path, module;
 			path = umobile.utility.Utils.getParameter('url', Backbone.history.fragment);
 			module = new umobile.view.ModuleView({path: path});
 			umobile.app.viewManager.show(module);
 		},
 
+        forgotPassword: function () {
+            console.log("Awesome debug routher.js - forgot_Password");
+            var path, module;
+            path = "https://netid.oakland.edu/profile/";
+            module = new umobile.view.ModuleView({path: path});
+            umobile.app.viewManager.show(module);
+        },
+
         view: null,
         
         getView: function () {
+            console.log("Awesome debug router.js - getView");
             return this.view;
         }, 
 
@@ -78,6 +103,7 @@
 		@param {String} route Reference to full route path.
 		**/
 		onRouteChanged: function (route, routeParam) {
+            console.log("Awesome debug router.js - onRouteChanged");
 			// Define.
 			var className, root, path;
 
@@ -111,6 +137,7 @@
 		@method initialize
 		**/
 		initialize: function () {
+            console.log("Awesome debug router.js - initialize");
 			// Initialize the Page view.
 			var page = new umobile.view.Page().render();
 

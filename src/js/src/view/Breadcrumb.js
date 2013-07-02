@@ -39,6 +39,7 @@
 		@param {Object} view The current view.
 		**/
 		toggleVisibility: function (view) {
+            console.log("Awesome debug Breadcrumb.js - toggleVisibility");
 			var visibility = (view.name === 'dashboard') ? this.$el.addClass('hidden') : this.$el.removeClass('hidden');
 		},
 
@@ -49,6 +50,7 @@
 		@override Base
 		**/
 		onRouteChanged: function (view) {
+            console.log("Awesome debug Breadcrumb.js - onRouteChanged");
 			// Disabled. Not in use.
 			//this.toggleVisibility(view);
 		}

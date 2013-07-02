@@ -39,6 +39,7 @@
 		@method cleanContainers
 		**/
 		cleanContainers: function () {
+            console.log("Awesome debug DashboardView.js - cleanContainers");
 			var notifier = this.loc('notifier'),
 				moduleList = this.loc('moduleList');
 
@@ -52,6 +53,7 @@
 		@method renderModules
 		**/
 		renderModules: function () {
+                console.log("Awesome debug DashboardView.js - renderModules");
 			// Define & initialize.
 			var moduleList = this.loc('moduleList'),
 				modules = this.moduleCollection.toJSON();
@@ -71,6 +73,7 @@
 		@method renderNotifier
 		**/
 		renderNotifier: function () {
+            console.log("Awesome debug DashBoardView.js - renderNotifier");
 			// Define.
 			var notifier, notifierModel, notifierView;
 
@@ -90,6 +93,7 @@
 		@override LoadedView
 		**/
 		renderContent: function (collection) {
+            console.log("Awesome debug DashBoardView.js - renderContent");
 			this.cleanContainers();
 			this.renderModules();
 		},
@@ -102,6 +106,7 @@
 		@override LoadedView
 		**/
 		renderError: function () {
+            console.log("Awesome debug DashBoardView.js - renderError");
 			this.cleanContainers();
 			this.renderNotifier();
 		}

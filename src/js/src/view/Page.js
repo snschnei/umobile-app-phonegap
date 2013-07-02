@@ -41,6 +41,7 @@
 		@method renderHeader
 		**/
 		renderHeader: function () {
+            console.log("Awesome debug Page.js - renderHeader");
 			// Define.
 			var header, headerView;
 
@@ -56,6 +57,7 @@
 		@method renderBreadcrumb
 		**/
 		renderBreadcrumb: function () {
+            console.log("Awesome debug Page.js - renderBreadcrumb");
 			// Define.
 			var breadcrumb, breadcrumbView;
 
@@ -71,6 +73,7 @@
 		@method renderFooter
 		**/
 		renderFooter: function () {
+            console.log("Awesome debug Page.js - renderFooter");
 			// Define.
 			var footer, footerView;
 
@@ -88,6 +91,7 @@
 		@override Base
 		**/
 		render: function () {
+            console.log("Awesome debug Page.js - render");
 			// Render base page.
 			this.$el.html(this.template(this.options));
 

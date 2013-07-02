@@ -13,9 +13,11 @@
 	**/
 	umobile.session.SessionTracker = {
 		get: function (success, failure) {
+        console.log("Awesome debug SessionTracker.js - get");
 			return cordova.exec(success, failure, 'SessionTracking', 'get', []);
 		},
 		set: function (time, success, failure) {
+            console.log("Awesome debug SessionTracker.js - set");
 			return cordova.exec(success, failure, 'SessionTracking', 'set', [time]);
 		}
 	};

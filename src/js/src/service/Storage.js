@@ -18,8 +18,10 @@
 	@method sync
 	**/
 	umobile.storage.sync = function (storage, key) {
+        console.log("Awesome debug Storage - umobile.storage.sync");
 		storage.init();
 		return function (method, model, options) {
+            console.log("Awesome debug Strorage.js - return in umobile.storage.sync");
 			var id, storageKey;
 			id = model.id || key;
 			storageKey = key + '.' + id;
@@ -30,6 +32,7 @@
 				storage.getItem(
 					storageKey,
 					function (result) {
+                    console.log("Awesome debug Storage.js - umobile.storage.sync function");
 						var arr, modules;
 						if (result) {
 							debug.info('Reading result: ' + result);
@@ -41,6 +44,7 @@
 								arr = JSON.parse(result);
 								modules = [];
 								$(arr).each(function (idx, module) {
+                                console.log("Awesome debug Storage.js - arr.each");
 									modules.push(new model.model(module));
 								});
 								model.reset(modules);
@@ -99,6 +103,7 @@
 		@param {Function} success
 		**/
 		getItem: function (storageKey, success) {
+            console.log("Awesome debug Storage.js - umobile.storage.local - getItem");
 			return success(window.localStorage.getItem(storageKey));
 		},
 
@@ -108,6 +113,7 @@
 		@method setItem
 		**/
 		setItem: function (storageKey, json) {
+            console.log("Awesome debug Storage.js - umobile.storage.local - setItem");
 			window.localStorage.setItem(storageKey, json);
 		},
 
@@ -117,6 +123,7 @@
 		@method setItem
 		**/
 		removeItem: function (storageKey) {
+            console.log("Awesome debug Storage.js - umobile.storage.local - removeItem");
 			window.localStorage.removeItem(storageKey);
 		},
 
@@ -125,7 +132,9 @@
 
 		@method init
 		**/
-		init: function () {}
+		init: function () {
+            console.log("Awesome debug Storage.js - umobile.storage.local - init");
+        }
 	};
 
 	/**
@@ -137,22 +146,28 @@
 	**/
 	umobile.storage.db = {
 		init: function () {
+            console.log("Awesome debug Storage.js - umobile.storage.db - init");
 			var db = window.openDatabase('umobile', '1.0', 'uMobile DB', 1000000);
 			db.transaction(
 				function (tx) {
+                console.log("Awesome debug Storage.js - umobile.storage.db - init(tx)");
 					tx.executeSql('CREATE TABLE IF NOT EXISTS umobile (id unique, data)');
 				},
-				function (tx, err) { debug.info('Error processing SQL: ' + err); }
-			);
+				function (tx, err) { debug.info('Error processing SQL: ' + err); 
+                    console.log("Awesome debug Storage.js - umobile.storage.db - itit(tx,err)");
+                });
 		},
 		getItem: function (storageKey, success) {
+            console.log("Awesome debug Storage.js - umobile.storage.db - getItem");
 			var db = window.openDatabase('umobile', '1.0', 'uMobile DB', 1000000);
 			db.transaction(
 				function (tx) {
+                    console.log("Awesome debug Storage.js - umobile.storage.db - getItem(tx)");
 					tx.executeSql(
 						'SELECT * FROM umobile WHERE id=?',
 						[storageKey],
 						function (tx, results) {
+                            console.log("Awesome debug Storage.js - umobile.storage.db - getItem(tx, results)");
 							if (results.rows.length > 0) {
 								success(results.rows.item(0).data);
 							} else {
@@ -168,9 +183,11 @@
 			return window.localStorage.getItem(storageKey);
 		},
 		setItem: function (storageKey, json) {
+            console.log("Awesome debug Storage.js - umobile.storage.db - setItem");
 			var db = window.openDatabase('umobile', '1.0', 'uMobile DB', 1000000);
 			db.transaction(
 				function (tx) {
+                    console.log("Awesome debug Storage.js - umobile.storage.db - setItem(tx)");
 					tx.executeSql('DELETE FROM umobile WHERE id=?', [storageKey]);
 					tx.executeSql('INSERT INTO umobile (id, data) VALUES (?, ?)', [storageKey, json]);
 				},
@@ -178,9 +195,11 @@
 			);
 		},
 		removeItem: function (storageKey) {
+            console.log("Awesome debug Storage.js - umobile.storage.db - removeItem");
 			var db = window.openDatabase('umobile', '1.0', 'uMobile DB', 1000000);
 			db.transaction(
 				function (tx) {
+                    console.log("Awesome debug Storage.js - umobile.storage.db - removeItem(tx)");
 					tx.executeSql('DELETE FROM umobile WHERE id=?', [storageKey]);
 				},
 				function (tx, err) { debug.info('Error processing SQL: ' + err); }

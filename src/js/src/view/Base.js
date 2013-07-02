@@ -94,6 +94,7 @@
 		@return {Object} Cached, jQuery-wrapped DOM element.
 		**/
 		loc: function (property, isRoot) {
+            console.log("Awesome debug Base.js - loc");
 			var scope;
 			if (isRoot && typeof isRoot !== 'boolean') {
 				throw new Error('Unsupported type. Expected boolean for isRoot argument and not ' + typeof isRoot + '.');
@@ -110,6 +111,7 @@
 		@return {Object} Reference to the Header view.
 		**/
 		render: function () {
+            console.log("Awesome debug Base.js - render");
 			var model = (this.options.hasOwnProperty('model')) ? this.options.model : {};
 			this.$el.html(this.template(model));
 			return this;
@@ -122,7 +124,9 @@
 		@method onCollectionReset
 		@param {Object} collection Collection of module objects.
 		**/
-		onCollectionReset: function (collection) {},
+		onCollectionReset: function (collection) {
+            console.log("Awesome debug Base.js - onCollectionReset");
+        },
 
 		/**
 		Method is triggered when the Credential Model is updated.
@@ -131,7 +135,9 @@
 		@method onCredChanged
 		@param {Object} model The updated model.
 		**/
-		onCredChanged: function (model) {},
+		onCredChanged: function (model) {
+            console.log("Awesome debug Base.js - onCredChanged");
+        },
 
 		/**
 		Method is triggered when the route changes.
@@ -140,7 +146,9 @@
 		@method onRouteChanged
 		@param {Object} view The current view.
 		**/
-		onRouteChanged: function (view) {},
+		onRouteChanged: function (view) {
+            console.log("Awesome debug Base.js - onRouteChanged");
+        },
 
 		/**
 		Method provides custom clean-up operations for child views.
@@ -148,7 +156,9 @@
 
 		@method clean
 		**/
-		clean: function () {},
+		clean: function () {
+            console.log("Awesome debug Base.js - clean");
+        },
 
 		/**
 		Method cleans up the DOM and unbinds
@@ -157,6 +167,7 @@
 		@method destroy
 		**/
 		destroy: function () {
+            console.log("Awesome debug Base.js - destroy");
 			// Unbind models, collections & listners.
 			this.unbind();
 			this.moduleCollection.off('reset', this.onCollectionReset, this);
@@ -182,6 +193,7 @@
 		@param {Object} options Options object.
 		**/
 		initialize: function (options) {
+            console.log("Awesome debug Base.js - initialize");
 			// Bind all properties & methods.
 			_.bindAll(this);
 

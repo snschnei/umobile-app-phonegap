@@ -73,6 +73,7 @@
 		@method clean
 		**/
 		clean: function () {
+            console.log("Awesome debug LoginView.js - clean");
 			this.unBindEventListeners();
 		},
 
@@ -85,6 +86,7 @@
 		@param {String} message The message to render.
 		**/
 		warn: function (action, message) {
+            console.log("Awesome debug LoginView.js - warn");
 			// Define & set defaults.
 			var warn = this.loc('warn');
 			action = (!action) ? 'hide' : action;
@@ -110,6 +112,7 @@
 		@method resetErrors
 		**/
 		resetErrors: function () {
+            console.log("Awesome debug LoginView.js - resetErrors");
 			var inputs = this.getInputs();
 			_.each(inputs, function (obj, key) {
 				var control = obj.el.closest('.control-group'),
@@ -128,6 +131,7 @@
 		@return {Object} Object containing form input data.
 		**/
 		getInputs: function () {
+            console.log("Awesome debug LoginView.js - getInputs");
 			// Define.
 			var inputs, elements;
 
@@ -158,6 +162,7 @@
 		@method lockLogin
 		**/
 		lockLogin: function () {
+            console.log("Awesome debug LoginView.js - logLogin");
 			if (this.loc('spinner').hasClass('invisible')) {
 				this.loc('username').attr('disabled', 'disabled');
 				this.loc('password').attr('disabled', 'disabled');
@@ -173,6 +178,7 @@
 		@method unlockLogin
 		**/
 		unlockLogin: function () {
+            console.log("Awesome debug LoginView.js - unlockLogin");
 			if (!this.loc('spinner').hasClass('invisible')) {
 				this.loc('username').removeAttr('disabled');
 				this.loc('password').removeAttr('disabled');
@@ -189,6 +195,7 @@
 		@param {Object} errors Reference to model errors.
 		**/
 		invalidFormHandler: function (model, errors) {
+            console.log("Awesome debug LoginView.js - invalidFormHandler");
 			// Cache inputs.
 			var inputs = this.getInputs();
 
@@ -203,6 +210,7 @@
 
 			// Show input errors.
 			_.each(errors, function (value, key) {
+                console.log("Awesome debug LoginView.js - invalidFormHandeler _.each");
 				var input, control, help;
 				if (inputs.hasOwnProperty(key)) {
 					input = inputs[key].el;
@@ -220,6 +228,7 @@
 		@method bindEventListeners
 		**/
 		bindEventListeners: function () {
+            console.log("Awesome debug LoginView.js - bindEventListeners");
 			// Bind Backbone.Validation to the Login view.
 			Backbone.Validation.bind(this);
 
@@ -236,6 +245,7 @@
 		@method unBindEventListeners
 		**/
 		unBindEventListeners: function () {
+            console.log("Awesome debug LoginView.js - unBindEventListeners");
 			// Unbind validation.
 			if (Backbone.Validation.unbind) {
 				Backbone.Validation.unbind(this);
@@ -254,6 +264,7 @@
 		@method onUpdateCredentials
 		**/
 		onUpdateCredentials: function () {
+            console.log("Awesome debug LoginView.js - onUpdateCredentials");
 			// Reset existing errors.
 			this.resetErrors();
 
@@ -273,6 +284,7 @@
 		@method updateCredentials
 		**/
 		updateCredentials: function () {
+            console.log("Awesome debug LoginView.js - updateCredentials");
 			// Define.
 			var inputs, username, password;
 
@@ -307,6 +319,7 @@
 		@method initModel
 		**/
 		initModel: function () {
+            console.log("Awesome debug LoginView.js - initModel");
 			// Backbone.Validation plugin expects the model to be housed
 			// within a model:{} and not the credModel:{}.
 			if (_.isEmpty(this.model)) {
@@ -323,6 +336,7 @@
 		@override LoadedView
 		**/
 		renderContent: function (collection) {
+            console.log("Awesome debug LoginView.js - renderContent");
 			this.initModel();
 		},
 
@@ -334,6 +348,7 @@
 		@override LoadedView
 		**/
 		renderError: function () {
+            console.log("Awesome debug LoginView.js - renderError");
 			this.initModel();
 			var username = this.model.get('username');
 			if (username === 'guest') {
@@ -350,6 +365,7 @@
 		@param {Object} e Event object.
 		**/
 		submitHandler: function (e) {
+            console.log("Awesome debug LoginView.js - submitHandler");
 			e.preventDefault();
 			if (this.loc('submit').hasClass('disabled')) {
 				return;

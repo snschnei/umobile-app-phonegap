@@ -35,6 +35,7 @@
 		@return {String} Name of the loaded view.
 		**/
 		getViewName: function () {
+            console.log("Awesome debug LoadedView.js - getViewName");
 			return this.name;
 		},
 
@@ -45,7 +46,9 @@
 
 		@method renderError
 		**/
-		renderError: function () {},
+		renderError: function () {
+            console.log("Awesome debug LoadedView.js - renderError");
+        },
 
 		/**
 		Method is meant to be overwritten. This method is
@@ -55,7 +58,9 @@
 		@method renderContent
 		@param {Object} collection Reference to ModuleCollection.
 		**/
-		renderContent: function (collection) {},
+		renderContent: function (collection) {
+            console.log("Awesome debug LoadedView.js - renderContent");
+        },
 
 		/**
 		Method shows the loading mask when switching views.
@@ -63,6 +68,7 @@
 		@method showLoader
 		**/
 		showLoader: function () {
+            console.log("Awesome debug LoadedView.js - showLoader");
 			var loader = $('#contentLoader');
 			loader.show();
 		},
@@ -73,6 +79,7 @@
 		@method hideLoader
 		**/
 		hideLoader: function () {
+            console.log("Awesome debug LoadedView.js - hideLoader");
 			var loader = $('#contentLoader');
 			loader.fadeOut();
 		},
@@ -85,6 +92,7 @@
 		@return {Object} Reference to loaded view.
 		**/
 		render: function () {
+            console.log("Awesome debug LoadedView.js - render");
 			// Loader.
 			this.showLoader();
 
@@ -135,6 +143,7 @@
 		@override Base
 		**/
 		onCollectionReset: function () {
+            console.log("Awesome debug LoadedView.js - onCollectionReset");
 			this.render();
 		}
 

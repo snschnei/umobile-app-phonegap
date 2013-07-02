@@ -19,6 +19,7 @@
 	@private
 	**/
 	var getLocalLoginServletUrl = function () {
+        console.log("Awesome debug Authentication.js - getLocalLoginServletUrl");
 		return config.uMobileServerUrl + config.uMobileServerContext + '/Login';
 	};
 
@@ -30,6 +31,7 @@
 	@private
 	**/
 	var getLocalLogoutServletUrl = function () {
+        console.log("Awesome debug Authentication.js - getLocalLogoutServletUrl");
 		return config.uMobileServerUrl + config.uMobileServerContext + '/Logout';
 	};
 
@@ -41,6 +43,7 @@
 	@method establishSession
 	**/
 	umobile.auth.establishSession = function () {
+        console.log("Awesome debug Authentication.js - umobile.auth.establishSession");
 		debug.info('Establish a session with: ' + config.loginFn);
 		debug.info('Using username: ' + umobile.app.credModel.get('username'));
 
@@ -67,6 +70,7 @@
 	@param {Object} credentials Object hash containing user credentials.
 	**/
 	umobile.auth.storeCredentials = function (credentials) {
+        console.log("Awesome debug Authentication.js - umobile.auth.storeCredentials");
 		// Define.
 		var username, password;
 
@@ -85,6 +89,7 @@
 	@method retrieveCredentials
 	**/
 	umobile.auth.retrieveCredentials = function () {
+        console.log("Awesome debug Authentication.js - umobile.auth.retrieveCredentials");
 		// Define.
 		var encUsername, encPassword, username, password, credentials;
 
@@ -104,6 +109,12 @@
 		}
 	};
 
+    umobile.auth.removeCredentials = function () {
+        console.log("removing stuff KJFdsfaskdjfkajkjKJFDKJK");
+        window.localStorage.removeItem('username');
+        window.localStorage.removeItem('password');
+    };
+
 	/**
 	Method mocks the login process for development purposes.
 
@@ -113,6 +124,7 @@
 	@param {Function} onError Handler for unsucssessful operation.
 	**/
 	umobile.auth.mockLogin = function (credentials, onSuccess, onError) {
+        console.log("Awesome debug Authentication.js - umobile.auth.mockLogin");
 		// Define.
 		var data, url, username;
 
@@ -139,9 +151,11 @@
 			dataType: 'json',
 			type: 'GET',
 			success: function (data, textStatus, jqXHR) {
+            console.log("Awesome debug Authentication.js - ajax: success");
 				onSuccess(data);
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
+            console.log("Awesome debug Authentication.js - ajax: error");
 				onError(jqXHR, textStatus, errorThrown);
 			}
 		});
@@ -157,6 +171,7 @@
 	@param {Function} onError Handler for unsucssessful operation.
 	**/
 	umobile.auth.localLogin = function (credentials, onSuccess, onError) {
+        console.log("Awesome debug Authentication.js - umobile.auth.localLogin");
 		// Define.
 		var data, url;
 
@@ -206,6 +221,7 @@
 	@param {Function} onError Handler for unsucssessful operation.
 	**/
 	umobile.auth.casLogin = function (credentials, onSuccess, onError) {
+        console.log("Awesome debug Authentication.js - umobile.auth.casLogin");
 		// Define.
 		var casUrl, serviceUrl;
 
@@ -226,6 +242,7 @@
 			dataType: 'html',
 			type: 'GET',
 			success: function (html, textStatus, jqXHR) {
+                console.log("Awesome debug Authentication.js - ajax: success GET");
 				// Define.
 				var flowRegex, executionRegex, flowId, executionId, data;
 
@@ -260,6 +277,7 @@
 						dataType: 'json',
 						type: 'POST',
 						success: function (data, textStatus, jqXHR) {
+                            console.log("Awesome debug Authentication.js - ajax: sucess post");
 							if (!credentials || credentials.attributes.username === data.user) {
 								onSuccess(data);
 							} else {
@@ -268,6 +286,7 @@
 							}
 						},
 						error: function (jqXHR, textStatus, errorThrown) {
+                            console.log("Awesome debug Authentication.js - ajax: error");
 							debug.info('Error submitting CAS credentials: ' + textStatus + ', ' + errorThrown);
 							return umobile.auth.localLogin(credentials, onSuccess, onError);
 						}
@@ -291,6 +310,7 @@
 	@param {Function} onError Handler for unsucssessful operation.
 	**/
 	umobile.auth.switchuser = function (credentials, onSuccess, onError) {
+        console.log("Awesome debug Authentication.js - umobile.auth.switchuser");
 		// Define.
 		var logoutUrl = getLocalLogoutServletUrl();
 

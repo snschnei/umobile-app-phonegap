@@ -26,6 +26,7 @@
 		@param {Function} success Success callback.
 		**/
 		get: function (success) {
+            console.log("Awesome debug SessionMock.js - get");
 			success(this.time);
 		},
 
@@ -39,6 +40,7 @@
 		@param {Function} failure Error callback.
 		**/
 		set: function (time, success, failure) {
+            console.log("Awesome debug SessionTrackerMock.js - set");
 			this.time = time;
 			if (success) {
 				success(time);

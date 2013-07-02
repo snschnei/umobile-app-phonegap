@@ -47,6 +47,7 @@
 		@method toggleHeaderIcons
 		**/
 		toggleHeaderIcons: function () {
+            console.log("Awesome debug Header.js - toggleHeaderIcons");
 			// Define.
 			var username, home, login, logout;
 
@@ -91,6 +92,7 @@
 		@override Base
 		**/
 		onCredChanged: function () {
+            console.log("Awesome debug Header.js - onCredChanged");
 			this.toggleHeaderIcons();
 		},
 
@@ -101,6 +103,7 @@
 		@override Base
 		**/
 		onRouteChanged: function (view) {
+            console.log("Awesome debug Header.js - onRouteChanged");
 			this.currentRoute = view.name;
 			this.toggleHeaderIcons();
 		}

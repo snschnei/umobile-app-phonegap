@@ -100,6 +100,7 @@ var umobile = {
       @return {Array} modules Array of module objects.
      **/
     buildModuleArray: function (data) {
+        console.log("Awesome debug app.js - builModuleArray");
         'use strict';
         // Define.
         var modules, folders;
@@ -110,6 +111,7 @@ var umobile = {
 
         // Iterate over folders.
         _.each(folders, function (folder, idx) {
+        console.log("Awesome debug app.js - _.each");
             var portlets = folder.portlets;
 
             // Iterate over portlets.
@@ -119,6 +121,7 @@ var umobile = {
                 // Dynamically download Icon from the server
                 // using the iconUrl from the JSON feed.
                 function grabIcon() {
+                    console.log("Awesome debug app.js - grabIcon");
                     var imagePath; // path to where the image will be saved.
                     var url = config.uMobileServerUrl + portlet.iconUrl; // url where the image can be found.
                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
@@ -189,6 +192,7 @@ var umobile = {
       @method checkSession
      **/
     checkSession: function () {
+        console.log("Awesome debug app.js - checkSession");
         'use strict';
         umobile.session.SessionTracker.get(_.bind(function (time) {
 
@@ -226,6 +230,7 @@ var umobile = {
       @method updateAppState
      **/
     updateAppState: function () {
+        console.log("Awesome debug app.js - updateAppState");
         'use strict';
         umobile.app.stateModel.fetch({
             success: _.bind(function (stateModel) {
@@ -244,6 +249,7 @@ var umobile = {
       @method initRouter
      **/
     initRouter: function () {
+        console.log("Awesome debug app.js - initRouter");
         'use strict';
         umobile.app.router = new umobile.router.RouteManager();
         Backbone.history.start();
@@ -256,6 +262,7 @@ var umobile = {
       @method initModels
      **/
     initModels: function () {
+        console.log("Awesome debug app.js - initModels");
         'use strict';
         umobile.app.stateModel = new umobile.model.State();
         umobile.app.credModel = new umobile.model.Credential();
@@ -268,6 +275,7 @@ var umobile = {
       @method initEventListeners
      **/
     initEventListeners: function () {
+        console.log("Awesome debug app.js - initEventListeners");
         'use strict';
 
         // Subscribe to 'session.established' event.
@@ -321,6 +329,7 @@ var umobile = {
       @method onDeviceReady
      **/
     onDeviceReady: function () {
+        console.log("Awesome debug app.js - onDeviceReady");
         'use strict';
 
         // add listener for the back button
@@ -340,6 +349,7 @@ var umobile = {
       @method onBackKeyDown
      **/
     onBackKeyDown: function () {
+        console.log("Awesome debug app.js - onBackKeyDown");
         // get the current view that the user is looking at.
         var currentPage = umobile.app.router.getView();
         if (currentPage === 'dashboard') {
@@ -358,6 +368,7 @@ var umobile = {
       @method initialize
      **/
     initialize: function () {
+        console.log("Awesome debug app.js - initialize");
         'use strict';
         // Listen to onDeviceReady event.
         document.addEventListener('deviceready', umobile.onDeviceReady, false);

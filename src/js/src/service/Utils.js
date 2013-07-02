@@ -16,6 +16,7 @@
 		@method getTimestamp
 		**/
 		getTimestamp: function () {
+            console.log("Awesome debug Utils.js - getTimestamp");
 			return new Date().getTime();
 		},
 
@@ -26,6 +27,7 @@
 		@param {Object} object Object to examine for length.
 		**/
 		getObjectLength: function (object) {
+            console.log("Awesome debug Utils.js - getObjectLength");
 			return _.keys(object).length;
 		},
 
@@ -38,6 +40,7 @@
 		@param {String} suffix Characters appended to truncated string.
 		**/
 		truncate: function (str, length, suffix) {
+            console.log("Awesome debug Utils.js - truncate");
 			length = (!length) ? 60 : length;
 			suffix = (!suffix) ? '...' : suffix;
 			return (str.length > length) ? str.substring(0, (length - suffix.length)) + suffix : str;
@@ -51,6 +54,7 @@
 		@param {String} path Url string to examine.
 		**/
 		getParameter: function (param, path) {
+            console.log("Awesome debug Utils.js - getParameter");
 			return path.split(param + '=')[1];
 		}
 
