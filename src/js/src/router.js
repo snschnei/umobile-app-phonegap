@@ -62,7 +62,8 @@
 		**/
 		logout: function () {
             console.log("Awesome debug router.js - logout");
-            umobile.app.auth.removeCredentials();
+            umobile.auth.removeCredentials();
+            umobile.auth.switchuser();
             umobile.app.viewManager.show(new umobile.view.DashboardView());
 		},
 
