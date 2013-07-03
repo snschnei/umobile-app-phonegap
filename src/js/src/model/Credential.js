@@ -39,6 +39,10 @@
 			}
 		},
 
+        deleteCredentials: function () {
+			this.sync('delete', this);
+        },
+
 		/**
 		Method overrides Backbone.sync with umobile.storage.sync method.
 		Persists the state of the model to the server.

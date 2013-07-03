@@ -64,6 +64,12 @@
             console.log("Awesome debug router.js - logout");
             umobile.auth.removeCredentials();
             umobile.auth.switchuser();
+            umobile.app.credModel.set('username', 'guest');
+            console.log("USERNAME ============= "+umobile.app.credModel.get('username'));
+            umobile.app.credModel.deleteCredentials();
+            umobile.updateAppState();
+            umobile.app.moduleCollection.reset({});
+            umobile.app.moduleCollection.fetch();
             umobile.app.viewManager.show(new umobile.view.DashboardView());
 		},
 

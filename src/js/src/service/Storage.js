@@ -25,7 +25,6 @@
 			var id, storageKey;
 			id = model.id || key;
 			storageKey = key + '.' + id;
-
 			switch (method) {
 			case 'read':
 				debug.info('Reading storage key: ' + storageKey);
@@ -53,7 +52,7 @@
 								options.success(model);
 							}
 						} else {
-							debug.info('Initializing new ' + storageKey + ' for ' + JSON.stringify(model));
+						debug.info('Initializing new ' + storageKey + ' for ' + JSON.stringify(model));
 							storage.setItem(storageKey, JSON.stringify(model));
 							if (options && options.hasOwnProperty('success')) {
 								options.success(model);

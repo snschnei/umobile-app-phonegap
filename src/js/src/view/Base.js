@@ -125,7 +125,6 @@
 		@param {Object} collection Collection of module objects.
 		**/
 		onCollectionReset: function (collection) {
-            console.log("Awesome debug Base.js - onCollectionReset");
         },
 
 		/**
@@ -136,7 +135,6 @@
 		@param {Object} model The updated model.
 		**/
 		onCredChanged: function (model) {
-            console.log("Awesome debug Base.js - onCredChanged");
         },
 
 		/**
@@ -147,7 +145,6 @@
 		@param {Object} view The current view.
 		**/
 		onRouteChanged: function (view) {
-            console.log("Awesome debug Base.js - onRouteChanged");
         },
 
 		/**
@@ -193,7 +190,6 @@
 		@param {Object} options Options object.
 		**/
 		initialize: function (options) {
-            console.log("Awesome debug Base.js - initialize");
 			// Bind all properties & methods.
 			_.bindAll(this);
 
