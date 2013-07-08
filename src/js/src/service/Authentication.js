@@ -109,11 +109,6 @@
 		}
 	};
 
-    umobile.auth.removeCredentials = function () {
-        console.log("removing stuff KJFdsfaskdjfkajkjKJFDKJK");
-        window.localStorage.removeItem('username');
-        window.localStorage.removeItem('password');
-    };
 
 	/**
 	Method mocks the login process for development purposes.
@@ -178,6 +173,7 @@
 		data = {refUrl: config.uMobileServerContext + '/layout.json'};
 		url = getLocalLoginServletUrl();
 
+        console.log("url ============================== " + url);
 		// If credentials are included, add them to the POST data.
 		if (credentials && credentials.get('username') && credentials.get('password')) {
 			data.userName = credentials.attributes.username;
@@ -196,7 +192,9 @@
 			success: function (data, textStatus, jqXHR) {
 				if (!credentials || !credentials.attributes.username) {
 					debug.info('Established guest session');
-					onSuccess(data);
+                    console.log("data ============================= " + data.refUrl);
+                    onSuccess(data);
+                    console.log("IT MADE IT HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				} else if (credentials.attributes.username === data.user) {
 					debug.info('Successful authentication for user ' + credentials.attributes.username);
 					onSuccess(data);
@@ -319,6 +317,24 @@
 			url: logoutUrl,
 			success: function (html, textStatus, jqXHR) {
 				umobile.auth[config.loginFn](credentials, onSuccess, onError);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				debug.info('Error logging out: ' + textStatus + ', ' + errorThrown);
+				onError(jqXHR, textStatus, errorThrown);
+			},
+			dataType: 'html',
+			type: 'GET'
+		});
+	};
+	umobile.auth.logout = function (credentials, onSuccess, onError) {
+        console.log("Awesome debug Authentication.js - umobile.auth.logout");
+		// Define.
+		var logoutUrl = getLocalLogoutServletUrl();
+
+		debug.info('Logging out via URL ' + logoutUrl);
+		$.ajax({
+			url: logoutUrl,
+			success: function (html, textStatus, jqXHR) {
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				debug.info('Error logging out: ' + textStatus + ', ' + errorThrown);

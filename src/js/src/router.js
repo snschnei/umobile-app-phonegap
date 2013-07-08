@@ -62,15 +62,18 @@
 		**/
 		logout: function () {
             console.log("Awesome debug router.js - logout");
-            umobile.auth.removeCredentials();
-            umobile.auth.switchuser();
-            umobile.app.credModel.set('username', 'guest');
-            console.log("USERNAME ============= "+umobile.app.credModel.get('username'));
-            umobile.app.credModel.deleteCredentials();
-            umobile.updateAppState();
-            umobile.app.moduleCollection.reset({});
-            umobile.app.moduleCollection.fetch();
-            umobile.app.viewManager.show(new umobile.view.DashboardView());
+            umobile.auth.logout(); // do an ajax call to remove cas ticket
+            umobile.app.credModel.set('username', 'guest'); // make the username guest so toggle icons switches back to default icons
+            // pull default JSON feed and display it
+            $.ajax({ 
+                url: 'https://mysail.oakland.edu/uPortal/layout.json', 
+                success: function(json) { 
+                    var modules = umobile.buildModuleArray(json);
+                    umobile.app.moduleCollection.reset(modules);
+                    umobile.app.moduleCollection.save();
+                    umobile.app.viewManager.show(new umobile.view.DashboardView());
+                } 
+            });
 		},
 
 		/**

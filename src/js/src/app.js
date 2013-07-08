@@ -104,6 +104,7 @@ var umobile = {
         'use strict';
         // Define.
         var modules, folders;
+        console.log(JSON.stringify(data));
 
         // Initialize.
         modules = [];
@@ -339,6 +340,11 @@ var umobile = {
         umobile.initModels();
         umobile.initRouter();
         umobile.updateAppState();
+    },
+
+    restart: function () {
+        Backbone.history.stop();
+        umobile.onDeviceReady();
     },
 
     /**
