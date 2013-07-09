@@ -64,6 +64,7 @@
             console.log("Awesome debug router.js - logout");
             umobile.auth.logout(); // do an ajax call to remove cas ticket
             umobile.app.credModel.set('username', 'guest'); // make the username guest so toggle icons switches back to default icons
+            umobile.app.credModel.deleteCredentials();
             // pull default JSON feed and display it
             $.ajax({ 
                 url: 'https://mysail.oakland.edu/uPortal/layout.json', 
