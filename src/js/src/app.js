@@ -183,6 +183,26 @@ var umobile = {
             }, this);
         }, this);
 
+        var portlet = [];
+        portlet.title = 'Campus Directory';
+        portlet.description = 'Oakland University Web Directory';
+        portlet.iconUrl = 'images/icons/directory.png';
+        portlet.url = 'http://www.oakland.edu/apps/mobile/directory/People.aspx?mobileapp=true';
+        modules.push(new umobile.model.Module(portlet));
+
+        portlet.title = 'Undergraduate Admissions';
+        portlet.description = 'UnderGraduate Admissions';
+        portlet.iconUrl = 'images/icons/admissions.png';
+        portlet.url = 'http://www.oakland.edu/m/go?mobileapp=true';
+        modules.push(new umobile.model.Module(portlet));
+
+        portlet.title = 'More Mobile Services';
+        portlet.description = 'Links to sites outside of MySail';
+        portlet.iconUrl = 'images/icons/links.png';
+        portlet.url = 'http://www.oakland.edu/m/?mobileapp=true';
+        modules.push(new umobile.model.Module(portlet));
+
+
         return modules;
     },
 
