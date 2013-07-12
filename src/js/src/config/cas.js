@@ -48,7 +48,28 @@ config.nativeIcons = {
 };
 
 // SUPPORTED MODULES
+// add modules that are not in the JSON feed here
 config.nativeModules = {
+    directory: {
+        title: 'Campus Directory',
+        description: 'Oakland University Web Directory',
+        iconUrl: 'images/icons/directory.png',
+        url: 'http://www.oakland.edu/apps/mobile/directory/People.aspx?mobileapp=true'
+    },
+    
+    admissions: {
+        title: 'Undergraduate Admissions', 
+        description: 'UnderGraduate Admissions',
+        iconUrl: 'images/icons/admissions.png',
+        url:'http://www.oakland.edu/m/go?mobileapp=true'
+    },
+    
+    links: {
+        title: 'More Mobile Services',
+        description: 'Links to sites outside of MySail',
+        iconUrl: 'images/icons/links.png',
+        url: 'http://www.oakland.edu/m/?mobileapp=true'
+    }
 	//news: 'modules/news.html',
 	//map: 'modules/map.html',
 	//calendar: 'modules/calendar.html',
