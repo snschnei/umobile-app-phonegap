@@ -59,7 +59,7 @@ config.nativeModules = {
     
     admissions: {
         title: 'Undergraduate Admissions', 
-        description: 'UnderGraduate Admissions',
+        description: 'Undergraduate Admissions',
         iconUrl: 'images/icons/admissions.png',
         url:'http://www.oakland.edu/m/go?mobileapp=true'
     },
@@ -70,8 +70,4 @@ config.nativeModules = {
         iconUrl: 'images/icons/links.png',
         url: 'http://www.oakland.edu/m/?mobileapp=true'
     }
-	//news: 'modules/news.html',
-	//map: 'modules/map.html',
-	//calendar: 'modules/calendar.html',
-	//courses: 'modules/courses.html'
 };
