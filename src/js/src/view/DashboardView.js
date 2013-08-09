@@ -67,6 +67,16 @@
 					model: folder
 				});
 				folderList.append(folderView.render().el).show();
+                var portlets = folder.portlets;
+                var modules = []; 
+                _.each(portlets, function (portlet, idx){
+                    console.log(portlet.title);
+                    var moduleView = new umobile.view.Module({
+                        model: portlet
+                    });
+                    folderList.append(moduleView.render().el).show();
+                }, this);
+
 			}, this);
 		},
 
