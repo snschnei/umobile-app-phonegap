@@ -31,10 +31,10 @@
 		/**
 		Property houses collection of modules.
 
-		@property moduleCollection
+		@property folderCollection
 		@type Object
 		**/
-		moduleCollection: {},
+		folderCollection: {},
 
 		/**
 		Property houses the Credential model.
@@ -167,7 +167,7 @@
             console.log("Awesome debug Base.js - destroy");
 			// Unbind models, collections & listners.
 			this.unbind();
-			this.moduleCollection.off('reset', this.onCollectionReset, this);
+			this.folderCollection.off('reset', this.onCollectionReset, this);
 			this.credModel.off('change', this.onCredChanged, this);
 			this.unsubscribe('route.changed', this.onRouteChanged);
 
@@ -194,7 +194,7 @@
 			_.bindAll(this);
 
 			// Cache module collection.
-			this.moduleCollection = umobile.app.moduleCollection;
+			this.folderCollection = umobile.app.folderCollection;
 
 			// Cache credential model.
 			this.credModel = umobile.app.credModel;
@@ -211,8 +211,8 @@
 			// Compile screen template.
 			this.template = Handlebars.compile($(this.selectors.template).html());
 
-			// Listen to the reset event on the moduleCollection.
-			this.moduleCollection.on('reset', this.onCollectionReset, this);
+			// Listen to the reset event on the folderCollection.
+			this.folderCollection.on('reset', this.onCollectionReset, this);
 
 			// Listen for the 'change' event on the credential model.
 			this.credModel.on('change', this.onCredChanged, this);

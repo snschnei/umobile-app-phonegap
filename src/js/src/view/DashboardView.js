@@ -30,6 +30,7 @@
 		selectors: {
 			template: '#views-partials-dashboardview',
 			moduleList: '#moduleList',
+            folderList: '#folderList',
 			notifier: '#notifier'
 		},
 
@@ -41,10 +42,12 @@
 		cleanContainers: function () {
             console.log("Awesome debug DashboardView.js - cleanContainers");
 			var notifier = this.loc('notifier'),
-				moduleList = this.loc('moduleList');
+				moduleList = this.loc('moduleList'),
+                folderList = this.loc('folderList');
 
 			notifier.empty().hide();
 			moduleList.empty().hide();
+            folderList.empty().hide();
 		},
 
 		/**
@@ -55,15 +58,15 @@
 		renderModules: function () {
                 console.log("Awesome debug DashboardView.js - renderModules");
 			// Define & initialize.
-			var moduleList = this.loc('moduleList'),
-				modules = this.moduleCollection.toJSON();
+			var folderList = this.loc('folderList'),
+				folders = this.folderCollection.toJSON();
 
 			// Iterate over modules and initialize each module view.
-			_.each(modules, function (module, idx) {
-				var moduleView = new umobile.view.Module({
-					model: module
+			_.each(folders, function (folder, idx) {
+				var folderView = new umobile.view.Folder({
+					model: folder
 				});
-				moduleList.append(moduleView.render().el).show();
+				folderList.append(folderView.render().el).show();
 			}, this);
 		},
 

@@ -103,11 +103,12 @@ var umobile = {
         console.log("Awesome debug app.js - builModuleArray");
         'use strict';
         // Define.
-        var modules, folders;
+        var modules, folders, folderList;
         console.log(JSON.stringify(data));
 
         // Initialize.
         modules = [];
+        folderList = [];
         folders = (data && !_.isEmpty(data)) ? data.layout.folders : {};
 
         // Iterate over folders.
@@ -181,6 +182,7 @@ var umobile = {
 
                 modules.push(new umobile.model.Module(portlet));
             }, this);
+            folderList.push(new umobile.model.Folder(folder));
         }, this);
 
         // add the native modules from the config file
@@ -194,7 +196,7 @@ var umobile = {
             modules.push(new umobile.model.Module(portlet));
         }, this);
 
-        return modules;
+        return folderList;
     },
 
     /**
@@ -224,7 +226,7 @@ var umobile = {
             // When session exists, fetch modules from module collection.
             // When the session has expired, attempt to re-establish a session.
             if ((now - lastSession) < sessionTimeout) {
-                umobile.app.moduleCollection.fetch();
+                umobile.app.folderCollection.fetch();
             } else {
                 umobile.auth.establishSession();
             }
@@ -278,7 +280,7 @@ var umobile = {
         'use strict';
         umobile.app.stateModel = new umobile.model.State();
         umobile.app.credModel = new umobile.model.Credential();
-        umobile.app.moduleCollection = new umobile.collection.ModuleCollection();
+        umobile.app.folderCollection = new umobile.collection.FolderCollection();
     },
 
     /**
@@ -294,7 +296,7 @@ var umobile = {
         // When triggered, updates the State model and SessionTracker.
         $.subscribe('session.established', _.bind(function (data) {
             // Define.
-            var modules;
+            var folder;
 
             // Update credentials.
             umobile.app.credModel.save({username: data.user});
@@ -307,9 +309,9 @@ var umobile = {
 
             // Build module array.
             // Populate the collection with modules.
-            modules = umobile.buildModuleArray(data);
-            umobile.app.moduleCollection.reset(modules);
-            umobile.app.moduleCollection.save();
+            folder = umobile.buildModuleArray(data);
+            umobile.app.folderCollection.reset(folder);
+            umobile.app.folderCollection.save();
 
             // Update time in the Session Tracker.
             umobile.session.SessionTracker.set(umobile.app.stateModel.get('lastSessionAccess'));
@@ -320,7 +322,7 @@ var umobile = {
 
         // Subscribe to 'session.failure' event.
         $.subscribe('session.failure', _.bind(function () {
-            umobile.app.moduleCollection.reset({});
+            umobile.app.folderCollection.reset({});
 
             // Direct users to the login screen.
             umobile.app.router.navigate('login', {trigger: true});

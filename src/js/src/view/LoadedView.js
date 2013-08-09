@@ -97,7 +97,7 @@
 			this.showLoader();
 
 			// Define & Initialize.
-			var collection = this.moduleCollection.toJSON(),
+			var collection = this.folderCollection.toJSON(),
 				viewManager = umobile.app.viewManager,
 				currentView = viewManager.currentView.getViewName();
 
