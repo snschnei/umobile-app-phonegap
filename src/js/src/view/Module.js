@@ -35,7 +35,15 @@
 		**/
 		selectors: {
 			template: '#views-partials-module'
-		}
+		},
+
+        initialize: function() {
+            this.render();
+        },
+        render: function() {
+            var template = Handlebars.compile($(this.selectors.template).html());
+            this.$el.html(template(this.model));
+        }
 	});
 
 })(jQuery, _, umobile, config);

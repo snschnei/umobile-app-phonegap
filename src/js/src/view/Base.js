@@ -113,7 +113,15 @@
 		render: function () {
             console.log("Awesome debug Base.js - render");
 			var model = (this.options.hasOwnProperty('model')) ? this.options.model : {};
+            var portlets = model.portlets;
 			this.$el.html(this.template(model));
+            _.each(portlets, function(portlet, idx){
+                var moduleView = new umobile.view.Module({
+                    model: portlet
+                })
+                this.$el.append(moduleView.el);
+                console.log("looping " +portlet.title);
+            },this);
 			return this;
 		},
 
