@@ -347,7 +347,7 @@ var umobile = {
         'use strict';
 
         // add listener for the back button
-        document.addEventListener('backbutton', umobile.onBackKeyDown, false);
+       // document.addEventListener('backbutton', umobile.onBackKeyDown, false);
 
         umobile.initEventListeners();
         umobile.initModels();
@@ -390,7 +390,8 @@ var umobile = {
         console.log("Awesome debug app.js - initialize");
         'use strict';
         // Listen to onDeviceReady event.
-        document.addEventListener('deviceready', umobile.onDeviceReady, false);
+//        document.addEventListener('deviceready', umobile.onDeviceReady, false);
+            umobile.onDeviceReady();
         if (config.loginFn === 'mockLogin') {
             umobile.onDeviceReady();
         }
