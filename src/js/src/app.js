@@ -122,43 +122,43 @@ var umobile = {
 
                 // Dynamically download Icon from the server
                 // using the iconUrl from the JSON feed.
-                function grabIcon() {
-                    console.log("Awesome debug app.js - grabIcon");
-                    var imagePath; // path to where the image will be saved.
-                    var url = config.uMobileServerUrl + portlet.iconUrl; // url where the image can be found.
-                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-                        imagePath = fs.root.fullPath + portlet.iconUrl;
-                        var fileTransfer = new FileTransfer();
+       //         function grabIcon() {
+       //             console.log("Awesome debug app.js - grabIcon");
+       //             var imagePath; // path to where the image will be saved.
+       //             var url = config.uMobileServerUrl + portlet.iconUrl; // url where the image can be found.
+       //             window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+       //                 imagePath = fs.root.fullPath + portlet.iconUrl;
+       //                 var fileTransfer = new FileTransfer();
 
-                        fileTransfer.download(
-                            url,
-                            imagePath,
-                            function (entry) {
-                                console.log('downoad complete: ' + entry.fullPath);
-                            },
-                            function (error) {
-                                console.log('download error source ' + error.source);
-                                console.log('download error target ' + error.target);
-                                console.log('upload error code ' + error.code);
-                            }
-                            );
-                    });
-                    return imagePath; // return image path so it can be found again 
-                }
+       //                 fileTransfer.download(
+       //                     url,
+       //                     imagePath,
+       //                     function (entry) {
+       //                         console.log('downoad complete: ' + entry.fullPath);
+       //                     },
+       //                     function (error) {
+       //                         console.log('download error source ' + error.source);
+       //                         console.log('download error target ' + error.target);
+       //                         console.log('upload error code ' + error.code);
+       //                     }
+       //                     );
+       //             });
+       //             return imagePath; // return image path so it can be found again 
+       //         }
 
-                // Parse the config.nativeIcons object for a property
-                // that matches the portlet.fname. If one is found, set
-                // the icon url to leverage a locally stored icon. If a
-                // match is not found, set the icon url to an icon on the
-                // server.
+       //         // Parse the config.nativeIcons object for a property
+       //         // that matches the portlet.fname. If one is found, set
+       //         // the icon url to leverage a locally stored icon. If a
+       //         // match is not found, set the icon url to an icon on the
+       //         // server.
 
-                // Commented out the check for local image becuause we will be pulling our images from the server.
-                //if (config.nativeIcons[portlet.fname]) {
-                //portlet.iconUrl = 'images/icons/' + config.nativeIcons[portlet.fname];
-                //} else {
-                var path = grabIcon(); // grap path of where the image was saved.
-                portlet.iconUrl = path;
-                //}
+       //         // Commented out the check for local image becuause we will be pulling our images from the server.
+       //         //if (config.nativeIcons[portlet.fname]) {
+       //         //portlet.iconUrl = 'images/icons/' + config.nativeIcons[portlet.fname];
+       //         //} else {
+       //         var path = grabIcon(); // grap path of where the image was saved.
+       //         portlet.iconUrl = path;
+       //         //}
 
                 // Parse the config.nativeModules object for a property that
                 // matches the portlet.fname. If one is found, the module or

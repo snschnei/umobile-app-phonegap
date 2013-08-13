@@ -163,6 +163,7 @@ module.exports = function (grunt) {
 						'src/js/src/view/Module.js',
 						'src/js/src/view/Folder.js',
 						'src/js/src/view/ModuleView.js',
+						'src/js/src/view/FolderView.js',
 						'src/js/src/view/Notifier.js',
 						'src/js/src/router.js'
 					]
