@@ -69,9 +69,9 @@
             $.ajax({ 
                 url: 'https://mysail.oakland.edu/uPortal/layout.json', 
                 success: function(json) { 
-                    var modules = umobile.buildModuleArray(json);
-                    umobile.app.moduleCollection.reset(modules);
-                    umobile.app.moduleCollection.save();
+                    var folders = umobile.buildModuleArray(json);
+                    umobile.app.folderCollection.reset(folders);
+                    umobile.app.folderCollection.save();
                     umobile.app.viewManager.show(new umobile.view.DashboardView());
                 } 
             });

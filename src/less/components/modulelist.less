@@ -7,6 +7,10 @@
 	text-align: left;
 	min-height: 150px;
 
+    ul {
+        margin: 0 0 0 0;
+    }
+
 	// List & list item
 	.um-module-list,
     .um-folder-list,
@@ -20,11 +24,9 @@
 	.um-folder-list ul{
         width: 100%;
         float: left;
-        padding: 10px 0 10px 10px;
         //border: 1px solid #ccc !important;
         //box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
         background-color: #000;
-        background: -webkit-linear-gradient(top, (@folderViewEndGradient) 0%, (@folderViewStartGradient) 100%); /* Chrome10+,Safari5.1+ */
 	}
 
 	// List item
@@ -46,10 +48,12 @@
     .um-folder-title {
         color: @white;
         overflow: hidden;
+        padding: 10px 0 10px 10px;
         text-overflow: ellipsis;
         white-space: nowrap;
         font-size: 25px;
         font-weight: bold;
+        background: -webkit-linear-gradient(top, (@folderViewEndGradient) 0%, (@folderViewStartGradient) 100%); /* Chrome10+,Safari5.1+ */
     }
 	// List item
 	.um-module-item {
