@@ -64,7 +64,8 @@
 			// Iterate over modules and initialize each module view.
 			_.each(folders, function (folder, idx) {
 				var folderView = new umobile.view.Folder({
-					model: folder
+					model: folder,
+                    id: folder.title
 				});
 				folderList.append(folderView.render().el).show();
 			}, this);

@@ -26,6 +26,7 @@
 		@type String
 		**/
 		className: 'um-module-item',
+        
 
 		/**
 		Property houses DOM selectors.

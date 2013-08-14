@@ -19,6 +19,8 @@
 		**/
 		tagName: 'ul',
 
+        id: 'abc',
+
 		/**
 		Property houses class name that is added to the tagName.
 
@@ -26,6 +28,16 @@
 		@type String
 		**/
 		className: 'um-folder-item',
+
+        events: {
+            'click': 'clicked'
+        },
+
+        clicked: function(){
+            $('#'+this.model.title).find('li').toggle();
+            console.log('clicked '+this.model.title  );
+
+        },
 
 		/**
 		Property houses DOM selectors.
