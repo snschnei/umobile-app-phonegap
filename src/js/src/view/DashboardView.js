@@ -60,13 +60,15 @@
 			// Define & initialize.
 			var folderList = this.loc('folderList'),
 				folders = this.folderCollection.toJSON();
+            var i = 1; // unique id for use in collapsing list view
 
 			// Iterate over modules and initialize each module view.
 			_.each(folders, function (folder, idx) {
 				var folderView = new umobile.view.Folder({
 					model: folder,
-                    id: folder.title
+                    id: i // pass in unique id
 				});
+                i++;
 				folderList.append(folderView.render().el).show();
 			}, this);
 		},

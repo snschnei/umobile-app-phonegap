@@ -34,7 +34,7 @@
         },
 
         clicked: function() {
-            $('#'+this.model.title).find('li').toggle();
+            $('#'+this.id).find('li').toggle();
         },
 
 		/**
