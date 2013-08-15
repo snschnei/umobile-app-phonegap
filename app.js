@@ -30,8 +30,13 @@ app.configure(function () {
 	app.use(express.static(path.join(__dirname, config.getPublicDirectory())));
 });
 
+
+
 // Startup.
 http.createServer(app).listen(app.get('port'), function () {
 	'use strict';
 	console.log('Express server listening on port ' + app.get('port'));
 });
+
+
+

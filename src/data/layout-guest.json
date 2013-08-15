@@ -1,44 +1,217 @@
 {
-	"user": "guest",
-	"locale": "en-US", 
-	"layout": {
-		"folders": [
-			{
-				"id": "u32l1s5",
-				"title": "Home",
-				"portlets": [
-					{
-						"fname": "news",
-						"title": "News",
-						"url": "/news.html",
-						"description": "Personalized news and RSS reader",
-						"newItemCount": "0",
-						"iconUrl": "/images/icons/feed.png"
-					},
-					{
-						"fname": "calendar",
-						"title": "Calendar",
-						"url": "/calendar.html",
-						"description": "Current weather conditions and forecast.",
-						"newItemCount": "1",
-						"iconUrl": "/images/icons/calendar.png"
-					}
-				]
-			},
-			{
-				"id": "u27l1s5",
-				"title": "Map",
-				"portlets": [
-					{
-						"fname": "map",
-						"title": "Map",
-						"url": "/map.html",
-						"description": "Campus Map Portlet",
-						"newItemCount": "0",
-						"iconUrl": "/images/icons/map.png"
-					}
-				]
-			}
-		]
-	}
-}
+        "user": "guest",
+        "locale": "en-US", 
+        "layout":
+            { "folders": [
+            
+                { "id": "u17l1s4", "title": "Home",
+                "portlets": [
+                
+                    {
+                        "fname": "phd-comics",
+                        "title": "PHD Comics",
+                        "url": "/uPortal/f/u17l1s4/p/phd-comics.n17/detached/render.uP?pCm=view",
+                        "description": "Latest PHD Comics strip",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/feed.png"
+                    },
+                    {
+                        "fname": "financial-aid",
+                        "title": "Financial Aid",
+                        "url": "/uPortal/f/u17l1s4/p/financial-aid.n18/detached/render.uP?pCm=view",
+                        "description": "Your current financial aid requirements and awards.",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/financial-aid-mobile.png"
+                    },
+                    {
+                        "fname": "ny-times",
+                        "title": "NY Times",
+                        "url": "/uPortal/f/u17l1s4/p/ny-times.n19/detached/render.uP?pCm=view",
+                        "description": "Recent news from the NY Times",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/feed.png"
+                    },
+                    {
+                        "fname": "AnnouncementsDisplay",
+                        "title": "Announcements",
+                        "url": "/uPortal/f/u17l1s4/p/AnnouncementsDisplay.u17l1n8/detached/render.uP?pCm=view",
+                        "description": "Contains important Oakland University announcements",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/announcements-mobile.png"
+                    },
+                    {
+                        "fname": "PasswordInfo",
+                        "title": "NetID Password Information",
+                        "url": "/uPortal/f/u17l1s4/p/PasswordInfo.u17l1n14/detached/render.uP?pCm=view",
+                        "description": "Gives you information on how frequently your NetID password should be updated and when the last update occurred",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/password-mobile.png"
+                    },
+                    {
+                        "fname": "my-courses",
+                        "title": "My Courses and Grades",
+                        "url": "/uPortal/f/u17l1s4/p/my-courses.u17l1n9/detached/render.uP?pCm=view",
+                        "description": "Contains your Oakland University class schedule, grades, and overall GPA.",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/class-schedule-mobile.png"
+                    },
+                    {
+                        "fname": "webmail",
+                        "title": "Webmail",
+                        "url": "/uPortal/f/u17l1s4/p/webmail.n20/detached/render.uP?pCm=view",
+                        "description": "Check your Oakland Webmail within the MySail portal",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/webmail-mobile.png"
+                    },
+                    {
+                        "fname": "penguin",
+                        "title": "Penguin",
+                        "url": "/uPortal/f/u17l1s4/p/penguin.n21/detached/render.uP?pCm=view",
+                        "description": "Poke the Penguin Google Gadget",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/default.png"
+                    },
+                    {
+                        "fname": "campus-map",
+                        "title": "Oakland Campus Map",
+                        "url": "/uPortal/f/u17l1s4/p/campus-map.u17l1n13/detached/render.uP?pCm=view",
+                        "description": "Map of Oakland University featuring searchable campus locations, coordinates, and integration with mobile devices!",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/campus-map-mobile.png"
+                    },
+                    {
+                        "fname": "oakland-services",
+                        "title": "Oakland Services",
+                        "url": "/uPortal/f/u17l1s4/p/oakland-services.u17l1n15/detached/render.uP?pCm=view",
+                        "description": "Links to important services at Oakland",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/ou-mobile.png"
+                    },
+                    {
+                        "fname": "mysail-promo",
+                        "title": "OU MySail App",
+                        "url": "/uPortal/f/u17l1s4/p/mysail-promo.u17l1n16/detached/render.uP?pCm=view",
+                        "description": "Download the OU MySail mobile smartphone app for Android, iPhone, iPod touch, and iPad devices.",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/sail-logo-mobile.png"
+                    }]},
+                { "id": "u27l1s5", "title": "Academics",
+                "portlets": [
+                
+                    {
+                        "fname": "my-details",
+                        "title": "My Details",
+                        "url": "/uPortal/f/u27l1s5/p/my-details.u27l1n7/detached/render.uP?pCm=view",
+                        "description": "Displays your current major(s) and academic information",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/my-details-mobile.png"
+                    },
+                    {
+                        "fname": "my-courses",
+                        "title": "My Courses and Grades",
+                        "url": "/uPortal/f/u27l1s5/p/my-courses.u27l1n8/detached/render.uP?pCm=view",
+                        "description": "Contains your Oakland University class schedule, grades, and overall GPA.",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/class-schedule-mobile.png"
+                    },
+                    {
+                        "fname": "financial-aid",
+                        "title": "Financial Aid",
+                        "url": "/uPortal/f/u27l1s5/p/financial-aid.u27l1n12/detached/render.uP?pCm=view",
+                        "description": "Your current financial aid requirements and awards.",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/financial-aid-mobile.png"
+                    },
+                    {
+                        "fname": "academic-resources",
+                        "title": "Academic Resources",
+                        "url": "/uPortal/f/u27l1s5/p/academic-resources.u27l1n10/detached/render.uP?pCm=view",
+                        "description": "Links to important academic information and services on campus",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/academic-mobile.png"
+                    },
+                    {
+                        "fname": "library",
+                        "title": "Library OneSearch",
+                        "url": "/uPortal/f/u27l1s5/p/library.u27l1n14/detached/render.uP?pCm=view",
+                        "description": "Library OneSearch allows you to search across library resources, including everything from the catalog and many library databases.",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/library-mobile.png"
+                    }]},
+                { "id": "u23l1s5", "title": "Campus",
+                "portlets": [
+                
+                    {
+                        "fname": "motley-fool",
+                        "title": "Motley Fool",
+                        "url": "/uPortal/f/campus/p/motley-fool.n28/detached/render.uP?pCm=view",
+                        "description": "Motley Fool channel",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/default.png"
+                    },
+                    {
+                        "fname": "OUNews",
+                        "title": "OU News",
+                        "url": "/uPortal/f/campus/p/OUNews.u23l1n8/detached/render.uP?pCm=view",
+                        "description": "OU News RSS Feed",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/news-mobile.png"
+                    },
+                    {
+                        "fname": "OUAthleticNews",
+                        "title": "OU Athletic News",
+                        "url": "/uPortal/f/campus/p/OUAthleticNews.u23l1n9/detached/render.uP?pCm=view",
+                        "description": "OU Athletic News Rss Feed",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/athletics-mobile.png"
+                    },
+                    {
+                        "fname": "campus-map",
+                        "title": "Oakland Campus Map",
+                        "url": "/uPortal/f/campus/p/campus-map.u23l1n13/detached/render.uP?pCm=view",
+                        "description": "Map of Oakland University featuring searchable campus locations, coordinates, and integration with mobile devices!",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/campus-map-mobile.png"
+                    },
+                    {
+                        "fname": "campus-life",
+                        "title": "Campus Life",
+                        "url": "/uPortal/f/campus/p/campus-life.u23l1n10/detached/render.uP?pCm=view",
+                        "description": "Links to important information and services on campus",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/campus-life-mobile.png"
+                    },
+                    {
+                        "fname": "OU-weather",
+                        "title": "Oakland Campus Weather",
+                        "url": "/uPortal/f/campus/p/OU-weather.u23l1n12/detached/render.uP?pCm=view",
+                        "description": "Latest weather conditions and upcoming forecast for Oakland University",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/weather-mobile.png"
+                    },
+                    {
+                        "fname": "all-events-calendar",
+                        "title": "All Events Calendar",
+                        "url": "/uPortal/f/campus/p/all-events-calendar.u23l1n11/detached/render.uP?pCm=view",
+                        "description": "Upcoming Oakland University campus events",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/calendar-mobile.png"
+                    }]},
+                { "id": "s22", "title": "me &amp; patty",
+                "portlets": [
+                
+                    {
+                        "fname": "about-college-life",
+                        "title": "About.com College Life",
+                        "url": "/uPortal/f/s22/p/about-college-life.n24/detached/render.uP?pCm=view",
+                        "description": "About.com College Life RSS feed",
+                        "newItemCount": "0",
+                        "iconUrl": "/uPortal/media/skins/icons/mobile/feed.png"
+                    }]},
+                { "id": "s59", "title": "Campus",
+                "portlets": [
+                ]},
+                { "id": "s82", "title": "New Tab",
+                "portlets": [
+                ]}]}
+    }
