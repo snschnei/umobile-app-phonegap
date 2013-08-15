@@ -390,6 +390,10 @@ var umobile = {
         console.log("Awesome debug app.js - initialize");
         'use strict';
         // Listen to onDeviceReady event.
+        window.addEventListener('load', function() {
+            console.log('fastclick was added');
+            FastClick.attach(document.body);
+        }, false);
         document.addEventListener('deviceready', umobile.onDeviceReady, false);
         if (config.loginFn === 'mockLogin') {
             umobile.onDeviceReady();

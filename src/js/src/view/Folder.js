@@ -35,6 +35,7 @@
 
         clicked: function() {
             $('#'+this.id).find('li').toggle();
+            console.log('clicked');
         },
 
 		/**
