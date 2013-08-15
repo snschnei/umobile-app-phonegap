@@ -119,7 +119,9 @@
                 var moduleView = new umobile.view.Module({
                     model: portlet
                 })
-                this.$el.append(moduleView.el);
+                if(portlet.title != 'OU MySail App'){ // temporary fix to not display app ad
+                    this.$el.append(moduleView.el);
+                }
                 console.log("looping " +portlet.title);
             },this);
 			return this;
