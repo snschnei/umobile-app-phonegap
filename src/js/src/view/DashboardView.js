@@ -64,6 +64,8 @@
 
 			// Iterate over modules and initialize each module view.
 			_.each(folders, function (folder, idx) {
+                // decode any html that is in the JSON feed if user adds it to tab name
+                folder.title = $('<div/>').html(folder.title).text(); 
 				var folderView = new umobile.view.Folder({
 					model: folder,
                     id: i // pass in unique id
