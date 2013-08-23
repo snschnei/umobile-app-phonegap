@@ -1,7 +1,12 @@
 //
 // Navbar
 // --------------------------------------------------
+
 .um-navbar {
+	z-index: 1;
+	top: 0;
+	position: fixed;
+	width: 100%;
 	border-top: 1px solid @navbarBorderTopColor;
 	border-bottom: 1px solid @navbarBorderBottomColor;
 
@@ -10,6 +15,7 @@
 		.um-shadow;
 		position: relative;
 		min-height: 45px;
+		padding: 0;
 
 		// uMobile logo
 		.um-brand {
@@ -30,14 +36,16 @@
 		// Home button
 		.um-btn-home {
 			position: absolute;
-			top: 0; left: 10px;
+			top: 0; 
+			left: 10px;
 			margin-top: 6px;
 		}
 
 		// Login & logout button
 		.um-btn-login, .um-btn-logout {
 			position: absolute;
-			top: 0; right: 10px;
+			top: 0; 
+			right: 10px;
 			margin-top: 6px;
 		}
 	}

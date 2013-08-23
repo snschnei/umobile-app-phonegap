@@ -73,6 +73,9 @@
                 i++;
 				folderList.append(folderView.render().el).show();
 			}, this);
+
+			$('#main').css( 'top', $('.um-navbar').height() );
+			window.scroll( $('.um-navbar').height(), 0 );
 		},
 
 		/**
