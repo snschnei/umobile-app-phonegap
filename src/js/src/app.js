@@ -362,7 +362,8 @@ var umobile = {
     onBackKeyDown: function () {
         console.log("Awesome debug app.js - onBackKeyDown");
         // get the current view that the user is looking at.
-        var currentPage = umobile.app.router.getView();
+        var currentPage = umobile.app.viewManager.getCurrentView().name;
+        console.log("THE CURRENT PAGE IS "+currentPage);
         if (currentPage === 'dashboard') {
             navigator.app.exitApp();
         }
