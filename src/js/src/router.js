@@ -109,7 +109,7 @@
 		onRouteChanged: function (route, routeParam) {
             console.log("Awesome debug router.js - onRouteChanged");
 			// Define.
-			var className, root, path, view
+            var className, root, path, view;
 
 			// Initialize.
 			root = $('html');
