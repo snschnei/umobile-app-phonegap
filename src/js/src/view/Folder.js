@@ -36,6 +36,9 @@
         clicked: function() {
             $('#'+this.id).find('li').toggle();
             console.log('clicked');
+			$('html, body').animate({
+				scrollTop : $('#'+this.id).position().top
+			});
         },
 
 		/**
