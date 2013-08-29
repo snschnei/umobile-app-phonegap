@@ -63,52 +63,6 @@
 		);
 	};
 
-	/**
-	Method stores user credentials in local storage.
-
-	@method storeCredentials
-	@param {Object} credentials Object hash containing user credentials.
-	**/
-	umobile.auth.storeCredentials = function (credentials) {
-        console.log("Awesome debug Authentication.js - umobile.auth.storeCredentials");
-		// Define.
-		var username, password;
-
-		// Initialize & encrypt.
-		username = GibberishAES.enc(credentials.username, config.encryptionKey);
-		password = GibberishAES.enc(credentials.password, config.encryptionKey);
-
-		// Persist in local storage.
-		window.localStorage.setItem('username', username);
-		window.localStorage.setItem('password', password);
-	};
-
-	/**
-	Method retrieves user credentials from local storage.
-
-	@method retrieveCredentials
-	**/
-	umobile.auth.retrieveCredentials = function () {
-        console.log("Awesome debug Authentication.js - umobile.auth.retrieveCredentials");
-		// Define.
-		var encUsername, encPassword, username, password, credentials;
-
-		// Initialize & retrieve from local storage.
-		encUsername = window.localStorage.getItem('username');
-		encPassword = window.localStorage.getItem('password');
-
-		// TODO: Double check this logic. The username and password variables are
-		// undefined so they will equate to false.
-		if (username && password) {
-			username = GibberishAES.dec(credentials.encUsername, config.encryptionKey);
-			password = GibberishAES.dec(credentials.encPassword, config.encryptionKey);
-			return { username: username, password: password };
-		} else {
-			debug.info('No credentials found for user');
-			return null;
-		}
-	};
-
 
 	/**
 	Method mocks the login process for development purposes.
@@ -266,7 +220,7 @@
 						data: {
 							service: serviceUrl,
 							username: credentials.attributes.username,
-							password: credentials.attributes.password,
+							password: GibberishAES.dec(credentials.attributes.password, config.encryptionKey),
 							lt: flowId,
 							execution: executionId,
 							_eventId: 'submit',
