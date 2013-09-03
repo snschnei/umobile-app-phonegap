@@ -12,6 +12,11 @@ then
     echo "Compiling for Web"
     grunt dev --environment=web --auth=mock &&
     grunt push.dev
+elif [ $1 == "ios" ]
+then
+    echo "Compiling for ios"
+    grunt prod --environment=ios --auth=cas &&
+    grunt push.prod
 else
-    echo "Must use parameter android or web to compile"
+    echo "Must use parameter android, iso, web to compile"
 fi
