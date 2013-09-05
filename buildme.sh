@@ -17,6 +17,8 @@ then
     echo "Compiling for ios"
     grunt prod --environment=ios --auth=cas &&
     grunt push.prod
+    cd .. && cd cordova
+    ./emulate
 else
     echo "Must use parameter android, iso, web to compile"
 fi

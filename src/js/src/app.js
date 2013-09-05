@@ -371,7 +371,6 @@ var umobile = {
             navigator.app.backHistory()
         }
     },
-    
 
     /**
       Entry point for the umobile application.
