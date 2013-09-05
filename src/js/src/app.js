@@ -125,14 +125,15 @@ var umobile = {
                 function grabIcon() {
                     console.log("Awesome debug app.js - grabIcon");
                     var imagePath; // path to where the image will be saved.
+                    console.log("IMAGEPATH DECLARED: " + imagePath);
                     var url = config.uMobileServerUrl + portlet.iconUrl; // url where the image can be found.
                     window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, function (fs) {
-                        imagePath = fs.root.fullPath + portlet.iconUrl;
+                        portlet.iconUrl = fs.root.fullPath + portlet.iconUrl;
                         var fileTransfer = new FileTransfer();
 
                         fileTransfer.download(
                             url,
-                            imagePath,
+                            portlet.iconUrl,
                             function (entry) {
                                 console.log('downoad complete: ' + entry.fullPath);
                             },
@@ -143,7 +144,6 @@ var umobile = {
                             }
                             );
                     });
-                    return imagePath; // return image path so it can be found again 
                 }
 
                 // Parse the config.nativeIcons object for a property
@@ -156,8 +156,7 @@ var umobile = {
                 //if (config.nativeIcons[portlet.fname]) {
                 //portlet.iconUrl = 'images/icons/' + config.nativeIcons[portlet.fname];
                 //} else {
-                var path = grabIcon(); // grap path of where the image was saved.
-                portlet.iconUrl = path;
+                grabIcon(); // grap path of where the image was saved.
                 //}
 
                 // Parse the config.nativeModules object for a property that
