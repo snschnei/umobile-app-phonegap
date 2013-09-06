@@ -125,7 +125,6 @@ var umobile = {
                 function grabIcon() {
                     console.log("Awesome debug app.js - grabIcon");
                     var imagePath; // path to where the image will be saved.
-                    console.log("IMAGEPATH DECLARED: " + imagePath);
                     var url = config.uMobileServerUrl + portlet.iconUrl; // url where the image can be found.
                     window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, function (fs) {
                         portlet.iconUrl = fs.root.fullPath + portlet.iconUrl;
