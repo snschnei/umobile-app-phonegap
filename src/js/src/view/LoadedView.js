@@ -109,6 +109,7 @@
 				// been unloaded. To insure this, we compare the current view name
 				// on the 'this' object with the view stored in the ViewManager.
 				// The ViewManager will always have the correct view to load.
+				console.log(this.getViewName());
 				if (this.getViewName() === currentView) {
 					// Render main template.
 					this.$el.addClass('hidden')
@@ -121,6 +122,10 @@
 					} else {
 						this.renderContent(collection);
 					}
+
+					// Adjust height for modules
+					this.$el.children(':first').children(':nth-child(2)').css('height', 
+						$(window).height() - $('.um-navbar').height());
 
 					// Append '#view' to '#viewLoader'.
 					$('#viewLoader').append(this.$el);
