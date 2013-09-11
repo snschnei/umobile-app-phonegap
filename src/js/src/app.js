@@ -165,13 +165,8 @@ var umobile = {
                 // portlet is natively supported. Set the portlet url to a local
                 // implementation (i.e., map.html). Otherwise, set the portlet url
                 // to an implementation located on the server.
-                if (config.nativeModules[portlet.fname]) {
-                    portlet.url = config.nativeModules[portlet.fname];
-                    portlet.isNative = true;
-                } else {
-                    portlet.url = config.uMobileServerUrl + portlet.url;
-                    portlet.isNative = false;
-                }
+                portlet.url = config.uMobileServerUrl + portlet.url;
+                portlet.isNative = false;
 
                 // Define hasNewItem property based upon the newItemCount property.
                 portlet.hasNewItem = (!Number(portlet.newItemCount)) ? false : true;
@@ -186,14 +181,11 @@ var umobile = {
         }, this);
 
         // add the native modules from the config file
-        var portlet = [];
-        _.each(config.nativeModules, function (nativeModule, idx) {
-            portlet.title = nativeModule.title;
-            portlet.description = nativeModule.description;
-            portlet.iconUrl = nativeModule.iconUrl;
-            portlet.url = nativeModule.url;
-
-            modules.push(new umobile.model.Module(portlet));
+        folder = [];
+        _.each(config.nativeFolders, function (nativeFolder, idx) {
+            folder.title = nativeFolder.title;
+            folder.portlets = nativeFolder.portlets;
+            folderList.push(new umobile.model.Folder(nativeFolder));
         }, this);
 
         return folderList;
@@ -370,7 +362,8 @@ var umobile = {
     onBackKeyDown: function () {
         console.log("Awesome debug app.js - onBackKeyDown");
         // get the current view that the user is looking at.
-        var currentPage = umobile.app.router.getView();
+        var currentPage = umobile.app.viewManager.getCurrentView().name;
+        console.log("THE CURRENT PAGE IS "+currentPage);
         if (currentPage === 'dashboard') {
             navigator.app.exitApp();
         }

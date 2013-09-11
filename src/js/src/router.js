@@ -65,9 +65,10 @@
             umobile.auth.logout(); // do an ajax call to remove cas ticket
             umobile.app.credModel.set('username', 'guest'); // make the username guest so toggle icons switches back to default icons
             umobile.app.credModel.deleteCredentials();
+            
             // pull default JSON feed and display it
             $.ajax({ 
-                url: 'https://mysail.oakland.edu/uPortal/layout.json', 
+                url: config.uMobileServerUrl + config.uMobileServerContext+'/layout.json',
                 success: function(json) { 
                     var folders = umobile.buildModuleArray(json);
                     umobile.app.folderCollection.reset(folders);
@@ -98,13 +99,6 @@
             umobile.app.viewManager.show(module);
         },
 
-        view: null,
-        
-        getView: function () {
-            console.log("Awesome debug router.js - getView");
-            return this.view;
-        }, 
-
 		/**
 		Listens for the route to change. When triggered,
 		it updates the class name on the html container
@@ -116,14 +110,14 @@
 		onRouteChanged: function (route, routeParam) {
             console.log("Awesome debug router.js - onRouteChanged");
 			// Define.
-			var className, root, path;
+            var className, root, path, view;
 
 			// Initialize.
 			root = $('html');
 			route = route.split(':');
-			this.view = route[1];
-			path = (!routeParam) ? this.view : this.view + '/' + routeParam;
-			className = ('um-' + this.view);
+			view = route[1];
+			path = (!routeParam) ? view : view + '/' + routeParam;
+			className = ('um-' + view);
 
 			// Remove the class from the container when generated className
 			// is different from the stored currentViewClass.
@@ -139,7 +133,7 @@
 			umobile.app.stateModel.save({currentView: path});
 
 			// Broadcast route changed event.
-			$.publish('route.changed', {name: this.view});
+			$.publish('route.changed', {name: view});
 		},
 
 		/**

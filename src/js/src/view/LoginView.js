@@ -310,7 +310,7 @@
 			this.bindEventListeners();
 
 			// Save updated credentials.
-			this.model.save({username: username, password: password});
+			this.model.save({username: username, password: GibberishAES.enc(password, config.encryptionKey)});
 		},
 
 		/**
