@@ -89,24 +89,24 @@ module.exports = function (grunt) {
 		jshint: {
 			options: {
 				nomen: false,
-				curly: false,
-				camelcase: false,
-				eqeqeq: false,
-				newcap: false,
-				undef: false,
-				trailing: false,
-				strict: false,
-				latedef: false,
-				indent: false,
-				quotmark: false
+				curly: true,
+				camelcase: true,
+				eqeqeq: true,
+				newcap: true,
+				undef: true,
+				trailing: true,
+				strict: true,
+				latedef: true,
+				indent: true,
+				quotmark: true
 			},
 			global: {
-				define: false,
-				window: false,
-				document: false
+				define: true,
+				window: true,
+				document: true
 			},
 			all: [
-				//'src/js/src/**/*.js',
+				'src/js/src/**/*.js',
 				'config/*.js',
 				'tasks/*.js',
 				'*.js'
