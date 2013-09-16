@@ -70,8 +70,11 @@
 					model: folder,
                     id: i // pass in unique id
 				});
-                i++;
 				folderList.append(folderView.render().el).show();
+				if (folderView.id != 1) {
+					folderView.$el.find('li').css('display', 'none');
+				}
+                i++;
 			}, this);
 
 			$('#main').css( 'top', $('.um-navbar').height() );
