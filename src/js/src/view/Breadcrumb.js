@@ -1,59 +1,59 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, Handlebars:true, console:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
-
-	/**
-	Manages the application Breadcrumb.
-
-	@class Breadcrumb
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.Breadcrumb = umobile.view.Base.extend({
-		/**
-		Property houses root DOM element.
-
-		@property el
-		@type Object
-		@override Base
-		**/
-		el: '#breadcrumb',
+		'use strict';
 
 		/**
-		Property houses DOM selectors.
+		Manages the application Breadcrumb.
 
-		@property selectors
-		@type Object
-		@override Base
+		@class Breadcrumb
+		@submodule view
+		@namespace view
+		@constructor
 		**/
-		selectors: {
-			template: '#views-partials-breadcrumb'
-		},
+		umobile.view.Breadcrumb = umobile.view.Base.extend({
+				/**
+				Property houses root DOM element.
 
-		/**
-		Method toggles the visibility of the breadcrumb view.
-		Currently disabled since it is not needed.
+				@property el
+				@type Object
+				@override Base
+				**/
+				el: '#breadcrumb',
 
-		@method toggleVisibility
-		@param {Object} view The current view.
-		**/
-		toggleVisibility: function (view) {
-            console.log("Awesome debug Breadcrumb.js - toggleVisibility");
-			var visibility = (view.name === 'dashboard') ? this.$el.addClass('hidden') : this.$el.removeClass('hidden');
-		},
+				/**
+				Property houses DOM selectors.
 
-		/**
-		Method is triggered when the route changes.
+				@property selectors
+				@type Object
+				@override Base
+				**/
+				selectors: {
+					template: '#views-partials-breadcrumb'
+				},
 
-		@method onRouteChanged
-		@override Base
-		**/
-		onRouteChanged: function (view) {
-            console.log("Awesome debug Breadcrumb.js - onRouteChanged");
-			// Disabled. Not in use.
-			//this.toggleVisibility(view);
-		}
-	});
+				/**
+				Method toggles the visibility of the breadcrumb view.
+				Currently disabled since it is not needed.
 
-})(jQuery, _, Backbone, umobile, config);
+				@method toggleVisibility
+				@param {Object} view The current view.
+				**/
+				toggleVisibility: function (view) {
+					console.log('Awesome debug Breadcrumb.js - toggleVisibility');
+					var visibility = (view.name === 'dashboard') ? this.$el.addClass('hidden') : this.$el.removeClass('hidden');
+				},
+
+				/**
+				Method is triggered when the route changes.
+
+				@method onRouteChanged
+				@override Base
+				**/
+				onRouteChanged: function (view) {
+					console.log('Awesome debug Breadcrumb.js - onRouteChanged');
+					// Disabled. Not in use.
+					//this.toggleVisibility(view);
+				}
+			});
+
+	})(jQuery, _, Backbone, umobile, config);

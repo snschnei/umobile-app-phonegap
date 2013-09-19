@@ -1,126 +1,128 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, console:true, Handlebars:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
-
-	/**
-	Manages the loaded Dashboard view.
-
-	@class DashboardView
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.DashboardView = umobile.view.LoadedView.extend({
-		/**
-		Property houses the name of the loaded view.
-
-		@property name
-		@type String
-		@override LoadedView
-		**/
-		name: 'dashboard',
+		'use strict';
 
 		/**
-		Property houses DOM selectors.
+		Manages the loaded Dashboard view.
 
-		@property selectors
-		@type Object
-		@override Base
+		@class DashboardView
+		@submodule view
+		@namespace view
+		@constructor
 		**/
-		selectors: {
-			template: '#views-partials-dashboardview',
-			moduleList: '#moduleList',
-            folderList: '#folderList',
-			notifier: '#notifier'
-		},
+		umobile.view.DashboardView = umobile.view.LoadedView.extend({
+				/**
+				Property houses the name of the loaded view.
 
-		/**
-		Method empties root containers.
+				@property name
+				@type String
+				@override LoadedView
+				**/
+				name: 'dashboard',
 
-		@method cleanContainers
-		**/
-		cleanContainers: function () {
-            console.log("Awesome debug DashboardView.js - cleanContainers");
-			var notifier = this.loc('notifier'),
-				moduleList = this.loc('moduleList'),
-                folderList = this.loc('folderList');
+				/**
+				Property houses DOM selectors.
 
-			notifier.empty().hide();
-			moduleList.empty().hide();
-            folderList.empty().hide();
-		},
+				@property selectors
+				@type Object
+				@override Base
+				**/
+				selectors: {
+					template: '#views-partials-dashboardview',
+					moduleList: '#moduleList',
+					folderList: '#folderList',
+					notifier: '#notifier'
+				},
 
-		/**
-		Method renders modules.
+				/**
+				Method empties root containers.
 
-		@method renderModules
-		**/
-		renderModules: function () {
-                console.log("Awesome debug DashboardView.js - renderModules");
-			// Define & initialize.
-			var folderList = this.loc('folderList'),
-				folders = this.folderCollection.toJSON();
-            var i = 1; // unique id for use in collapsing list view
+				@method cleanContainers
+				**/
+				cleanContainers: function () {
+					console.log('Awesome debug DashboardView.js - cleanContainers');
+					var notifier = this.loc('notifier'),
+					moduleList = this.loc('moduleList'),
+					folderList = this.loc('folderList');
 
-			// Iterate over modules and initialize each module view.
-			_.each(folders, function (folder, idx) {
-                // decode any html that is in the JSON feed if user adds it to tab name
-                folder.title = $('<div/>').html(folder.title).text(); 
-				var folderView = new umobile.view.Folder({
-					model: folder,
-                    id: i // pass in unique id
-				});
-                i++;
-				folderList.append(folderView.render().el).show();
-			}, this);
+					notifier.empty().hide();
+					moduleList.empty().hide();
+					folderList.empty().hide();
+				},
 
-			$('#main').css( 'top', $('.um-navbar').height() );
-			window.scroll( $('.um-navbar').height(), 0 );
-		},
+				/**
+				Method renders modules.
 
-		/**
-		Method renders the notifier.
+				@method renderModules
+				**/
+				renderModules: function () {
+					console.log('Awesome debug DashboardView.js - renderModules');
+					// Define & initialize.
+					var folderList = this.loc('folderList'),
+					folders = this.folderCollection.toJSON();
+					var i = 1; // unique id for use in collapsing list view
 
-		@method renderNotifier
-		**/
-		renderNotifier: function () {
-            console.log("Awesome debug DashBoardView.js - renderNotifier");
-			// Define.
-			var notifier, notifierModel, notifierView;
+					// Iterate over modules and initialize each module view.
+					_.each(folders, function (folder, idx) {
+							// decode any html that is in the JSON feed if user adds it to tab name
+							folder.title = $('<div/>').html(folder.title).text();
+							var folderView = new umobile.view.Folder({
+									model: folder,
+									id: i // pass in unique id
+								});
+							i++;
+							folderList.append(folderView.render().el).show();
+						}, this);
 
-			// Initialize.
-			notifier = this.loc('notifier');
-			notifierModel = new umobile.model.Notifier();
-			notifierView = new umobile.view.Notifier({model: notifierModel.toJSON()});
-			notifier.append(notifierView.render().el).show();
-		},
+					$('#main').css('top', $('.um-navbar').height());
+					window.scroll($('.um-navbar').height(), 0);
+				},
 
-		/**
-		Method overrides the LoadedView class. This method
-		provides custom content for the Dashboard view.
+				/**
+				Method renders the notifier.
 
-		@method renderContent
-		@param {Object} collection Reference to the ModuleCollection.
-		@override LoadedView
-		**/
-		renderContent: function (collection) {
-            console.log("Awesome debug DashBoardView.js - renderContent");
-			this.cleanContainers();
-			this.renderModules();
-		},
+				@method renderNotifier
+				**/
+				renderNotifier: function () {
+					console.log('Awesome debug DashBoardView.js - renderNotifier');
+					// Define.
+					var notifier, notifierModel, notifierView;
 
-		/**
-		Method overrides the LoadedView class. This method
-		provides custom content for the Dashboard view.
+					// Initialize.
+					notifier = this.loc('notifier');
+					notifierModel = new umobile.model.Notifier();
+					notifierView = new umobile.view.Notifier({
+							model: notifierModel.toJSON()
+						});
+					notifier.append(notifierView.render().el).show();
+				},
 
-		@method renderError
-		@override LoadedView
-		**/
-		renderError: function () {
-            console.log("Awesome debug DashBoardView.js - renderError");
-			this.cleanContainers();
-			this.renderNotifier();
-		}
-	});
+				/**
+				Method overrides the LoadedView class. This method
+				provides custom content for the Dashboard view.
 
-})(jQuery, _, Backbone, umobile, config);
+				@method renderContent
+				@param {Object} collection Reference to the ModuleCollection.
+				@override LoadedView
+				**/
+				renderContent: function (collection) {
+					console.log('Awesome debug DashBoardView.js - renderContent');
+					this.cleanContainers();
+					this.renderModules();
+				},
+
+				/**
+				Method overrides the LoadedView class. This method
+				provides custom content for the Dashboard view.
+
+				@method renderError
+				@override LoadedView
+				**/
+				renderError: function () {
+					console.log('Awesome debug DashBoardView.js - renderError');
+					this.cleanContainers();
+					this.renderNotifier();
+				}
+			});
+
+	})(jQuery, _, Backbone, umobile, config);

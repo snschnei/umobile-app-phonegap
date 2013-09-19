@@ -1,235 +1,232 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, console:true, Handlebars:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
-
-	/**
-	Class abstraction. Defines properties and methods
-	that all views require.
-
-	@class Base
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.Base = Backbone.View.extend({
-		/**
-		Property houses DOM selectors.
-
-		@property selectors
-		@type Object
-		**/
-		selectors: {},
+		'use strict';
 
 		/**
-		Property houses compiled handlebar template.
+		Class abstraction. Defines properties and methods
+		that all views require.
 
-		@property template
-		@type Object
+		@class Base
+		@submodule view
+		@namespace view
+		@constructor
 		**/
-		template: {},
+		umobile.view.Base = Backbone.View.extend({
+				/**
+				Property houses DOM selectors.
 
-		/**
-		Property houses collection of modules.
+				@property selectors
+				@type Object
+				**/
+				selectors: {},
 
-		@property folderCollection
-		@type Object
-		**/
-		folderCollection: {},
+				/**
+				Property houses compiled handlebar template.
 
-		/**
-		Property houses the Credential model.
+				@property template
+				@type Object
+				**/
+				template: {},
 
-		@property credModel
-		@type Object
-		**/
-		credModel: {},
+				/**
+				Property houses collection of modules.
 
-		/**
-		Property houses the State model.
+				@property folderCollection
+				@type Object
+				**/
+				folderCollection: {},
 
-		@property stateModel
-		@type Object
-		**/
-		stateModel: {},
+				/**
+				Property houses the Credential model.
 
-		/**
-		Property houses binding to $.publish method.
+				@property credModel
+				@type Object
+				**/
+				credModel: {},
 
-		@property publish
-		@type Object
-		**/
-		publish: _.bind($.publish, this),
+				/**
+				Property houses the State model.
 
-		/**
-		Property houses binding to $.subscribe method.
+				@property stateModel
+				@type Object
+				**/
+				stateModel: {},
 
-		@property subscribe
-		@type Object
-		**/
-		subscribe: _.bind($.subscribe, this),
+				/**
+				Property houses binding to $.publish method.
 
-		/**
-		Property houses binding to $.unsubscribe method.
+				@property publish
+				@type Object
+				**/
+				publish: _.bind($.publish, this),
 
-		@property unsubscribe
-		@type Object
-		**/
-		unsubscribe: _.bind($.unsubscribe, this),
+				/**
+				Property houses binding to $.subscribe method.
 
-		/**
-		Property houses utilty implementation.
+				@property subscribe
+				@type Object
+				**/
+				subscribe: _.bind($.subscribe, this),
 
-		@property utils
-		@type Object
-		**/
-		utils: {},
+				/**
+				Property houses binding to $.unsubscribe method.
 
-		/**
-		Helper method. Given the passed property, this method
-		parses the selector object looking for a match.
+				@property unsubscribe
+				@type Object
+				**/
+				unsubscribe: _.bind($.unsubscribe, this),
 
-		@method loc
-		@param {String} property The property to look up.
-		@param {Boolean} isRoot Flag to search for property on the body tag.
-		@return {Object} Cached, jQuery-wrapped DOM element.
-		**/
-		loc: function (property, isRoot) {
-            console.log("Awesome debug Base.js - loc");
-			var scope;
-			if (isRoot && typeof isRoot !== 'boolean') {
-				throw new Error('Unsupported type. Expected boolean for isRoot argument and not ' + typeof isRoot + '.');
-			}
+				/**
+				Property houses utilty implementation.
 
-			scope = (isRoot) ? $('body') : this.$el;
-			return scope.find(this.selectors[property]);
-		},
+				@property utils
+				@type Object
+				**/
+				utils: {},
 
-		/**
-		Method provides generic rendering of templates.
+				/**
+				Helper method. Given the passed property, this method
+				parses the selector object looking for a match.
 
-		@method render
-		@return {Object} Reference to the Header view.
-		**/
-		render: function () {
-            console.log("Awesome debug Base.js - render");
-			var model = (this.options.hasOwnProperty('model')) ? this.options.model : {};
-            var portlets = model.portlets;
-			this.$el.html(this.template(model));
-            _.each(portlets, function(portlet, idx){
-                var moduleView = new umobile.view.Module({
-                    model: portlet
-                })
-                if(portlet.title != 'OU MySail App'){ // temporary fix to not display app ad
-                    this.$el.append(moduleView.el);
-                }
-                console.log("looping " +portlet.title);
-            },this);
-			return this;
-		},
+				@method loc
+				@param {String} property The property to look up.
+				@param {Boolean} isRoot Flag to search for property on the body tag.
+				@return {Object} Cached, jQuery-wrapped DOM element.
+				**/
+				loc: function (property, isRoot) {
+					console.log('Awesome debug Base.js - loc');
+					var scope;
+					if (isRoot && typeof isRoot !== 'boolean') {
+						throw new Error('Unsupported type. Expected boolean for isRoot argument and not ' + typeof isRoot + '.');
+					}
 
-		/**
-		Method is triggered when the Module Collection is reset.
-		This method is meant to be implemented by child views.
+					scope = (isRoot) ? $('body') : this.$el;
+					return scope.find(this.selectors[property]);
+				},
 
-		@method onCollectionReset
-		@param {Object} collection Collection of module objects.
-		**/
-		onCollectionReset: function (collection) {
-        },
+				/**
+				Method provides generic rendering of templates.
 
-		/**
-		Method is triggered when the Credential Model is updated.
-		This method is meant to be implemented by child views.
+				@method render
+				@return {Object} Reference to the Header view.
+				**/
+				render: function () {
+					console.log('Awesome debug Base.js - render');
+					var model = (this.options.hasOwnProperty('model')) ? this.options.model : {};
+					var portlets = model.portlets;
+					this.$el.html(this.template(model));
+					_.each(portlets, function (portlet, idx) {
+							var moduleView = new umobile.view.Module({
+									model: portlet
+								});
+							if (portlet.title !== 'OU MySail App') { // temporary fix to not display app ad
+								this.$el.append(moduleView.el);
+							}
+							console.log('looping ' + portlet.title);
+						}, this);
+					return this;
+				},
 
-		@method onCredChanged
-		@param {Object} model The updated model.
-		**/
-		onCredChanged: function (model) {
-        },
+				/**
+				Method is triggered when the Module Collection is reset.
+				This method is meant to be implemented by child views.
 
-		/**
-		Method is triggered when the route changes.
-		This method is meant to be implemented by child views.
+				@method onCollectionReset
+				@param {Object} collection Collection of module objects.
+				**/
+				onCollectionReset: function (collection) {},
 
-		@method onRouteChanged
-		@param {Object} view The current view.
-		**/
-		onRouteChanged: function (view) {
-        },
+				/**
+				Method is triggered when the Credential Model is updated.
+				This method is meant to be implemented by child views.
 
-		/**
-		Method provides custom clean-up operations for child views.
-		This method is meant to be implemented by child views.
+				@method onCredChanged
+				@param {Object} model The updated model.
+				**/
+				onCredChanged: function (model) {},
 
-		@method clean
-		**/
-		clean: function () {
-            console.log("Awesome debug Base.js - clean");
-        },
+				/**
+				Method is triggered when the route changes.
+				This method is meant to be implemented by child views.
 
-		/**
-		Method cleans up the DOM and unbinds
-		events when the loaded view changes.
+				@method onRouteChanged
+				@param {Object} view The current view.
+				**/
+				onRouteChanged: function (view) {},
 
-		@method destroy
-		**/
-		destroy: function () {
-            console.log("Awesome debug Base.js - destroy");
-			// Unbind models, collections & listners.
-			this.unbind();
-			this.folderCollection.off('reset', this.onCollectionReset, this);
-			this.credModel.off('change', this.onCredChanged, this);
-			this.unsubscribe('route.changed', this.onRouteChanged);
+				/**
+				Method provides custom clean-up operations for child views.
+				This method is meant to be implemented by child views.
 
-			// Undelegate events.
-			this.undelegateEvents();
+				@method clean
+				**/
+				clean: function () {
+					console.log('Awesome debug Base.js - clean');
+				},
 
-			// Custom removal.
-			if (this.clean && _.isFunction(this.clean)) {
-				this.clean();
-			}
+				/**
+				Method cleans up the DOM and unbinds
+				events when the loaded view changes.
 
-			// Remove DOM.
-			this.remove();
-		},
+				@method destroy
+				**/
+				destroy: function () {
+					console.log('Awesome debug Base.js - destroy');
+					// Unbind models, collections & listners.
+					this.unbind();
+					this.folderCollection.off('reset', this.onCollectionReset, this);
+					this.credModel.off('change', this.onCredChanged, this);
+					this.unsubscribe('route.changed', this.onRouteChanged);
 
-		/**
-		Method initializes the view.
+					// Undelegate events.
+					this.undelegateEvents();
 
-		@method initialize
-		@param {Object} options Options object.
-		**/
-		initialize: function (options) {
-			// Bind all properties & methods.
-			_.bindAll(this);
+					// Custom removal.
+					if (this.clean && _.isFunction(this.clean)) {
+						this.clean();
+					}
 
-			// Cache module collection.
-			this.folderCollection = umobile.app.folderCollection;
+					// Remove DOM.
+					this.remove();
+				},
 
-			// Cache credential model.
-			this.credModel = umobile.app.credModel;
+				/**
+				Method initializes the view.
 
-			// Cache state model.
-			this.stateModel = umobile.app.stateModel;
+				@method initialize
+				@param {Object} options Options object.
+				**/
+				initialize: function (options) {
+					// Bind all properties & methods.
+					_.bindAll(this);
 
-			// Cache utilities.
-			this.utils = umobile.utility.Utils;
+					// Cache module collection.
+					this.folderCollection = umobile.app.folderCollection;
 
-			// Cache options.
-			this.options = (options && !_.isEmpty(options)) ? options : {};
+					// Cache credential model.
+					this.credModel = umobile.app.credModel;
 
-			// Compile screen template.
-			this.template = Handlebars.compile($(this.selectors.template).html());
+					// Cache state model.
+					this.stateModel = umobile.app.stateModel;
 
-			// Listen to the reset event on the folderCollection.
-			this.folderCollection.on('reset', this.onCollectionReset, this);
+					// Cache utilities.
+					this.utils = umobile.utility.Utils;
 
-			// Listen for the 'change' event on the credential model.
-			this.credModel.on('change', this.onCredChanged, this);
+					// Cache options.
+					this.options = (options && !_.isEmpty(options)) ? options : {};
 
-			// Listen for the 'route.changed' event.
-			this.subscribe('route.changed', this.onRouteChanged, this);
-		}
-	});
+					// Compile screen template.
+					this.template = Handlebars.compile($(this.selectors.template).html());
 
-})(jQuery, _, Backbone, umobile, config);
+					// Listen to the reset event on the folderCollection.
+					this.folderCollection.on('reset', this.onCollectionReset, this);
+
+					// Listen for the 'change' event on the credential model.
+					this.credModel.on('change', this.onCredChanged, this);
+
+					// Listen for the 'route.changed' event.
+					this.subscribe('route.changed', this.onRouteChanged, this);
+				}
+			});
+
+	})(jQuery, _, Backbone, umobile, config);

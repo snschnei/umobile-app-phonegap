@@ -1,378 +1,383 @@
-/*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, console:true, Handlebars:true */
+/*global window:true, _:true, Backbone:true, GibberishAES:true, jQuery:true, umobile:true, config:true, console:true, Handlebars:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
-
-	/**
-	Manages the loaded Login view.
-
-	@class Login
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.LoginView = umobile.view.LoadedView.extend({
-		/**
-		Property houses the name of the loaded view.
-
-		@property name
-		@type String
-		@override LoadedView
-		**/
-		name: 'login',
+		'use strict';
 
 		/**
-		Property houses DOM selectors.
+		Manages the loaded Login view.
 
-		@property selectors
-		@type Object
-		@override Base
+		@class Login
+		@submodule view
+		@namespace view
+		@constructor
 		**/
-		selectors: {
-			template: '#views-partials-loginview',
-			username: '#username',
-			password: '#password',
-			submit: '#submitButton',
-			warn: '#loginAlert',
-			login: '#login',
-			spinner: '#submitSpinner'
-		},
+		umobile.view.LoginView = umobile.view.LoadedView.extend({
+				/**
+				Property houses the name of the loaded view.
 
-		/**
-		Property houses messages.
+				@property name
+				@type String
+				@override LoadedView
+				**/
+				name: 'login',
 
-		@property messages
-		@type Object
-		**/
-		messages: {
-			validationError: 'You have errors with your username or password.',
-			guestLoginError: 'We tried to log you into the portal as a guest but something went wrong. Please try to login with your credentials.',
-			loginError: 'We tried to log you into the portal but something went wrong. Please try to login again.'
-		},
+				/**
+				Property houses DOM selectors.
 
-		/**
-		Property houses the Credential model.
+				@property selectors
+				@type Object
+				@override Base
+				**/
+				selectors: {
+					template: '#views-partials-loginview',
+					username: '#username',
+					password: '#password',
+					submit: '#submitButton',
+					warn: '#loginAlert',
+					login: '#login',
+					spinner: '#submitSpinner'
+				},
 
-		@property model
-		@type Object
-		**/
-		model: {},
+				/**
+				Property houses messages.
 
-		/**
-		Property houses Backbone events object.
+				@property messages
+				@type Object
+				**/
+				messages: {
+					validationError: 'You have errors with your username or password.',
+					guestLoginError: 'We tried to log you into the portal as a guest but something went wrong. Please try to login with your credentials.',
+					loginError: 'We tried to log you into the portal but something went wrong. Please try to login again.'
+				},
 
-		@property events
-		@type Object
-		**/
-		events: {
-			'submit form': 'submitHandler'
-		},
+				/**
+				Property houses the Credential model.
 
-		/**
-		Method houses view clean up operations.
+				@property model
+				@type Object
+				**/
+				model: {},
 
-		@method clean
-		**/
-		clean: function () {
-            console.log("Awesome debug LoginView.js - clean");
-			this.unBindEventListeners();
-		},
+				/**
+				Property houses Backbone events object.
 
-		/**
-		Method manages the alert.
-		TODO: Move the alert implementation into a seperate view.
+				@property events
+				@type Object
+				**/
+				events: {
+					'submit form': 'submitHandler'
+				},
 
-		@method warn
-		@param {String} action The action to take (i.e., hide or show).
-		@param {String} message The message to render.
-		**/
-		warn: function (action, message) {
-            console.log("Awesome debug LoginView.js - warn");
-			// Define & set defaults.
-			var warn = this.loc('warn');
-			action = (!action) ? 'hide' : action;
-			message = (!message) ? this.messages.validationError : message;
+				/**
+				Method houses view clean up operations.
 
-			switch (action) {
-			case 'hide':
-				warn.slideUp('fast');
-				break;
-			case 'show':
-				warn.find('.message').html(message);
-				warn.slideDown('fast');
-				break;
-			default:
-				warn.slideUp('fast');
-			}
-		},
+				@method clean
+				**/
+				clean: function () {
+					console.log('Awesome debug LoginView.js - clean');
+					this.unBindEventListeners();
+				},
 
-		/**
-		Method removes existing error messages
-		from the login form.
+				/**
+				Method manages the alert.
+				TODO: Move the alert implementation into a seperate view.
 
-		@method resetErrors
-		**/
-		resetErrors: function () {
-            console.log("Awesome debug LoginView.js - resetErrors");
-			var inputs = this.getInputs();
-			_.each(inputs, function (obj, key) {
-				var control = obj.el.closest('.control-group'),
-					help = control.find('.help-inline');
-				if (control.hasClass('error')) {
-					control.removeClass('error');
-					help.hide();
-				}
-			}, this);
-		},
+				@method warn
+				@param {String} action The action to take (i.e., hide or show).
+				@param {String} message The message to render.
+				**/
+				warn: function (action, message) {
+					console.log('Awesome debug LoginView.js - warn');
+					// Define & set defaults.
+					var warn = this.loc('warn');
+					action = (!action) ? 'hide' : action;
+					message = (!message) ? this.messages.validationError : message;
 
-		/**
-		Method builds an object containing form input data.
+					switch (action) {
+					case 'hide':
+						warn.slideUp('fast');
+						break;
+					case 'show':
+						warn.find('.message').html(message);
+						warn.slideDown('fast');
+						break;
+					default:
+						warn.slideUp('fast');
+					}
+				},
 
-		@method getInputs
-		@return {Object} Object containing form input data.
-		**/
-		getInputs: function () {
-            console.log("Awesome debug LoginView.js - getInputs");
-			// Define.
-			var inputs, elements;
+				/**
+				Method removes existing error messages
+				from the login form.
 
-			// Initialize.
-			inputs = {};
-			elements = this.$el.find(':input');
+				@method resetErrors
+				**/
+				resetErrors: function () {
+					console.log('Awesome debug LoginView.js - resetErrors');
+					var inputs = this.getInputs();
+					_.each(inputs, function (obj, key) {
+							var control = obj.el.closest('.control-group'),
+							help = control.find('.help-inline');
+							if (control.hasClass('error')) {
+								control.removeClass('error');
+								help.hide();
+							}
+						}, this);
+				},
 
-			// Iterate over elements.
-			_.each(elements, function (element, index) {
-				var tag, el, name;
-				tag = element.nodeName.toLowerCase();
-				if (tag === 'input') {
-					el = $(element);
-					name = el.attr('name');
-					inputs[name] = {
-						el: el,
-						value: el.val()
-					};
-				}
-			}, this);
+				/**
+				Method builds an object containing form input data.
 
-			return inputs;
-		},
+				@method getInputs
+				@return {Object} Object containing form input data.
+				**/
+				getInputs: function () {
+					console.log('Awesome debug LoginView.js - getInputs');
+					// Define.
+					var inputs, elements;
 
-		/**
-		Method locks or disables the form when being submitted.
+					// Initialize.
+					inputs = {};
+					elements = this.$el.find(':input');
 
-		@method lockLogin
-		**/
-		lockLogin: function () {
-            console.log("Awesome debug LoginView.js - logLogin");
-			if (this.loc('spinner').hasClass('invisible')) {
-				this.loc('username').attr('disabled', 'disabled');
-				this.loc('password').attr('disabled', 'disabled');
-				this.loc('submit').addClass('disabled');
-				this.loc('spinner').removeClass('invisible');
-			}
-		},
+					// Iterate over elements.
+					_.each(elements, function (element, index) {
+							var tag, el, name;
+							tag = element.nodeName.toLowerCase();
+							if (tag === 'input') {
+								el = $(element);
+								name = el.attr('name');
+								inputs[name] = {
+									el: el,
+									value: el.val()
+								};
+							}
+						}, this);
 
-		/**
-		Method unlocks or removes the login form
-		from a disabled state.
+					return inputs;
+				},
 
-		@method unlockLogin
-		**/
-		unlockLogin: function () {
-            console.log("Awesome debug LoginView.js - unlockLogin");
-			if (!this.loc('spinner').hasClass('invisible')) {
-				this.loc('username').removeAttr('disabled');
-				this.loc('password').removeAttr('disabled');
-				this.loc('submit').removeClass('disabled');
-				this.loc('spinner').addClass('invisible');
-			}
-		},
+				/**
+				Method locks or disables the form when being submitted.
 
-		/**
-		Method updates the form when the validation on the model is invalid.
+				@method lockLogin
+				**/
+				lockLogin: function () {
+					console.log('Awesome debug LoginView.js - logLogin');
+					if (this.loc('spinner').hasClass('invisible')) {
+						this.loc('username').attr('disabled', 'disabled');
+						this.loc('password').attr('disabled', 'disabled');
+						this.loc('submit').addClass('disabled');
+						this.loc('spinner').removeClass('invisible');
+					}
+				},
 
-		@method invalidFormHandler
-		@param {Object} model Reference to Credential model.
-		@param {Object} errors Reference to model errors.
-		**/
-		invalidFormHandler: function (model, errors) {
-            console.log("Awesome debug LoginView.js - invalidFormHandler");
-			// Cache inputs.
-			var inputs = this.getInputs();
+				/**
+				Method unlocks or removes the login form
+				from a disabled state.
 
-			// Unlock the login.
-			this.unlockLogin();
+				@method unlockLogin
+				**/
+				unlockLogin: function () {
+					console.log('Awesome debug LoginView.js - unlockLogin');
+					if (!this.loc('spinner').hasClass('invisible')) {
+						this.loc('username').removeAttr('disabled');
+						this.loc('password').removeAttr('disabled');
+						this.loc('submit').removeClass('disabled');
+						this.loc('spinner').addClass('invisible');
+					}
+				},
 
-			// Reset existing errors.
-			this.resetErrors();
+				/**
+				Method updates the form when the validation on the model is invalid.
 
-			// Show warning message.
-			this.warn('show', this.messages.validationError);
+				@method invalidFormHandler
+				@param {Object} model Reference to Credential model.
+				@param {Object} errors Reference to model errors.
+				**/
+				invalidFormHandler: function (model, errors) {
+					console.log('Awesome debug LoginView.js - invalidFormHandler');
+					// Cache inputs.
+					var inputs = this.getInputs();
 
-			// Show input errors.
-			_.each(errors, function (value, key) {
-                console.log("Awesome debug LoginView.js - invalidFormHandeler _.each");
-				var input, control, help;
-				if (inputs.hasOwnProperty(key)) {
-					input = inputs[key].el;
-					control = input.closest('.control-group');
-					help = control.find('.help-inline');
-					control.addClass('error');
-					help.html(value).show();
+					// Unlock the login.
+					this.unlockLogin();
+
+					// Reset existing errors.
+					this.resetErrors();
+
+					// Show warning message.
+					this.warn('show', this.messages.validationError);
+
+					// Show input errors.
+					_.each(errors, function (value, key) {
+							console.log('Awesome debug LoginView.js - invalidFormHandeler _.each');
+							var input, control, help;
+							if (inputs.hasOwnProperty(key)) {
+								input = inputs[key].el;
+								control = input.closest('.control-group');
+								help = control.find('.help-inline');
+								control.addClass('error');
+								help.html(value).show();
+							}
+						});
+				},
+
+				/**
+				Method sets up bindings on the view and model.
+
+				@method bindEventListeners
+				**/
+				bindEventListeners: function () {
+					console.log('Awesome debug LoginView.js - bindEventListeners');
+					// Bind Backbone.Validation to the Login view.
+					Backbone.Validation.bind(this);
+
+					// Bind to model. Invalid model callback.
+					this.model.bind('validated:invalid', _.bind(this.invalidFormHandler, this));
+
+					// Listen to the save event on the Credential model.
+					this.model.on('change', _.bind(this.onUpdateCredentials, this));
+				},
+
+				/**
+				Method unbinds events on the view and model.
+
+				@method unBindEventListeners
+				**/
+				unBindEventListeners: function () {
+					console.log('Awesome debug LoginView.js - unBindEventListeners');
+					// Unbind validation.
+					if (Backbone.Validation.unbind) {
+						Backbone.Validation.unbind(this);
+					}
+
+					// Unbind model.
+					if (this.model.unbind) {
+						this.model.unbind('validated:invalid');
+						this.model.unbind('change');
+					}
+				},
+
+				/**
+				Method logs the user into the portal.
+
+				@method onUpdateCredentials
+				**/
+				onUpdateCredentials: function () {
+					console.log('Awesome debug LoginView.js - onUpdateCredentials');
+					// Reset existing errors.
+					this.resetErrors();
+
+					// Hide warning message.
+					this.warn('hide');
+
+					// Log the user into the portal.
+					umobile.auth.establishSession();
+				},
+
+				/**
+				Method extracts credentials from the login form
+				and attempts to persist them by calling save on
+				the Credential model. Triggers a change event
+				on the Credential model.
+
+				@method updateCredentials
+				**/
+				updateCredentials: function () {
+					console.log('Awesome debug LoginView.js - updateCredentials');
+					// Define.
+					var inputs, username, password;
+
+					// Initialize.
+					inputs = this.getInputs();
+					username = inputs.username.value.toLowerCase();
+					password = inputs.password.value;
+
+					// Unbind the model.
+					this.unBindEventListeners();
+
+					// When username entered matches what is stored
+					// save a null value so we can trigger a change
+					// event on model.
+					if (this.model.get('username') === username) {
+						this.model.save({
+								username: null
+							});
+					}
+
+					// Lock the login.
+					this.lockLogin();
+
+					// Bind the model.
+					this.bindEventListeners();
+
+					// Save updated credentials.
+					this.model.save({
+							username: username,
+							password: GibberishAES.enc(password, config.encryptionKey)
+						});
+				},
+
+				/**
+				Methods sets up the model:{} object for validation.
+
+				@method initModel
+				**/
+				initModel: function () {
+					console.log('Awesome debug LoginView.js - initModel');
+					// Backbone.Validation plugin expects the model to be housed
+					// within a model:{} and not the credModel:{}.
+					if (_.isEmpty(this.model)) {
+						this.model = this.credModel;
+					}
+				},
+
+				/**
+				Method overrides the LoadedView class. This method
+				provides custom content for the Login view.
+
+				@method renderContent
+				@param {Object} collection Reference to ModuleCollection.
+				@override LoadedView
+				**/
+				renderContent: function (collection) {
+					console.log('Awesome debug LoginView.js - renderContent');
+					this.initModel();
+				},
+
+				/**
+				Method overrides the LoadedView class. This method
+				provides custom error content for the Login view.
+
+				@method renderError
+				@override LoadedView
+				**/
+				renderError: function () {
+					console.log('Awesome debug LoginView.js - renderError');
+					this.initModel();
+					var username = this.model.get('username');
+					if (username === 'guest') {
+						return;
+					}
+
+					this.warn('show', this.messages.loginError);
+				},
+
+				/**
+				Handler for form submission.
+
+				@method submitHandler
+				@param {Object} e Event object.
+				**/
+				submitHandler: function (e) {
+					console.log('Awesome debug LoginView.js - submitHandler');
+					e.preventDefault();
+					if (this.loc('submit').hasClass('disabled')) {
+						return;
+					}
+
+					this.updateCredentials();
 				}
 			});
-		},
 
-		/**
-		Method sets up bindings on the view and model.
-
-		@method bindEventListeners
-		**/
-		bindEventListeners: function () {
-            console.log("Awesome debug LoginView.js - bindEventListeners");
-			// Bind Backbone.Validation to the Login view.
-			Backbone.Validation.bind(this);
-
-			// Bind to model. Invalid model callback.
-			this.model.bind('validated:invalid', _.bind(this.invalidFormHandler, this));
-
-			// Listen to the save event on the Credential model.
-			this.model.on('change', _.bind(this.onUpdateCredentials, this));
-		},
-
-		/**
-		Method unbinds events on the view and model.
-
-		@method unBindEventListeners
-		**/
-		unBindEventListeners: function () {
-            console.log("Awesome debug LoginView.js - unBindEventListeners");
-			// Unbind validation.
-			if (Backbone.Validation.unbind) {
-				Backbone.Validation.unbind(this);
-			}
-
-			// Unbind model.
-			if (this.model.unbind) {
-				this.model.unbind('validated:invalid');
-				this.model.unbind('change');
-			}
-		},
-
-		/**
-		Method logs the user into the portal.
-
-		@method onUpdateCredentials
-		**/
-		onUpdateCredentials: function () {
-            console.log("Awesome debug LoginView.js - onUpdateCredentials");
-			// Reset existing errors.
-			this.resetErrors();
-
-			// Hide warning message.
-			this.warn('hide');
-
-			// Log the user into the portal.
-			umobile.auth.establishSession();
-		},
-
-		/**
-		Method extracts credentials from the login form
-		and attempts to persist them by calling save on
-		the Credential model. Triggers a change event
-		on the Credential model.
-
-		@method updateCredentials
-		**/
-		updateCredentials: function () {
-            console.log("Awesome debug LoginView.js - updateCredentials");
-			// Define.
-			var inputs, username, password;
-
-			// Initialize.
-			inputs = this.getInputs();
-			username = inputs.username.value.toLowerCase();
-			password = inputs.password.value;
-
-			// Unbind the model.
-			this.unBindEventListeners();
-
-			// When username entered matches what is stored
-			// save a null value so we can trigger a change
-			// event on model.
-			if (this.model.get('username') === username) {
-				this.model.save({username: null});
-			}
-
-			// Lock the login.
-			this.lockLogin();
-
-			// Bind the model.
-			this.bindEventListeners();
-
-			// Save updated credentials.
-			this.model.save({username: username, password: GibberishAES.enc(password, config.encryptionKey)});
-		},
-
-		/**
-		Methods sets up the model:{} object for validation.
-
-		@method initModel
-		**/
-		initModel: function () {
-            console.log("Awesome debug LoginView.js - initModel");
-			// Backbone.Validation plugin expects the model to be housed
-			// within a model:{} and not the credModel:{}.
-			if (_.isEmpty(this.model)) {
-				this.model = this.credModel;
-			}
-		},
-
-		/**
-		Method overrides the LoadedView class. This method
-		provides custom content for the Login view.
-
-		@method renderContent
-		@param {Object} collection Reference to ModuleCollection.
-		@override LoadedView
-		**/
-		renderContent: function (collection) {
-            console.log("Awesome debug LoginView.js - renderContent");
-			this.initModel();
-		},
-
-		/**
-		Method overrides the LoadedView class. This method
-		provides custom error content for the Login view.
-
-		@method renderError
-		@override LoadedView
-		**/
-		renderError: function () {
-            console.log("Awesome debug LoginView.js - renderError");
-			this.initModel();
-			var username = this.model.get('username');
-			if (username === 'guest') {
-				return;
-			}
-
-			this.warn('show', this.messages.loginError);
-		},
-
-		/**
-		Handler for form submission.
-
-		@method submitHandler
-		@param {Object} e Event object.
-		**/
-		submitHandler: function (e) {
-            console.log("Awesome debug LoginView.js - submitHandler");
-			e.preventDefault();
-			if (this.loc('submit').hasClass('disabled')) {
-				return;
-			}
-
-			this.updateCredentials();
-		}
-	});
-
-})(jQuery, _, Backbone, umobile, config);
+	})(jQuery, _, Backbone, umobile, config);
