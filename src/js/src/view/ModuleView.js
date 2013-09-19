@@ -1,105 +1,107 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, console:true, Handlebars:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
-
-	/**
-	Manages the loaded Module view.
-
-	@class ModuleView
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.ModuleView = umobile.view.LoadedView.extend({
-		/**
-		Property houses the name of the loaded view.
-
-		@property name
-		@type String
-		@override LoadedView
-		**/
-		name: 'module',
+		'use strict';
 
 		/**
-		Property houses DOM selectors.
+		Manages the loaded Module view.
 
-		@property selectors
-		@type Object
-		@override Base
+		@class ModuleView
+		@submodule view
+		@namespace view
+		@constructor
 		**/
-		selectors: {
-			template: '#views-partials-moduleview',
-			notifier: '#notifier',
-			frame: '#moduleFrame'
-		},
+		umobile.view.ModuleView = umobile.view.LoadedView.extend({
+				/**
+				Property houses the name of the loaded view.
 
-		/**
-		Method empties root containers.
+				@property name
+				@type String
+				@override LoadedView
+				**/
+				name: 'module',
 
-		@method cleanContainers
-		**/
-		cleanContainers: function () {
-            console.log("Awesome debug ModuleView.js - cleanContainers");
-			var notifier = this.loc('notifier'),
-				frame = this.loc('frame');
+				/**
+				Property houses DOM selectors.
 
-			notifier.empty().hide();
-			frame.hide();
-		},
+				@property selectors
+				@type Object
+				@override Base
+				**/
+				selectors: {
+					template: '#views-partials-moduleview',
+					notifier: '#notifier',
+					frame: '#moduleFrame'
+				},
 
-		/**
-		Method renders the notifier.
+				/**
+				Method empties root containers.
 
-		@method renderNotifier
-		**/
-		renderNotifier: function () {
-            console.log("Awesome debug ModuleView.js - renderNotifier");
-			// Define.
-			var notifier, notifierModel, notifierView;
+				@method cleanContainers
+				**/
+				cleanContainers: function () {
+					console.log('Awesome debug ModuleView.js - cleanContainers');
+					var notifier = this.loc('notifier'),
+					frame = this.loc('frame');
 
-			// Initialize.
-			notifier = this.loc('notifier');
-			notifierModel = new umobile.model.Notifier();
-			notifierView = new umobile.view.Notifier({model: notifierModel.toJSON()});
-			notifier.append(notifierView.render().el).show();
-		},
+					notifier.empty().hide();
+					frame.hide();
+				},
 
-		/**
-		Method renders the frame container.
+				/**
+				Method renders the notifier.
 
-		@method renderFrame
-		**/
-		renderFrame: function () {
-            console.log("Awesome debug ModuleView.js - renderFrame");
-			var frame = this.loc('frame').show();
-		},
+				@method renderNotifier
+				**/
+				renderNotifier: function () {
+					console.log('Awesome debug ModuleView.js - renderNotifier');
+					// Define.
+					var notifier, notifierModel, notifierView;
 
-		/**
-		Method overrides the LoadedView class. This method
-		provides custom content for the Module view.
+					// Initialize.
+					notifier = this.loc('notifier');
+					notifierModel = new umobile.model.Notifier();
+					notifierView = new umobile.view.Notifier({
+							model: notifierModel.toJSON()
+						});
+					notifier.append(notifierView.render().el).show();
+				},
 
-		@method renderError
-		@override LoadedView
-		**/
-		renderError: function () {
-            console.log("Awesome debug ModuleView.js - renderError");
-			this.cleanContainers();
-			this.renderNotifier();
-		},
+				/**
+				Method renders the frame container.
 
-		/**
-		Method overrides the LoadedView class. This method
-		provides custom content for the Module view.
+				@method renderFrame
+				**/
+				renderFrame: function () {
+					console.log('Awesome debug ModuleView.js - renderFrame');
+					var frame = this.loc('frame').show();
+				},
 
-		@method renderContent
-		@param {Object} collection Reference to the ModuleCollection.
-		@override LoadedView
-		**/
-		renderContent: function (collection) {
-            console.log("Awesome debug ModuleView.js - renderContent");
-			this.cleanContainers();
-			this.renderFrame();
-		}
-	});
+				/**
+				Method overrides the LoadedView class. This method
+				provides custom content for the Module view.
 
-})(jQuery, _, Backbone, umobile, config);
+				@method renderError
+				@override LoadedView
+				**/
+				renderError: function () {
+					console.log('Awesome debug ModuleView.js - renderError');
+					this.cleanContainers();
+					this.renderNotifier();
+				},
+
+				/**
+				Method overrides the LoadedView class. This method
+				provides custom content for the Module view.
+
+				@method renderContent
+				@param {Object} collection Reference to the ModuleCollection.
+				@override LoadedView
+				**/
+				renderContent: function (collection) {
+					console.log('Awesome debug ModuleView.js - renderContent');
+					this.cleanContainers();
+					this.renderFrame();
+				}
+			});
+
+	})(jQuery, _, Backbone, umobile, config);

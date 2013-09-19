@@ -1,63 +1,63 @@
 /*global window:true, _:true, document:true, jQuery:true, umobile:true, config:true, console:true */
 (function ($, _, umobile, config) {
-	'use strict';
-
-	/**
-	Houses utility methods.
-
-	@class Utils
-	@submodule utility
-	@namespace utility
-	**/
-	umobile.utility.Utils = {
-		/**
-		Method returns the current timestamp.
-
-		@method getTimestamp
-		**/
-		getTimestamp: function () {
-            console.log("Awesome debug Utils.js - getTimestamp");
-			return new Date().getTime();
-		},
+		'use strict';
 
 		/**
-		Method returns the length of an object.
+		Houses utility methods.
 
-		@method getObjectLength
-		@param {Object} object Object to examine for length.
+		@class Utils
+		@submodule utility
+		@namespace utility
 		**/
-		getObjectLength: function (object) {
-            console.log("Awesome debug Utils.js - getObjectLength");
-			return _.keys(object).length;
-		},
+		umobile.utility.Utils = {
+			/**
+			Method returns the current timestamp.
 
-		/**
-		Method returns a truncated string.
+			@method getTimestamp
+			**/
+			getTimestamp: function () {
+				console.log('Awesome debug Utils.js - getTimestamp');
+				return new Date().getTime();
+			},
 
-		@method truncate
-		@param {String} str String to be truncated.
-		@param {Number} length Allowable length of a string.
-		@param {String} suffix Characters appended to truncated string.
-		**/
-		truncate: function (str, length, suffix) {
-            console.log("Awesome debug Utils.js - truncate");
-			length = (!length) ? 60 : length;
-			suffix = (!suffix) ? '...' : suffix;
-			return (str.length > length) ? str.substring(0, (length - suffix.length)) + suffix : str;
-		},
+			/**
+			Method returns the length of an object.
 
-		/**
-		Method returns the contents of a parameter on a url string.
+			@method getObjectLength
+			@param {Object} object Object to examine for length.
+			**/
+			getObjectLength: function (object) {
+				console.log('Awesome debug Utils.js - getObjectLength');
+				return _.keys(object).length;
+			},
 
-		@method getParameter
-		@param {String} param Property to search.
-		@param {String} path Url string to examine.
-		**/
-		getParameter: function (param, path) {
-            console.log("Awesome debug Utils.js - getParameter");
-			return path.split(param + '=')[1];
-		}
+			/**
+			Method returns a truncated string.
 
-	};
+			@method truncate
+			@param {String} str String to be truncated.
+			@param {Number} length Allowable length of a string.
+			@param {String} suffix Characters appended to truncated string.
+			**/
+			truncate: function (str, length, suffix) {
+				console.log('Awesome debug Utils.js - truncate');
+				length = (!length) ? 60 : length;
+				suffix = (!suffix) ? '...' : suffix;
+				return (str.length > length) ? str.substring(0, (length - suffix.length)) + suffix : str;
+			},
 
-})(jQuery, _, umobile, config);
+			/**
+			Method returns the contents of a parameter on a url string.
+
+			@method getParameter
+			@param {String} param Property to search.
+			@param {String} path Url string to examine.
+			**/
+			getParameter: function (param, path) {
+				console.log('Awesome debug Utils.js - getParameter');
+				return path.split(param + '=')[1];
+			}
+
+		};
+
+	})(jQuery, _, umobile, config);

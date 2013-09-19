@@ -50,29 +50,29 @@ config.nativeIcons = {
 // SUPPORTED FOLDERS
 // add folders and modules that are not in the JSON feed here
 config.nativeFolders = {
-    OtherServices: {
-        title: 'Other Services',
-        portlets: {
-            directory: {
-                title: 'Campus Directory',
-                description: 'Oakland University Web Directory',
-                iconUrl: 'images/icons/directory.png',
-                url: 'http://www.oakland.edu/apps/mobile/directory/People.aspx?mobileapp=true'
-            },
+	OtherServices: {
+		title: 'Other Services',
+		portlets: {
+			directory: {
+				title: 'Campus Directory',
+				description: 'Oakland University Web Directory',
+				iconUrl: 'images/icons/directory.png',
+				url: 'http://www.oakland.edu/apps/mobile/directory/People.aspx?mobileapp=true'
+			},
 
-            admissions: {
-                title: 'Undergraduate Admissions', 
-                description: 'Undergraduate Admissions',
-                iconUrl: 'images/icons/admissions.png',
-                url:'http://www.oakland.edu/m/go?mobileapp=true'
-            },
+			admissions: {
+				title: 'Undergraduate Admissions',
+				description: 'Undergraduate Admissions',
+				iconUrl: 'images/icons/admissions.png',
+				url: 'http://www.oakland.edu/m/go?mobileapp=true'
+			},
 
-            links: {
-                title: 'More Mobile Services',
-                description: 'Links to sites outside of MySail',
-                iconUrl: 'images/icons/links.png',
-                url: 'http://www.oakland.edu/m/?mobileapp=true'
-            }
-        }
-    }
+			links: {
+				title: 'More Mobile Services',
+				description: 'Links to sites outside of MySail',
+				iconUrl: 'images/icons/links.png',
+				url: 'http://www.oakland.edu/m/?mobileapp=true'
+			}
+		}
+	}
 };

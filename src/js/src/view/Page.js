@@ -1,111 +1,111 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, Handlebars:true, console:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
-
-	/**
-	Responsible for rendering out a basic page layout,
-	which consists of the header, content and footer.
-
-	@class Page
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.Page = umobile.view.Base.extend({
-		/**
-		Property houses the root DOM element.
-
-		@property el
-		@type Object
-		@override Base
-		**/
-		el: '#page',
+		'use strict';
 
 		/**
-		Property houses DOM selectors.
+		Responsible for rendering out a basic page layout,
+		which consists of the header, content and footer.
 
-		@property selectors
-		@type Object
-		@override Base
+		@class Page
+		@submodule view
+		@namespace view
+		@constructor
 		**/
-		selectors: {
-			template: '#views-partials-page',
-			header: '#header',
-			breadcrumb: '#breadcrumb',
-			footer: '#footer'
-		},
+		umobile.view.Page = umobile.view.Base.extend({
+				/**
+				Property houses the root DOM element.
 
-		/**
-		Method initializes the Header view.
+				@property el
+				@type Object
+				@override Base
+				**/
+				el: '#page',
 
-		@method renderHeader
-		**/
-		renderHeader: function () {
-            console.log("Awesome debug Page.js - renderHeader");
-			// Define.
-			var header, headerView;
+				/**
+				Property houses DOM selectors.
 
-			// Initialize.
-			header = this.loc('header').html('');
-			headerView = new umobile.view.Header();
-			headerView.render();
-		},
+				@property selectors
+				@type Object
+				@override Base
+				**/
+				selectors: {
+					template: '#views-partials-page',
+					header: '#header',
+					breadcrumb: '#breadcrumb',
+					footer: '#footer'
+				},
 
-		/**
-		Method initializes the Breadcrumb view.
+				/**
+				Method initializes the Header view.
 
-		@method renderBreadcrumb
-		**/
-		renderBreadcrumb: function () {
-            console.log("Awesome debug Page.js - renderBreadcrumb");
-			// Define.
-			var breadcrumb, breadcrumbView;
+				@method renderHeader
+				**/
+				renderHeader: function () {
+					console.log('Awesome debug Page.js - renderHeader');
+					// Define.
+					var header, headerView;
 
-			// Initialize.
-			breadcrumb = this.loc('breadcrumb').html('');
-			breadcrumbView = new umobile.view.Breadcrumb();
-			breadcrumbView.render();
-		},
+					// Initialize.
+					header = this.loc('header').html('');
+					headerView = new umobile.view.Header();
+					headerView.render();
+				},
 
-		/**
-		Method initializes the Footer view.
+				/**
+				Method initializes the Breadcrumb view.
 
-		@method renderFooter
-		**/
-		renderFooter: function () {
-            console.log("Awesome debug Page.js - renderFooter");
-			// Define.
-			var footer, footerView;
+				@method renderBreadcrumb
+				**/
+				renderBreadcrumb: function () {
+					console.log('Awesome debug Page.js - renderBreadcrumb');
+					// Define.
+					var breadcrumb, breadcrumbView;
 
-			// Initialize.
-			footer = this.loc('footer').html('');
-			footerView = new umobile.view.Footer();
-			footerView.render();
-		},
+					// Initialize.
+					breadcrumb = this.loc('breadcrumb').html('');
+					breadcrumbView = new umobile.view.Breadcrumb();
+					breadcrumbView.render();
+				},
 
-		/**
-		Method renders header, content and footer.
+				/**
+				Method initializes the Footer view.
 
-		@method render
-		@return {Object} Reference to the Page view.
-		@override Base
-		**/
-		render: function () {
-            console.log("Awesome debug Page.js - render");
-			// Render base page.
-			this.$el.html(this.template(this.options));
+				@method renderFooter
+				**/
+				renderFooter: function () {
+					console.log('Awesome debug Page.js - renderFooter');
+					// Define.
+					var footer, footerView;
 
-			// Render the header.
-			this.renderHeader();
+					// Initialize.
+					footer = this.loc('footer').html('');
+					footerView = new umobile.view.Footer();
+					footerView.render();
+				},
 
-			// Render the breadcrumb.
-			this.renderBreadcrumb();
+				/**
+				Method renders header, content and footer.
 
-			// Render the footer.
-			this.renderFooter();
+				@method render
+				@return {Object} Reference to the Page view.
+				@override Base
+				**/
+				render: function () {
+					console.log('Awesome debug Page.js - render');
+					// Render base page.
+					this.$el.html(this.template(this.options));
 
-			return this;
-		}
-	});
+					// Render the header.
+					this.renderHeader();
 
-})(jQuery, _, Backbone, umobile, config);
+					// Render the breadcrumb.
+					this.renderBreadcrumb();
+
+					// Render the footer.
+					this.renderFooter();
+
+					return this;
+				}
+			});
+
+	})(jQuery, _, Backbone, umobile, config);

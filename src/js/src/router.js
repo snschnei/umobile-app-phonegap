@@ -27,9 +27,9 @@
 		routes: {
 			'dashboard': 'dashboard',
 			'login': 'login',
-            'logout': 'logout',
+			'logout': 'logout',
 			'modules/*module': 'modules',
-            'forgotPassword': 'forgotPassword',
+			'forgotPassword': 'forgotPassword',
 			'*other': 'dashboard'
 		},
 
@@ -39,18 +39,18 @@
 		@method dashboard
 		**/
 		dashboard: function () {
-            console.log("Awesome debug router.js - dashboard");
+			console.log('Awesome debug router.js - dashboard');
 			var dashboard = new umobile.view.DashboardView();
 			umobile.app.viewManager.show(dashboard);
 		},
 
 		/**
-		Method initializes the Login view.
+		method initializes the login view.
 
 		@method login
 		**/
 		login: function () {
-            console.log("Awesome debug router.js - login");
+			console.log('Awesome debug router.js - login');
 			var login = new umobile.view.LoginView();
 			umobile.app.viewManager.show(login);
 		},
@@ -61,21 +61,21 @@
 		@method logout
 		**/
 		logout: function () {
-            console.log("Awesome debug router.js - logout");
-            umobile.auth.logout(); // do an ajax call to remove cas ticket
-            umobile.app.credModel.set('username', 'guest'); // make the username guest so toggle icons switches back to default icons
-            umobile.app.credModel.deleteCredentials();
-            
-            // pull default JSON feed and display it
-            $.ajax({ 
-                url: config.uMobileServerUrl + config.uMobileServerContext+'/layout.json',
-                success: function(json) { 
-                    var folders = umobile.buildModuleArray(json);
-                    umobile.app.folderCollection.reset(folders);
-                    umobile.app.folderCollection.save();
-                    umobile.app.viewManager.show(new umobile.view.DashboardView());
-                } 
-            });
+			console.log('Awesome debug router.js - logout');
+			umobile.auth.logout(); // do an ajax call to remove cas ticket
+			umobile.app.credModel.set('username', 'guest'); // make the username guest so toggle icons switches back to default icons
+			umobile.app.credModel.deleteCredentials();
+
+			// pull default JSON feed and display it
+			$.ajax({
+				url: config.uMobileServerUrl + config.uMobileServerContext + '/layout.json',
+				success: function (json) {
+					var folders = umobile.buildModuleArray(json);
+					umobile.app.folderCollection.reset(folders);
+					umobile.app.folderCollection.save();
+					umobile.app.viewManager.show(new umobile.view.DashboardView());
+				}
+			});
 		},
 
 		/**
@@ -84,20 +84,24 @@
 		@method modules
 		**/
 		modules: function () {
-            console.log("Awesome debug router.js - modules");
+			console.log('Awesome debug router.js - modules');
 			var path, module;
 			path = umobile.utility.Utils.getParameter('url', Backbone.history.fragment);
-			module = new umobile.view.ModuleView({path: path});
+			module = new umobile.view.ModuleView({
+				path: path
+			});
 			umobile.app.viewManager.show(module);
 		},
 
-        forgotPassword: function () {
-            console.log("Awesome debug routher.js - forgot_Password");
-            var path, module;
-            path = "https://netid.oakland.edu/profile/";
-            module = new umobile.view.ModuleView({path: path});
-            umobile.app.viewManager.show(module);
-        },
+		forgotPassword: function () {
+			console.log('Awesome debug routher.js - forgot_Password');
+			var path, module;
+			path = 'https://netid.oakland.edu/profile/';
+			module = new umobile.view.ModuleView({
+				path: path
+			});
+			umobile.app.viewManager.show(module);
+		},
 
 		/**
 		Listens for the route to change. When triggered,
@@ -108,9 +112,9 @@
 		@param {String} route Reference to full route path.
 		**/
 		onRouteChanged: function (route, routeParam) {
-            console.log("Awesome debug router.js - onRouteChanged");
+			console.log('Awesome debug router.js - onRouteChanged');
 			// Define.
-            var className, root, path, view;
+			var className, root, path, view;
 
 			// Initialize.
 			root = $('html');
@@ -130,10 +134,14 @@
 			this.currentViewClass = className;
 
 			// Update the current view on the state model.
-			umobile.app.stateModel.save({currentView: path});
+			umobile.app.stateModel.save({
+				currentView: path
+			});
 
 			// Broadcast route changed event.
-			$.publish('route.changed', {name: view});
+			$.publish('route.changed', {
+				name: view
+			});
 		},
 
 		/**
@@ -142,7 +150,7 @@
 		@method initialize
 		**/
 		initialize: function () {
-            console.log("Awesome debug router.js - initialize");
+			console.log('Awesome debug router.js - initialize');
 			// Initialize the Page view.
 			var page = new umobile.view.Page().render();
 
