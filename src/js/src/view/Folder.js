@@ -35,10 +35,8 @@
 
 				clicked: function () {
 					$('#' + this.id).find('li').toggle();
-					console.log('clicked');
-					$('html, body').animate({
-							scrollTop: $('#' + this.id).position().top
-						});
+					console.log('clicked ' + this.model.title);
+					$('html, body').scrollTop($('#' + this.id).position().top);
 				},
 
 				/**

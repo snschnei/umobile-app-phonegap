@@ -122,6 +122,11 @@
 								this.renderContent(collection);
 							}
 
+							// Adjust height for modules
+							this.$el.children(':first').children(':nth-child(2)').css('height',
+								$(window).height() - $('.um-navbar').height());
+
+
 							// Append '#view' to '#viewLoader'.
 							$('#viewLoader').append(this.$el);
 
