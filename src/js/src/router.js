@@ -3,27 +3,27 @@
 	'use strict';
 
 	/**
-		Houses the Backbone.Router implementation.
+	Houses the Backbone.Router implementation.
 
-		@class RouteManager
-		@submodule router
-		@namespace router
-		**/
+	@class RouteManager
+	@submodule router
+	@namespace router
+	**/
 	umobile.router.RouteManager = Backbone.Router.extend({
 		/**
-				Property houses the current view class name.
+		Property houses the current view class name.
 
-				@property currentViewClass
-				@type String
-				**/
+		@property currentViewClass
+		@type String
+		**/
 		currentViewClass: null,
 
 		/**
-				Property houses Backbone routes.
+		Property houses Backbone routes.
 
-				@property routes
-				@type Object
-				**/
+		@property routes
+		@type Object
+		**/
 		routes: {
 			'dashboard': 'dashboard',
 			'login': 'login',
@@ -34,10 +34,10 @@
 		},
 
 		/**
-					Method initializes the Dashboard view.
+		Method initializes the Dashboard view.
 
-					@method dashboard
-					**/
+		@method dashboard
+		**/
 		dashboard: function () {
 			console.log('Awesome debug router.js - dashboard');
 			var dashboard = new umobile.view.DashboardView();
@@ -45,10 +45,10 @@
 		},
 
 		/**
-					Method initializes the Login view.
+		method initializes the login view.
 
-					@method login
-					**/
+		@method login
+		**/
 		login: function () {
 			console.log('Awesome debug router.js - login');
 			var login = new umobile.view.LoginView();
@@ -56,10 +56,10 @@
 		},
 
 		/**
-					Method initializes the logout view.
+		Method initializes the logout view.
 
-					@method logout
-					**/
+		@method logout
+		**/
 		logout: function () {
 			console.log('Awesome debug router.js - logout');
 			umobile.auth.logout(); // do an ajax call to remove cas ticket
@@ -79,10 +79,10 @@
 		},
 
 		/**
-					Method initializes the Module view.
+		Method initializes the Module view.
 
-					@method modules
-					**/
+		@method modules
+		**/
 		modules: function () {
 			console.log('Awesome debug router.js - modules');
 			var path, module;
@@ -104,13 +104,13 @@
 		},
 
 		/**
-					Listens for the route to change. When triggered,
-					it updates the class name on the html container
-					and broadcasts the changed route.
+		Listens for the route to change. When triggered,
+		it updates the class name on the html container
+		and broadcasts the changed route.
 
-					@method onRouteChanged
-					@param {String} route Reference to full route path.
-					**/
+		@method onRouteChanged
+		@param {String} route Reference to full route path.
+		**/
 		onRouteChanged: function (route, routeParam) {
 			console.log('Awesome debug router.js - onRouteChanged');
 			// Define.
@@ -145,10 +145,10 @@
 		},
 
 		/**
-					Method initializes the router.
+		Method initializes the router.
 
-					@method initialize
-					**/
+		@method initialize
+		**/
 		initialize: function () {
 			console.log('Awesome debug router.js - initialize');
 			// Initialize the Page view.
