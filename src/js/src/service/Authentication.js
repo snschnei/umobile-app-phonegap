@@ -207,7 +207,9 @@
 
 						// If this doesn't look like the CAS login form, we already
 						// have a CAS session and were directed straight to uMobile.
+						console.log('before the check');
 						if (html.indexOf('name="lt"') === -1) {
+							console.log('after the log');
 							data = $.parseJSON(html);
 							if (!credentials || credentials.attributes.username === data.user) {
 								onSuccess(data);
@@ -216,8 +218,8 @@
 								onError(jqXHR, 'Auth failure');
 							}
 						} else { // Otherwise submit the user's credentials.
-							flowRegex = /input type='hidden' name="lt" value='([a-z0-9\-]*)?'/i;
-							executionRegex = /input type='hidden' name='execution' value='([a-z0-9\-]*)?'/i;
+							flowRegex = /input type="hidden" name="lt" value="([a-z0-9\-]*)?"/i;
+							executionRegex = /input type="hidden" name="execution" value="([a-z0-9\-]*)?"/i;
 							flowId = flowRegex.exec(html)[1];
 							executionId = executionRegex.exec(html)[1];
 
