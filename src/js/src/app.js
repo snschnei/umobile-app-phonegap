@@ -66,6 +66,14 @@ var umobile = {
 	auth: {},
 
 	/**
+	Namespace for the the logout service.
+
+	@submodule logout
+	@namespace logout
+	**/
+	logout: {},
+
+	/**
 	Namespace for the umobile storage implementation.
 
 	@submodule storage

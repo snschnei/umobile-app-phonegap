@@ -1,6 +1,6 @@
 {
   "port": 5000,
-  "environment": "ios",
+  "environment": "android",
   "auth": "cas",
   "mode": "prod",
   "less": {
@@ -9,5 +9,5 @@
     "prefix": "/css",
     "debug": true
   },
-  "external": "../www"
+  "external": "../assets/www"
 }

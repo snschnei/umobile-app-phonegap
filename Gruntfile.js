@@ -144,6 +144,7 @@ module.exports = function (grunt) {
 						'src/js/src/service/Utils.js',
 						'src/js/src/service/' + config.getTracker() + '.js',
 						'src/js/src/service/Authentication.js',
+						'src/js/src/service/Logout.js',
 						'src/js/src/service/Storage.js',
 						'src/js/src/model/State.js',
 						'src/js/src/model/Module.js',
