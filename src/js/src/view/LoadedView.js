@@ -140,6 +140,69 @@
 
 					return this;
 				},
+=======
+		showLoader: function () {
+            console.log("Awesome debug LoadedView.js - showLoader");
+			var loader = $('#contentLoader');
+			loader.show();
+		},
+
+		/**
+		Method hides the loading mask when switching views.
+
+		@method hideLoader
+		**/
+		hideLoader: function () {
+            console.log("Awesome debug LoadedView.js - hideLoader");
+			var loader = $('#contentLoader');
+			loader.fadeOut();
+		},
+
+		/**
+		Method renders the UI for all loaded views.
+
+		@method render
+		@override Base
+		@return {Object} Reference to loaded view.
+		**/
+		render: function () {
+            console.log("Awesome debug LoadedView.js - render");
+			// Loader.
+			this.showLoader();
+
+			// Define & Initialize.
+			var collection = this.folderCollection.toJSON(),
+				viewManager = umobile.app.viewManager,
+				currentView = viewManager.currentView.getViewName();
+
+			// The render method gets called numerous time in the present architecture.
+			// We only want to move forward when actual data is available.
+			if (!_.isEmpty(collection)) {
+
+				// We want to make sure we are not calling loaded views that have
+				// been unloaded. To insure this, we compare the current view name
+				// on the 'this' object with the view stored in the ViewManager.
+				// The ViewManager will always have the correct view to load.
+				console.log(this.getViewName());
+				if (this.getViewName() === currentView) {
+					// Render main template.
+					this.$el.addClass('hidden')
+						.html(this.template(this.options))
+						.removeClass('hidden');
+
+					// Render custom content for the loaded view.
+					if (collection[0].fname === 'fname') {
+						this.renderError();
+					} else {
+						this.renderContent(collection);
+					}
+
+					// Adjust height for modules
+					this.$el.children(':first').children(':nth-child(2)').css('height', 
+						$(window).height() - $('.um-navbar').height());
+
+					// Append '#view' to '#viewLoader'.
+					$('#viewLoader').append(this.$el);
 
 				/**
 				Method is triggered when the Module Collection is reset.

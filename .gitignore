@@ -7,3 +7,4 @@
 *.swp
 .project
 src/.project
+.DS_Store
