@@ -1,98 +1,98 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, Handlebars:true, console:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
+ 'use strict';
+
+ /**
+   Class abstraction. Defines properties and methods
+   for all loaded views.
+
+   @class LoadedView
+   @submodule view
+   @namespace view
+   @constructor
+  **/
+ umobile.view.LoadedView = umobile.view.Base.extend({
+	 /**
+	   Property houses the name of the loaded view.
+
+	   @property name
+	   @type String
+	  **/
+name: 'base',
+
+/**
+  Property houses root DOM element.
+
+  @property el
+  @type Object
+ **/
+el: '#view',
+
+/**
+  Method returns the name of the loaded view.
+
+  @method getViewName
+  @return {String} Name of the loaded view.
+ **/
+getViewName: function () {
+	console.log("Awesome debug LoadedView.js - getViewName");
+	return this.name;
+},
 
 	/**
-	Class abstraction. Defines properties and methods
-	for all loaded views.
+	  Method is meant to be overwritten. This method is
+	  a placeholder for child views to place their custom
+	  view error content.
 
-	@class LoadedView
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.LoadedView = umobile.view.Base.extend({
-		/**
-		Property houses the name of the loaded view.
+	  @method renderError
+	 **/
+renderError: function () {
+				 console.log("Awesome debug LoadedView.js - renderError");
+			 },
 
-		@property name
-		@type String
-		**/
-		name: 'base',
+			 /**
+			   Method is meant to be overwritten. This method is
+			   a placeholder for child views to place their custom
+			   view content.
 
-		/**
-		Property houses root DOM element.
+			   @method renderContent
+			   @param {Object} collection Reference to ModuleCollection.
+			  **/
+renderContent: function (collection) {
+				   console.log("Awesome debug LoadedView.js - renderContent");
+			   },
 
-		@property el
-		@type Object
-		**/
-		el: '#view',
+			   /**
+				 Method shows the loading mask when switching views.
 
-		/**
-		Method returns the name of the loaded view.
+				 @method showLoader
+				**/
+showLoader: function () {
+				console.log("Awesome debug LoadedView.js - showLoader");
+				var loader = $('#contentLoader');
+				loader.show();
+			},
 
-		@method getViewName
-		@return {String} Name of the loaded view.
-		**/
-		getViewName: function () {
-            console.log("Awesome debug LoadedView.js - getViewName");
-			return this.name;
-		},
+			/**
+			  Method hides the loading mask when switching views.
 
-		/**
-		Method is meant to be overwritten. This method is
-		a placeholder for child views to place their custom
-		view error content.
+			  @method hideLoader
+			 **/
+hideLoader: function () {
+				console.log("Awesome debug LoadedView.js - hideLoader");
+				var loader = $('#contentLoader');
+				loader.fadeOut();
+			},
 
-		@method renderError
-		**/
-		renderError: function () {
-            console.log("Awesome debug LoadedView.js - renderError");
-        },
+			/**
+			  Method renders the UI for all loaded views.
 
-		/**
-		Method is meant to be overwritten. This method is
-		a placeholder for child views to place their custom
-		view content.
-
-		@method renderContent
-		@param {Object} collection Reference to ModuleCollection.
-		**/
-		renderContent: function (collection) {
-            console.log("Awesome debug LoadedView.js - renderContent");
-        },
-
-		/**
-		Method shows the loading mask when switching views.
-
-		@method showLoader
-		**/
-		showLoader: function () {
-            console.log("Awesome debug LoadedView.js - showLoader");
-			var loader = $('#contentLoader');
-			loader.show();
-		},
-
-		/**
-		Method hides the loading mask when switching views.
-
-		@method hideLoader
-		**/
-		hideLoader: function () {
-            console.log("Awesome debug LoadedView.js - hideLoader");
-			var loader = $('#contentLoader');
-			loader.fadeOut();
-		},
-
-		/**
-		Method renders the UI for all loaded views.
-
-		@method render
-		@override Base
-		@return {Object} Reference to loaded view.
-		**/
-		render: function () {
-            console.log("Awesome debug LoadedView.js - render");
+			  @method render
+			  @override Base
+			  @return {Object} Reference to loaded view.
+			 **/
+render: function () {
+			console.log("Awesome debug LoadedView.js - render");
 			// Loader.
 			this.showLoader();
 
@@ -125,7 +125,7 @@
 
 					// Adjust height for modules
 					this.$el.children(':first').children(':nth-child(2)').css('height', 
-						$(window).height() - $('.um-navbar').height());
+							$(window).height() - $('.um-navbar').height());
 
 					// Append '#view' to '#viewLoader'.
 					$('#viewLoader').append(this.$el);
@@ -142,16 +142,16 @@
 		},
 
 		/**
-		Method is triggered when the Module Collection is reset.
+		  Method is triggered when the Module Collection is reset.
 
-		@method onCollectionReset
-		@override Base
-		**/
-		onCollectionReset: function () {
-            console.log("Awesome debug LoadedView.js - onCollectionReset");
-			this.render();
-		}
+		  @method onCollectionReset
+		  @override Base
+		 **/
+onCollectionReset: function () {
+					   console.log("Awesome debug LoadedView.js - onCollectionReset");
+					   this.render();
+				   }
 
-	});
+});
 
 })(jQuery, _, Backbone, umobile, config);

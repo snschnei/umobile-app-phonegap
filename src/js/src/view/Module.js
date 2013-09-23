@@ -1,49 +1,49 @@
 /*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, Handlebars:true, console:true */
 (function ($, _, umobile, config) {
-	'use strict';
+ 'use strict';
 
-	/**
-	Manages the individual Module or portlet view.
+ /**
+   Manages the individual Module or portlet view.
 
-	@class Module
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.Module = umobile.view.Base.extend({
-		/**
-		Property houses HTML tag name used to build view.
+   @class Module
+   @submodule view
+   @namespace view
+   @constructor
+  **/
+ umobile.view.Module = umobile.view.Base.extend({
+	 /**
+	   Property houses HTML tag name used to build view.
 
-		@property tagName
-		@type String
-		**/
-		tagName: 'li',
+	   @property tagName
+	   @type String
+	  **/
+tagName: 'li',
 
-		/**
-		Property houses class name that is added to the tagName.
+/**
+  Property houses class name that is added to the tagName.
 
-		@property className
-		@type String
-		**/
-		className: 'um-module-item',
+  @property className
+  @type String
+ **/
+className: 'um-module-item',
 
-		/**
-		Property houses DOM selectors.
+/**
+  Property houses DOM selectors.
 
-		@property selectors
-		@type Object
-		**/
-		selectors: {
-			template: '#views-partials-module'
-		},
+  @property selectors
+  @type Object
+ **/
+selectors: {
+template: '#views-partials-module'
+},
 
-        initialize: function() {
-            this.render();
-        },
-        render: function() {
-            var template = Handlebars.compile($(this.selectors.template).html());
-            this.$el.html(template(this.model));
-        }
-	});
+initialize: function() {
+				this.render();
+			},
+render: function() {
+			var template = Handlebars.compile($(this.selectors.template).html());
+			this.$el.html(template(this.model));
+		}
+});
 
 })(jQuery, _, umobile, config);

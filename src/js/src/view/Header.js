@@ -1,79 +1,79 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, Handlebars:true, console:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
+ 'use strict';
+
+ /**
+   Manages the application Header.
+
+   @class Header
+   @submodule view
+   @namespace view
+   @constructor
+  **/
+ umobile.view.Header = umobile.view.Base.extend({
+	 /**
+	   Property houses the root DOM element.
+
+	   @property el
+	   @type Object
+	  **/
+el: '#header',
+
+/**
+  Property houses DOM selectors.
+
+  @property selectors
+  @type Object
+  @override Base
+ **/
+selectors: {
+template: '#views-partials-header',
+home: '#homeButton',
+login: '#loginButton',
+logout: '#logoutButton'
+},
 
 	/**
-	Manages the application Header.
+	  Property houses the current route.
 
-	@class Header
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.Header = umobile.view.Base.extend({
-		/**
-		Property houses the root DOM element.
+	  @property currentRoute
+	  @type String
+	 **/
+currentRoute: null,
 
-		@property el
-		@type Object
-		**/
-		el: '#header',
+	/**
+	  Method manages the visibility of header icons.
 
-		/**
-		Property houses DOM selectors.
+	  @method toggleHeaderIcons
+	 **/
+	toggleHeaderIcons: function () {
+		console.log("Awesome debug Header.js - toggleHeaderIcons");
+		// Define.
+		var username, home, login, logout;
 
-		@property selectors
-		@type Object
-		@override Base
-		**/
-		selectors: {
-			template: '#views-partials-header',
-			home: '#homeButton',
-			login: '#loginButton',
-			logout: '#logoutButton'
-		},
+		// Initialize.
+		username = this.credModel.get('username');
+		console.log("username +++-============================" + username);
+		home = this.loc('home');
+		login = this.loc('login');
+		logout = this.loc('logout');
 
-		/**
-		Property houses the current route.
+		// Only toggle icons when our credential model
+		// contains a valid username.
+		if (username) {
+			// Toggles the login/logout button.
+			// TODO: Implement logout functionality.
 
-		@property currentRoute
-		@type String
-		**/
-		currentRoute: null,
+			if (username === 'guest') {
+				login.removeClass('hidden');
+				logout.addClass('hidden');
+			} else {
+				login.addClass('hidden');
+				logout.removeClass('hidden');
+			}
 
-		/**
-		Method manages the visibility of header icons.
-
-		@method toggleHeaderIcons
-		**/
-		toggleHeaderIcons: function () {
-            console.log("Awesome debug Header.js - toggleHeaderIcons");
-			// Define.
-			var username, home, login, logout;
-
-			// Initialize.
-			username = this.credModel.get('username');
-            console.log("username +++-============================" + username);
-			home = this.loc('home');
-			login = this.loc('login');
-			logout = this.loc('logout');
-
-			// Only toggle icons when our credential model
-			// contains a valid username.
-			if (username) {
-				// Toggles the login/logout button.
-				// TODO: Implement logout functionality.
-                
-				if (username === 'guest') {
-					login.removeClass('hidden');
-					logout.addClass('hidden');
-				} else {
-					login.addClass('hidden');
-					logout.removeClass('hidden');
-				}
-
-				console.log(this.currentRoute);
-				switch (this.currentRoute) {
+			console.log(this.currentRoute);
+			switch (this.currentRoute) {
 				case 'dashboard':
 					home.addClass('hidden');
 					break;
@@ -83,32 +83,32 @@
 				case 'modules':
 					home.removeClass('hidden');
 					break;
-				}
 			}
-		},
-
-		/**
-		Method is triggered when a user's credentials are updated.
-
-		@method onCredChanged
-		@override Base
-		**/
-		onCredChanged: function () {
-            console.log("Awesome debug Header.js - onCredChanged");
-			this.toggleHeaderIcons();
-		},
-
-		/**
-		Method is triggered when the route changes.
-
-		@method onRouteChanged
-		@override Base
-		**/
-		onRouteChanged: function (view) {
-            console.log("Awesome debug Header.js - onRouteChanged");
-			this.currentRoute = view.name;
-			this.toggleHeaderIcons();
 		}
-	});
+	},
+
+	/**
+	  Method is triggered when a user's credentials are updated.
+
+	  @method onCredChanged
+	  @override Base
+	 **/
+onCredChanged: function () {
+				   console.log("Awesome debug Header.js - onCredChanged");
+				   this.toggleHeaderIcons();
+			   },
+
+			   /**
+				 Method is triggered when the route changes.
+
+				 @method onRouteChanged
+				 @override Base
+				**/
+onRouteChanged: function (view) {
+					console.log("Awesome debug Header.js - onRouteChanged");
+					this.currentRoute = view.name;
+					this.toggleHeaderIcons();
+				}
+});
 
 })(jQuery, _, Backbone, umobile, config);
