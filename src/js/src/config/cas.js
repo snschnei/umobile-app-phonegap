@@ -19,6 +19,9 @@ config.casServerUrl = 'https://cas.oakland.edu';
 // LOCAL STORAGE.
 config.storageFn = 'local';
 
+// Forgot password url
+config.forgotPassword = 'https://netid.oakland.edu/profile/';
+
 // SESSION TIMEOUT.
 // 600000 millseconds = 10 minutes.
 config.sessionTimeout = '600000';
