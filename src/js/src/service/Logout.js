@@ -23,7 +23,7 @@
 				$.ajax({
 						url: config.uMobileServerUrl + config.uMobileServerContext + '/layout.json',
 						success: function (json) {
-							var folders = umobile.buildModuleArray(json);
+							var folders = umobile.buildFolderArray(json);
 							umobile.app.folderCollection.reset(folders);
 							umobile.app.folderCollection.save();
 							umobile.app.viewManager.show(new umobile.view.DashboardView());
