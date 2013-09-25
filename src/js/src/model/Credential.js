@@ -39,6 +39,11 @@
 					}
 				},
 
+				/**
+				Method to delete the user credentials from storage.
+
+				@method deleteCredentials
+				**/
 				deleteCredentials: function () {
 					this.sync('delete', this);
 				},
