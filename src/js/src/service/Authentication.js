@@ -288,7 +288,7 @@
 		};
 
 		/**
-		Method logs the current user out of the application 
+		Method logs the current user out of the application
 
 		@method logout
 		@param {Object} credentials Object hash containing user credentials.
