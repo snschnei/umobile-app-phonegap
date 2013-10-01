@@ -29,7 +29,7 @@
 				template: {},
 
 				/**
-				Property houses collection of modules.
+				Property houses collection of folders.
 
 				@property folderCollection
 				@type Object
@@ -105,7 +105,8 @@
 				},
 
 				/**
-				Method provides generic rendering of templates.
+				Method provides generic rendering of templates. It will nest the module view
+				inside the folder view by calling the Module render function.
 
 				@method render
 				@return {Object} Reference to the Header view.
@@ -115,14 +116,13 @@
 					var model = (this.options.hasOwnProperty('model')) ? this.options.model : {};
 					var portlets = model.portlets;
 					this.$el.html(this.template(model));
-					_.each(portlets, function (portlet, idx) {
+					_.each(portlets, function (portlet, idx) { // loop through the portlets so we can nest render them
 							var moduleView = new umobile.view.Module({
 									model: portlet
 								});
 							if (portlet.title !== 'OU MySail App') { // temporary fix to not display app ad
-								this.$el.append(moduleView.el);
+								this.$el.append(moduleView.el);// render the portlets 
 							}
-							console.log('looping ' + portlet.title);
 						}, this);
 					return this;
 				},
