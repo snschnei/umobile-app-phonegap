@@ -121,7 +121,7 @@
 									model: portlet
 								});
 							if (portlet.title !== 'OU MySail App') { // temporary fix to not display app ad
-								this.$el.append(moduleView.el);// render the portlets 
+								this.$el.append(moduleView.el);// render the portlets
 							}
 						}, this);
 					return this;

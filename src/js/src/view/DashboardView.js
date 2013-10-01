@@ -68,12 +68,13 @@
 							folder.title = $('<div/>').html(folder.title).text();
 							var folderView = new umobile.view.Folder({
 									model: folder,
-									id: i // pass in unique id
+									id: i // pass in unique id to be used for collapsing folders
 								});
 							i++;
 							folderList.append(folderView.render().el).show();
 						}, this);
 
+					// make the view start below the navbar
 					$('#main').css('top', $('.um-navbar').height());
 					window.scroll($('.um-navbar').height(), 0);
 				},
