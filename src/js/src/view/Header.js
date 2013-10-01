@@ -53,7 +53,6 @@
 
 					// Initialize.
 					username = this.credModel.get('username');
-					console.log('username +++-============================' + username);
 					home = this.loc('home');
 					login = this.loc('login');
 					logout = this.loc('logout');
@@ -62,7 +61,6 @@
 					// contains a valid username.
 					if (username) {
 						// Toggles the login/logout button.
-						// TODO: Implement logout functionality.
 
 						if (username === 'guest') {
 							login.removeClass('hidden');
