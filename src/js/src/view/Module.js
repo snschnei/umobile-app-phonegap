@@ -37,9 +37,22 @@
 					template: '#views-partials-module'
 				},
 
+				/**
+				Method will call the render functin when the view
+				is initialized
+
+				@method initialize
+				**/
+
 				initialize: function () {
 					this.render();
 				},
+
+				/**
+				Method will render the the module view
+
+				@method render 
+				**/
 				render: function () {
 					var template = Handlebars.compile($(this.selectors.template).html());
 					this.$el.html(template(this.model));
