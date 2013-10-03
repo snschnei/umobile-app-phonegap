@@ -80,10 +80,16 @@
 			umobile.app.viewManager.show(module);
 		},
 
+		/**
+		Method initializes the Module view and directs user to the Forgot password page.
+
+		@method forgotPassword
+		**/
+
 		forgotPassword: function () {
 			console.log('Awesome debug routher.js - forgot_Password');
 			var path, module;
-			path = 'https://netid.oakland.edu/profile/';
+			path = config.forgotPassword;
 			module = new umobile.view.ModuleView({
 				path: path
 			});

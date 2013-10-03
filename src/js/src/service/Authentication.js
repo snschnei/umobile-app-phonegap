@@ -132,7 +132,6 @@
 			};
 			url = getLocalLoginServletUrl();
 
-			console.log('url ============================== ' + url);
 			// If credentials are included, add them to the POST data.
 			if (credentials && credentials.get('username') && credentials.get('password')) {
 				data.userName = credentials.attributes.username;
@@ -151,9 +150,7 @@
 					success: function (data, textStatus, jqXHR) {
 						if (!credentials || !credentials.attributes.username) {
 							debug.info('Established guest session');
-							console.log('data ============================= ' + data.refUrl);
 							onSuccess(data);
-							console.log('IT MADE IT HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 						} else if (credentials.attributes.username === data.user) {
 							debug.info('Successful authentication for user ' + credentials.attributes.username);
 							onSuccess(data);
@@ -289,6 +286,15 @@
 					type: 'GET'
 				});
 		};
+
+		/**
+		Method logs the current user out of the application
+
+		@method logout
+		@param {Object} credentials Object hash containing user credentials.
+		@param {Function} onSuccess Handler for successful operation.
+		@param {Function} onError Handler for unsucssessful operation.
+		**/
 		umobile.auth.logout = function (credentials, onSuccess, onError) {
 			console.log('Awesome debug Authentication.js - umobile.auth.logout');
 			// Define.

@@ -4,7 +4,7 @@
 
 		/**
 		The Folder model houses information relating to each
-		folder or portlet.
+		folder or tab.
 
 		@class Folder
 		@subfolder model

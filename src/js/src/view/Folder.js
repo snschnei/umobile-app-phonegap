@@ -19,8 +19,6 @@
 				**/
 				tagName: 'ul',
 
-				id: 'abc',
-
 				/**
 				Property houses class name that is added to the tagName.
 
@@ -33,10 +31,14 @@
 					'click': 'clicked'
 				},
 
+				/**
+				Method toggles the folder list open and closed. It will then scroll the folder tab to the top of the list.
+
+				@method clicked
+				**/
 				clicked: function () {
-					$('#' + this.id).find('li').toggle();
-					console.log('clicked ' + this.model.title);
-					$('html, body').scrollTop($('#' + this.id).position().top);
+					$('#' + this.id).find('li').toggle(); // toggle the folder list when clicked
+					$('html, body').scrollTop($('#' + this.id).position().top); // scroll folder tab to top when clicked
 				},
 
 				/**

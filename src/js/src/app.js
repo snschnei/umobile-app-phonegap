@@ -3,7 +3,7 @@
 /**
 Main module for the umobile application. Namespaces
 all source logic to the umobile namespace. Houses the
-app, bootstrap, model, collection, view, auth and storage
+app, bootstrap, model, collection, view, logout, auth and storage
 submodules.
 
 @module umobile
@@ -99,20 +99,19 @@ var umobile = {
 
 	/**
 	Method parses the data received by the session.established event.
-	Iterates over layout JSON and adds modules (i.e. portlets) to
-	the modues array based upon the number of portlets described
-	by the JSON feed. The modules array is then returned.
+	Iterates over layout JSON and adds folders (i.e. tabs) to
+	the folders array based upon the number of folders described
+	by the JSON feed. The folders array is then returned.
 
-	@method buildModuleArray
-	@param {Object} data Object containing layout and portlet information.
-	@return {Array} modules Array of module objects.
+	@method buildFolderArray
+	@param {Object} data Object containing layout, folder and portlet information.
+	@return {Array} modules Array of folder objects.
 	**/
-	buildModuleArray: function (data) {
+	buildFolderArray: function (data) {
 		'use strict';
 		console.log('Awesome debug app.js - builModuleArray');
 		// Define.
 		var modules, folders, folderList;
-		console.log(JSON.stringify(data));
 
 		// Initialize.
 		modules = [];
@@ -133,8 +132,6 @@ var umobile = {
 
 						function grabIcon() {
 							console.log('Awesome debug app.js - grabIcon');
-							var imagePath; // path to where the image will be saved.
-							console.log('IMAGEPATH DECLARED: ' + imagePath);
 							var url = config.uMobileServerUrl + portlet.iconUrl; // url where the image can be found.
 							window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, function (fs) {
 									portlet.iconUrl = fs.root.fullPath + portlet.iconUrl;
@@ -142,7 +139,8 @@ var umobile = {
 
 									fileTransfer.download(
 										url,
-										portlet.iconUrl, function (entry) {
+										portlet.iconUrl,
+										function (entry) {
 											console.log('downoad complete: ' + entry.fullPath);
 										}, function (error) {
 											console.log('download error source ' + error.source);
@@ -152,24 +150,9 @@ var umobile = {
 								});
 						}
 
-						// Parse the config.nativeIcons object for a property
-						// that matches the portlet.fname. If one is found, set
-						// the icon url to leverage a locally stored icon. If a
-						// match is not found, set the icon url to an icon on the
-						// server.
-
-						// Commented out the check for local image becuause we will be pulling our images from the server.
-						//if (config.nativeIcons[portlet.fname]) {
-						//portlet.iconUrl = 'images/icons/' + config.nativeIcons[portlet.fname];
-						//} else {
-						grabIcon(); // grap path of where the image was saved.
-						//}
-
-						// Parse the config.nativeModules object for a property that
-						// matches the portlet.fname. If one is found, the module or
-						// portlet is natively supported. Set the portlet url to a local
-						// implementation (i.e., map.html). Otherwise, set the portlet url
-						// to an implementation located on the server.
+						// dowload the portlet icons
+						grabIcon();
+						
 						portlet.url = config.uMobileServerUrl + portlet.url;
 						portlet.isNative = false;
 
@@ -180,12 +163,11 @@ var umobile = {
 						portlet.fullTitle = portlet.title;
 						portlet.title = umobile.utility.Utils.truncate(portlet.title);
 
-						modules.push(new umobile.model.Module(portlet));
 					}, this);
 				folderList.push(new umobile.model.Folder(folder));
 			}, this);
 
-		// add the native modules from the config file
+		// add the modules that are not part of portal from the config file
 		var folder = [];
 		_.each(config.nativeFolders, function (nativeFolder, idx) {
 				folder.title = nativeFolder.title;
@@ -310,7 +292,7 @@ var umobile = {
 
 					// Build module array.
 					// Populate the collection with modules.
-					folder = umobile.buildModuleArray(data);
+					folder = umobile.buildFolderArray(data);
 					umobile.app.folderCollection.reset(folder);
 					umobile.app.folderCollection.save();
 
