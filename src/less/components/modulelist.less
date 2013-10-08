@@ -4,25 +4,57 @@
 .um-module-container {
 	padding: 0 0 0 0;
 	position: relative;
-	text-align: center;
+	text-align: left;
 	min-height: 150px;
+
+    ul {
+        margin: 0 0 0 0;
+    }
 
 	// List & list item
 	.um-module-list,
+    .um-folder-list,
 	.um-module-item {
 		display: block;
 		padding: 0;
 		margin: 0;
 		list-style: none;
 	}
-
-	// List
-	.um-module-list {
-		width: 265px;
-		margin: 0 auto;
-		padding: 10px 0 10px 0;
+	// FolderListView
+	.um-folder-list ul{
+        width: 100%;
+        float: left;
+        //border: 1px solid #ccc !important;
+        //box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+        background-color: #000;
 	}
 
+	// List item
+	.um-folder-item {
+		float: left;
+	}
+
+	// ListView
+	.um-module-list li {
+        width: 100%;
+        float: left;
+        border-bottom: 1px solid #ccc !important;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+        background-color: #000;
+        background: -webkit-linear-gradient(top, (@listViewEndGradient) 0%, (@listViewStartGradient) 100%); /* Chrome10+,Safari5.1+ */
+	}
+
+    // Folder Title
+    .um-folder-title {
+        color: @white;
+        overflow: hidden;
+        padding: 10px 0 10px 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 25px;
+        font-weight: bold;
+        background: -webkit-linear-gradient(top, (@folderViewEndGradient) 0%, (@folderViewStartGradient) 100%); /* Chrome10+,Safari5.1+ */
+    }
 	// List item
 	.um-module-item {
 		float: left;
@@ -33,8 +65,7 @@
 		display: block;
 		position: relative;
 		color: @moduleLinkColor;
-		text-shadow: 1px 1px 3px @moduleLinkShadowColor;
-		margin: 0 15px 20px 15px;
+		//text-shadow: 1px 1px 3px @moduleLinkShadowColor;
 
 		// New item indicator
 		.um-new {
@@ -51,9 +82,24 @@
 
 		// Title
 		.um-title {
-			width: 55px;
+			width: 60%;
+            color: @black;
 			overflow: hidden;
-			padding: 10px 0 0 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+			padding:  20px 0 0 20px;
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		// Description
+		.um-description {
+			width: 60%;
+            color: @black;
+			overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+			padding:  5px 0 0 20px;
 			font-size: 12px;
 			font-weight: bold;
 		}
@@ -61,8 +107,23 @@
 		// Icon
 		.um-icon {
 			img {
-				width: 57px;
-				height: 57px;
+                //height: 90%
+                padding: 5px 0 5px 0;
+                float: left;
+				width: 75px;
+				height: 75px;
+			}
+		}
+
+		// Arror Icon
+		.um-arrow {
+			img {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                padding: 0 10px 0 0;
+				width: 20px;
+				height: 20px;
 			}
 		}
 	}

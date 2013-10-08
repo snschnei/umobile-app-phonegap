@@ -5,3 +5,6 @@
 /src/modules/
 /src/css/
 /src/docs/
+*.swp
+.project
+src/.project

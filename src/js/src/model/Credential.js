@@ -1,51 +1,60 @@
 /*global window:true, document:true, jQuery:true, _:true, umobile:true, config:true, Backbone:true, console:true */
 (function ($, _, umobile, config) {
-	'use strict';
-
-	/**
-	The Credential model houses information relating to a user's
-	login credentials.
-
-	@class Credential
-	@submodule model
-	@namespace model
-	@constructor
-	**/
-	umobile.model.Credential = Backbone.Model.extend({
-		/**
-		Property houses default model attributes.
-
-		@property defaults
-		@type Object
-		**/
-		defaults: {
-			id: 'credentials',
-			username: null,
-			password: null
-		},
+		'use strict';
 
 		/**
-		Property houses validation rules.
+		The Credential model houses information relating to a user's
+		login credentials.
 
-		@property validation
-		@type Object
+		@class Credential
+		@submodule model
+		@namespace model
+		@constructor
 		**/
-		validation: {
-			username: {
-				required: true
-			},
-			password: {
-				required: true
-			}
-		},
+		umobile.model.Credential = Backbone.Model.extend({
+				/**
+				Property houses default model attributes.
 
-		/**
-		Method overrides Backbone.sync with umobile.storage.sync method.
-		Persists the state of the model to the server.
+				@property defaults
+				@type Object
+				**/
+				defaults: {
+					id: 'credentials',
+					username: null,
+					password: null
+				},
 
-		@method sync
-		**/
-		sync: umobile.storage.sync(umobile.storage[config.storageFn], 'credentials')
-	});
+				/**
+				Property houses validation rules.
 
-})(jQuery, _, umobile, config);
+				@property validation
+				@type Object
+				**/
+				validation: {
+					username: {
+						required: true
+					},
+					password: {
+						required: true
+					}
+				},
+
+				/**
+				Method to delete the user credentials from storage.
+
+				@method deleteCredentials
+				**/
+				deleteCredentials: function () {
+					this.sync('delete', this);
+				},
+
+				/**
+				Method overrides Backbone.sync with umobile.storage.sync method.
+				Persists the state of the model to the server.
+
+				@method sync
+				**/
+				sync: umobile.storage.sync(umobile.storage[config.storageFn], 'credentials')
+			});
+
+	})(jQuery, _, umobile, config);

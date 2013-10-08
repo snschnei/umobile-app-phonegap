@@ -27,7 +27,9 @@
 		routes: {
 			'dashboard': 'dashboard',
 			'login': 'login',
+			'logout': 'logout',
 			'modules/*module': 'modules',
+			'forgotPassword': 'forgotPassword',
 			'*other': 'dashboard'
 		},
 
@@ -42,13 +44,22 @@
 		},
 
 		/**
-		Method initializes the Login view.
+		method initializes the login view.
 
 		@method login
 		**/
 		login: function () {
 			var login = new umobile.view.LoginView();
 			umobile.app.viewManager.show(login);
+		},
+
+		/**
+		Method initializes the logout view.
+
+		@method logout
+		**/
+		logout: function () {
+			umobile.logout.Logout.logout();
 		},
 
 		/**
@@ -59,7 +70,24 @@
 		modules: function () {
 			var path, module;
 			path = umobile.utility.Utils.getParameter('url', Backbone.history.fragment);
-			module = new umobile.view.ModuleView({path: path});
+			module = new umobile.view.ModuleView({
+				path: path
+			});
+			umobile.app.viewManager.show(module);
+		},
+
+		/**
+		Method initializes the Module view and directs user to the Forgot password page.
+
+		@method forgotPassword
+		**/
+
+		forgotPassword: function () {
+			var path, module;
+			path = config.forgotPassword;
+			module = new umobile.view.ModuleView({
+				path: path
+			});
 			umobile.app.viewManager.show(module);
 		},
 
@@ -73,7 +101,7 @@
 		**/
 		onRouteChanged: function (route, routeParam) {
 			// Define.
-			var className, root, view, path;
+			var className, root, path, view;
 
 			// Initialize.
 			root = $('html');
@@ -93,10 +121,14 @@
 			this.currentViewClass = className;
 
 			// Update the current view on the state model.
-			umobile.app.stateModel.save({currentView: path});
+			umobile.app.stateModel.save({
+				currentView: path
+			});
 
 			// Broadcast route changed event.
-			$.publish('route.changed', {name: view});
+			$.publish('route.changed', {
+				name: view
+			});
 		},
 
 		/**

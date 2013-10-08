@@ -132,7 +132,8 @@ module.exports = function (grunt) {
 					'www/js/lib/backbone/backbone-validation.min.js': ['src/js/lib/backbone/backbone-validation.js'],
 					'www/js/lib/handlebars/handlebars.min.js': ['src/js/lib/handlebars/handlebars.js'],
 					'www/js/lib/bootstrap/bootstrap.min.js': ['src/js/lib/bootstrap/bootstrap.js'],
-					'www/js/lib/debug/debug.min.js': ['src/js/lib/debug/debug.js']
+					'www/js/lib/debug/debug.min.js': ['src/js/lib/debug/debug.js'],
+					'www/js/lib/fastclick.js': ['src/js/lib/fastclick.js']
 				}
 			},
 			source: {
@@ -140,17 +141,22 @@ module.exports = function (grunt) {
 					'www/js/src/main.min.js': [
 						'src/js/src/config/' + config.getAuth() + '.js',
 						'src/js/src/app.js',
+						'src/js/src/resource/Background.js',
 						'src/js/src/service/Utils.js',
 						'src/js/src/service/' + config.getTracker() + '.js',
 						'src/js/src/service/Authentication.js',
+						'src/js/src/service/Logout.js',
 						'src/js/src/service/Storage.js',
 						'src/js/src/model/State.js',
 						'src/js/src/model/Module.js',
+						'src/js/src/model/Folder.js',
 						'src/js/src/model/Credential.js',
 						'src/js/src/model/Notifier.js',
 						'src/js/src/collection/ModuleCollection.js',
+						'src/js/src/collection/FolderCollection.js',
 						'src/js/src/view/ViewManager.js',
 						'src/js/src/view/Base.js',
+						'src/js/src/view/Background.js',
 						'src/js/src/view/Page.js',
 						'src/js/src/view/Breadcrumb.js',
 						'src/js/src/view/Header.js',
@@ -159,6 +165,7 @@ module.exports = function (grunt) {
 						'src/js/src/view/DashboardView.js',
 						'src/js/src/view/LoginView.js',
 						'src/js/src/view/Module.js',
+						'src/js/src/view/Folder.js',
 						'src/js/src/view/ModuleView.js',
 						'src/js/src/view/Notifier.js',
 						'src/js/src/router.js'

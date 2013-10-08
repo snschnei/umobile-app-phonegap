@@ -1,83 +1,83 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, Handlebars:true, console:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
-
-	/**
-	Manages the application Footer.
-
-	@class Footer
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.Footer = umobile.view.Base.extend({
-		/**
-		Property houses root DOM element.
-
-		@property el
-		@type Object
-		**/
-		el: '#footer',
+		'use strict';
 
 		/**
-		Property houses DOM selectors.
+		Manages the application Footer.
 
-		@property selectors
-		@type Object
-		@override Base
+		@class Footer
+		@submodule view
+		@namespace view
+		@constructor
 		**/
-		selectors: {
-			template: '#views-partials-footer'
-		},
+		umobile.view.Footer = umobile.view.Base.extend({
+				/**
+				Property houses root DOM element.
 
-		/**
-		Property houses the current route.
+				@property el
+				@type Object
+				**/
+				el: '#footer',
 
-		@property currentRoute
-		@type String
-		**/
-		currentRoute: null,
+				/**
+				Property houses DOM selectors.
 
-		/**
-		Method toggles the visibility of the footer.
+				@property selectors
+				@type Object
+				@override Base
+				**/
+				selectors: {
+					template: '#views-partials-footer'
+				},
 
-		@method toggleVisibility
-		@param {Object} view The current view.
-		**/
-		toggleVisibility: function () {
-			// Define & initialize.
-			var username = this.credModel.get('username');
+				/**
+				Property houses the current route.
 
-			// Hide the footer and only show it when on the
-			// dashboard and logged in as a guest.
-			this.$el.hide();
-			if (username && this.currentRoute) {
-				if (username === 'guest' && this.currentRoute === 'dashboard') {
-					this.$el.show();
+				@property currentRoute
+				@type String
+				**/
+				currentRoute: null,
+
+				/**
+				Method toggles the visibility of the footer.
+
+				@method toggleVisibility
+				@param {Object} view The current view.
+				**/
+				toggleVisibility: function () {
+					// Define & initialize.
+					var username = this.credModel.get('username');
+
+					// Hide the footer and only show it when on the
+					// dashboard and logged in as a guest.
+					this.$el.hide();
+					if (username && this.currentRoute) {
+						if (username === 'guest' && this.currentRoute === 'dashboard') {
+							this.$el.show();
+						}
+					}
+				},
+
+				/**
+				Method is triggered when a user's credentials are updated.
+
+				@method onCredChanged
+				@override Base
+				**/
+				onCredChanged: function (model) {
+					this.toggleVisibility();
+				},
+
+				/**
+				Method is triggered when the route changes.
+
+				@method onRouteChanged
+				@override Base
+				**/
+				onRouteChanged: function (view) {
+					this.currentRoute = view.name;
+					this.toggleVisibility();
 				}
-			}
-		},
+			});
 
-		/**
-		Method is triggered when a user's credentials are updated.
-
-		@method onCredChanged
-		@override Base
-		**/
-		onCredChanged: function (model) {
-			this.toggleVisibility();
-		},
-
-		/**
-		Method is triggered when the route changes.
-
-		@method onRouteChanged
-		@override Base
-		**/
-		onRouteChanged: function (view) {
-			this.currentRoute = view.name;
-			this.toggleVisibility();
-		}
-	});
-
-})(jQuery, _, Backbone, umobile, config);
+	})(jQuery, _, Backbone, umobile, config);

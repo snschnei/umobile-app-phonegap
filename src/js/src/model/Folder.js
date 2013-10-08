@@ -3,14 +3,15 @@
 		'use strict';
 
 		/**
-		The State model houses the state of a user's authentication status.
+		The Folder model houses information relating to each
+		folder or tab.
 
-		@class State
-		@submodule model
+		@class Folder
+		@subfolder model
 		@namespace model
 		@constructor
 		**/
-		umobile.model.State = Backbone.Model.extend({
+		umobile.model.Folder = Backbone.Model.extend({
 				/**
 				Property houses default model attributes.
 
@@ -18,10 +19,7 @@
 				@type Object
 				**/
 				defaults: {
-					id: 'state',
-					authenticated: false,
-					lastSessionAccess: null,
-					currentView: null
+					title: 'Title'
 				},
 
 				/**
@@ -30,7 +28,7 @@
 
 				@method sync
 				**/
-				sync: umobile.storage.sync(umobile.storage[config.storageFn], 'state')
+				sync: umobile.storage.sync(umobile.storage[config.storageFn], 'folder')
 			});
 
 	})(jQuery, _, umobile, config);

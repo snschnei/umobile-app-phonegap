@@ -1,9 +1,9 @@
-/*global window:true, document:true, $:true, _:true, umobile:true, config:true, Backbone:true, console:true */
+/*global window:true, document:true, FastClick:true, navigator:true, FileTransfer:true, LocalFileSystem:true, $:true, _:true, umobile:true, config:true, Backbone:true, console:true */
 
 /**
 Main module for the umobile application. Namespaces
 all source logic to the umobile namespace. Houses the
-app, bootstrap, model, collection, view, auth and storage
+app, bootstrap, model, collection, view, logout, auth and storage
 submodules.
 
 @module umobile
@@ -66,6 +66,14 @@ var umobile = {
 	auth: {},
 
 	/**
+	Namespace for the the logout service.
+
+	@submodule logout
+	@namespace logout
+	**/
+	logout: {},
+
+	/**
 	Namespace for the umobile storage implementation.
 
 	@submodule storage
@@ -98,21 +106,22 @@ var umobile = {
 
 	/**
 	Method parses the data received by the session.established event.
-	Iterates over layout JSON and adds modules (i.e. portlets) to
-	the modues array based upon the number of portlets described
-	by the JSON feed. The modules array is then returned.
+	Iterates over layout JSON and adds folders (i.e. tabs) to
+	the folders array based upon the number of folders described
+	by the JSON feed. The folders array is then returned.
 
-	@method buildModuleArray
-	@param {Object} data Object containing layout and portlet information.
-	@return {Array} modules Array of module objects.
+	@method buildFolderArray
+	@param {Object} data Object containing layout, folder and portlet information.
+	@return {Array} modules Array of folder objects.
 	**/
-	buildModuleArray: function (data) {
+	buildFolderArray: function (data) {
 		'use strict';
 		// Define.
-		var modules, folders, headers;
+		var modules, folders, headers, folderList;
 
 		// Initialize.
 		modules = [];
+		folderList = [];
 		folders = (data && !_.isEmpty(data)) ? data.layout.folders : {};
 		headers = (data && !_.isEmpty(data) && !_.isEmpty(data.layout.header)) ? data.layout.header.portlets : {};
 		// Iterate over Headers
@@ -126,48 +135,60 @@ var umobile = {
 
 		// Iterate over folders.
 		_.each(folders, function (folder, idx) {
-			var portlets = folder.portlets;
+				var portlets = folder.portlets;
 
-			// Iterate over portlets.
-			_.each(portlets, function (portlet, idx) {
-				portlet.id = portlet.fname;
+				// Iterate over portlets.
+				_.each(portlets, function (portlet, idx) {
+						portlet.id = portlet.fname;
 
-				// Parse the config.nativeIcons object for a property
-				// that matches the portlet.fname. If one is found, set
-				// the icon url to leverage a locally stored icon. If a
-				// match is not found, set the icon url to an icon on the
-				// server.
-				if (config.nativeIcons[portlet.fname]) {
-					portlet.iconUrl = 'images/icons/' + config.nativeIcons[portlet.fname];
-				} else {
-					portlet.iconUrl = config.uPortalServerUrl + portlet.iconUrl;
-				}
+						// Dynamically download Icon from the server
+						// using the iconUrl from the JSON feed.
 
-				// Parse the config.nativeModules object for a property that
-				// matches the portlet.fname. If one is found, the module or
-				// portlet is natively supported. Set the portlet url to a local
-				// implementation (i.e., map.html). Otherwise, set the portlet url
-				// to an implementation located on the server.
-				if (config.nativeModules[portlet.fname]) {
-					portlet.url = config.nativeModules[portlet.fname];
-					portlet.isNative = true;
-				} else {
-					portlet.url = config.uMobileServerUrl + portlet.url;
-					portlet.isNative = false;
-				}
+						function grabIcon() {
+							var url = config.uMobileServerUrl + portlet.iconUrl; // url where the image can be found.
+							window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, function (fs) {
+									portlet.iconUrl = fs.root.fullPath + portlet.iconUrl;
+									var fileTransfer = new FileTransfer();
 
-				// Define hasNewItem property based upon the newItemCount property.
-				portlet.hasNewItem = (!Number(portlet.newItemCount)) ? false : true;
+									fileTransfer.download(
+										url,
+										portlet.iconUrl,
+										function (entry) {
+											console.log('downoad complete: ' + entry.fullPath);
+										}, function (error) {
+											console.log('download error source ' + error.source);
+											console.log('download error target ' + error.target);
+											console.log('upload error code ' + error.code);
+										});
+								});
+						}
 
-				// Truncate portlet title.
-				portlet.fullTitle = portlet.title;
-				portlet.title = umobile.utility.Utils.truncate(portlet.title);
+						// dowload the portlet icons
+						grabIcon();
+						
+						portlet.url = config.uMobileServerUrl + portlet.url;
+						portlet.isNative = false;
 
-				modules.push(new umobile.model.Module(portlet));
+						// Define hasNewItem property based upon the newItemCount property.
+						portlet.hasNewItem = (!Number(portlet.newItemCount)) ? false : true;
+
+						// Truncate portlet title.
+						portlet.fullTitle = portlet.title;
+						portlet.title = umobile.utility.Utils.truncate(portlet.title);
+
+					}, this);
+				folderList.push(new umobile.model.Folder(folder));
 			}, this);
-		}, this);
 
-		return modules;
+		// add the modules that are not part of portal from the config file
+		var folder = [];
+		_.each(config.nativeFolders, function (nativeFolder, idx) {
+				folder.title = nativeFolder.title;
+				folder.portlets = nativeFolder.portlets;
+				folderList.push(new umobile.model.Folder(nativeFolder));
+			}, this);
+
+		return folderList;
 	},
 
 	/**
@@ -180,27 +201,29 @@ var umobile = {
 		'use strict';
 		umobile.session.SessionTracker.get(_.bind(function (time) {
 
-			// Define.
-			var now, lastSession, sessionTimeout;
+					// Define.
+					var now, lastSession, sessionTimeout;
 
-			// Update the 'lastSessionAccess' property.
-			if (time !== 0) {
-				umobile.app.stateModel.save({lastSessionAccess: time});
-			}
+					// Update the 'lastSessionAccess' property.
+					if (time !== 0) {
+						umobile.app.stateModel.save({
+								lastSessionAccess: time
+							});
+					}
 
-			// Determine if our session has expired.
-			now = Number((new Date()).getTime());
-			lastSession = Number(umobile.app.stateModel.get('lastSessionAccess'));
-			sessionTimeout = Number(config.sessionTimeout);
+					// Determine if our session has expired.
+					now = Number((new Date()).getTime());
+					lastSession = Number(umobile.app.stateModel.get('lastSessionAccess'));
+					sessionTimeout = Number(config.sessionTimeout);
 
-			// When session exists, fetch modules from module collection.
-			// When the session has expired, attempt to re-establish a session.
-			if ((now - lastSession) < sessionTimeout) {
-				umobile.app.moduleCollection.fetch();
-			} else {
-				umobile.auth.establishSession();
-			}
-		}, this));
+					// When session exists, fetch modules from module collection.
+					// When the session has expired, attempt to re-establish a session.
+					if ((now - lastSession) < sessionTimeout) {
+						umobile.app.folderCollection.fetch();
+					} else {
+						umobile.auth.establishSession();
+					}
+				}, this));
 	},
 
 	/**
@@ -216,14 +239,14 @@ var umobile = {
 	updateAppState: function () {
 		'use strict';
 		umobile.app.stateModel.fetch({
-			success: _.bind(function (stateModel) {
-				umobile.app.credModel.fetch({
-					success: _.bind(function (credModel) {
-						umobile.checkSession();
+				success: _.bind(function (stateModel) {
+						umobile.app.credModel.fetch({
+								success: _.bind(function (credModel) {
+										umobile.checkSession();
+									}, this)
+							});
 					}, this)
-				});
-			}, this)
-		});
+			});
 	},
 
 	/**
@@ -247,7 +270,7 @@ var umobile = {
 		'use strict';
 		umobile.app.stateModel = new umobile.model.State();
 		umobile.app.credModel = new umobile.model.Credential();
-		umobile.app.moduleCollection = new umobile.collection.ModuleCollection();
+		umobile.app.folderCollection = new umobile.collection.FolderCollection();
 	},
 
 	/**
@@ -261,38 +284,44 @@ var umobile = {
 		// Subscribe to 'session.established' event.
 		// When triggered, updates the State model and SessionTracker.
 		$.subscribe('session.established', _.bind(function (data) {
-			// Define.
-			var modules;
+					// Define.
+					var folder;
 
-			// Update credentials.
-			umobile.app.credModel.save({username: data.user});
+					// Update credentials.
+					umobile.app.credModel.save({
+							username: data.user
+						});
 
-			// Update state.
-			umobile.app.stateModel.save({
-				lastSessionAccess: (new Date()).getTime(),
-				authenticated: (umobile.app.credModel.get('username')) ? true : false
-			});
+					// Update state.
+					umobile.app.stateModel.save({
+							lastSessionAccess: (new Date()).getTime(),
+							authenticated: (umobile.app.credModel.get('username')) ? true : false
+						});
 
-			// Build module array.
-			// Populate the collection with modules.
-			modules = umobile.buildModuleArray(data);
-			umobile.app.moduleCollection.reset(modules);
-			umobile.app.moduleCollection.save();
+					// Build module array.
+					// Populate the collection with modules.
+					folder = umobile.buildFolderArray(data);
+					umobile.app.folderCollection.reset(folder);
+					umobile.app.folderCollection.save();
 
-			// Update time in the Session Tracker.
-			umobile.session.SessionTracker.set(umobile.app.stateModel.get('lastSessionAccess'));
+					// Update time in the Session Tracker.
+					umobile.session.SessionTracker.set(umobile.app.stateModel.get('lastSessionAccess'));
 
-			// Redirect user to dashboard.
-			umobile.app.router.navigate('dashboard', {trigger: true});
-		}, this));
+					// Redirect user to dashboard.
+					umobile.app.router.navigate('dashboard', {
+							trigger: true
+						});
+				}, this));
 
 		// Subscribe to 'session.failure' event.
 		$.subscribe('session.failure', _.bind(function () {
-			umobile.app.moduleCollection.reset({});
+					umobile.app.folderCollection.reset({});
 
-			// Direct users to the login screen.
-			umobile.app.router.navigate('login', {trigger: true});
-		}, this));
+					// Direct users to the login screen.
+					umobile.app.router.navigate('login', {
+							trigger: true
+						});
+				}, this));
 	},
 
 	/**
@@ -311,10 +340,37 @@ var umobile = {
 	onDeviceReady: function () {
 		'use strict';
 
+		// add listener for the back button
+		document.addEventListener('backbutton', umobile.onBackKeyDown, false);
+
 		umobile.initEventListeners();
 		umobile.initModels();
 		umobile.initRouter();
 		umobile.updateAppState();
+	},
+
+	restart: function () {
+		'use strict';
+		Backbone.history.stop();
+		umobile.onDeviceReady();
+	},
+
+	/**
+	This function will listen for the backbutton press. If the backbutton is pressed
+	while the user is viewing the dashboard then the app will close. Other wise it will
+	go back in the page history.
+
+	@method onBackKeyDown
+	**/
+	onBackKeyDown: function () {
+		'use strict';
+		// get the current view that the user is looking at.
+		var currentPage = umobile.app.viewManager.getCurrentView().name;
+		if (currentPage === 'dashboard') {
+			navigator.app.exitApp();
+		} else {
+			navigator.app.backHistory();
+		}
 	},
 
 	/**
@@ -326,6 +382,9 @@ var umobile = {
 	initialize: function () {
 		'use strict';
 		// Listen to onDeviceReady event.
+		window.addEventListener('load', function () {
+				FastClick.attach(document.body);
+			}, false);
 		document.addEventListener('deviceready', umobile.onDeviceReady, false);
 		if (config.loginFn === 'mockLogin') {
 			umobile.onDeviceReady();

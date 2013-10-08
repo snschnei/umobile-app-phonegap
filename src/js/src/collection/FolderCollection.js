@@ -3,21 +3,21 @@
 		'use strict';
 
 		/**
-		The Module collection houses a collection of modules or portlets.
+		The Folder collection houses a collection of folders or portlets.
 
-		@class ModuleCollection
-		@submodule collection
+		@class FolderCollection
+		@subfolder collection
 		@namespace collection
 		@constructor
 		**/
-		umobile.collection.ModuleCollection = Backbone.Collection.extend({
+		umobile.collection.FolderCollection = Backbone.Collection.extend({
 				/**
 				The model class contained by the collection.
 
 				@property model
 				@type Object
 				**/
-				model: umobile.model.Module,
+				model: umobile.model.Folder,
 
 				/**
 				Method overrides Backbone.save. Makes an update call to the
@@ -47,7 +47,7 @@
 
 				@method sync
 				**/
-				sync: umobile.storage.sync(umobile.storage[config.storageFn], 'modules')
+				sync: umobile.storage.sync(umobile.storage[config.storageFn], 'folders')
 			});
 
 	})(jQuery, _, umobile, config);

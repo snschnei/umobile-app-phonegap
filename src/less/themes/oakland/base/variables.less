@@ -1,0 +1,80 @@
+//
+// Oakland (Theme Rules)
+// --------------------------------------------------
+
+// Color Palette
+// -------------------------
+
+// Black
+@black: rgba(0, 0, 0, 1);
+@blackLighten: lighten(@black, 10%);
+@blackLighter: lighten(@black, 20%);
+@blackLightest: lighten(@black, 30%);
+
+// White
+@white: rgba(255, 255, 255, 1);
+
+// b1: Oakland Background
+@b1: rgba(183, 156, 88, 1);
+@b1Darken: darken(@b1, 10%);
+@b1Darker: darken(@b1, 20%);
+@b1Darkest: darken(@b1, 30%);
+
+// b2: Oakland Background
+@b2: rgba(223, 221, 181, 1);
+@b2Darken: darken(@b2, 10%);
+@b2Darker: darken(@b2, 20%);
+@b2Darkest: darken(@b2, 30%);
+
+// Component Colors
+// -------------------------
+// Backgrounds
+@defaultBg: @b2;
+@dashboardBg: @b2;
+@moduleBg: @b2;
+@loginBg: @b2;
+
+// Buttons
+// Inverse
+@inverseButtonGradientStartColor: @b1;
+@inverseButtonGradientEndColor: @b1;
+@inverseButtonHoverColor: @b1Darken;
+@inverseButtonBorderColor: @b1Darken;
+@inverseButtonTextColor: @white;
+
+//listView Gradient
+@listViewStartGradient: rgba(226, 232, 231, 1);
+@listViewEndGradient: @white;
+@folderViewStartGradient: rgba(222,212,186,1);
+@folderViewEndGradient: rgba(173,149,82,1);
+
+
+// Login form
+@loginFormBg: @b1;
+@legendBorderBottomColor: @b1Darken;
+
+// Navbar
+@navbarBorderTopColor: @b1;
+@navbarBorderBottomColor: @b1Darken;
+@navbarGradientStartColor: @b1;
+@navbarGradientEndColor: @b1Darken;
+@navbarTextColor: @white;
+
+// Module list
+@moduleLinkColor: @white;
+@moduleLinkShadowColor: @black;
+@badgeBorderColor: @white;
+@badgeBg: @b1;
+@badgeGradientStartColor: @b1;
+@badgeGradientEndColor: @b1Darker;
+
+// Paths
+// -------------------------
+@logoPath: '../images/theme/oakland/portal_logo.png';
+@beigeLoaderPath: '../images/theme/oakland/um_beige_loader.gif';
+
+// Loader
+@defaultLoaderPath: @beigeLoaderPath;
+@dashboardLoaderPath: @beigeLoaderPath;
+@moduleLoaderPath: @defaultLoaderPath;
+@loginLoaderPath: @defaultLoaderPath;

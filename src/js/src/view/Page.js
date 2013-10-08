@@ -37,9 +37,9 @@
 		},
 
 		/**
-		Method initializes the Header view.
+		Responsible for rendering out a basic page layout,
+		which consists of the header, content and footer.
 
-		@method renderHeader
 		**/
 		renderHeader: function () {
 			// Define.

@@ -1,143 +1,150 @@
 /*global window:true, _:true, Backbone:true, jQuery:true, umobile:true, config:true, Handlebars:true, console:true */
 (function ($, _, Backbone, umobile, config) {
-	'use strict';
-
-	/**
-	Class abstraction. Defines properties and methods
-	for all loaded views.
-
-	@class LoadedView
-	@submodule view
-	@namespace view
-	@constructor
-	**/
-	umobile.view.LoadedView = umobile.view.Base.extend({
-		/**
-		Property houses the name of the loaded view.
-
-		@property name
-		@type String
-		**/
-		name: 'base',
+		'use strict';
 
 		/**
-		Property houses root DOM element.
+		Class abstraction. Defines properties and methods
+		for all loaded views.
 
-		@property el
-		@type Object
+		@class LoadedView
+		@submodule view
+		@namespace view
+		@constructor
 		**/
-		el: '#view',
+		umobile.view.LoadedView = umobile.view.Base.extend({
+				/**
+				Property houses the name of the loaded view.
 
-		/**
-		Method returns the name of the loaded view.
+				@property name
+				@type String
+				**/
+				name: 'base',
 
-		@method getViewName
-		@return {String} Name of the loaded view.
-		**/
-		getViewName: function () {
-			return this.name;
-		},
+				/**
+				Property houses root DOM element.
 
-		/**
-		Method is meant to be overwritten. This method is
-		a placeholder for child views to place their custom
-		view error content.
+				@property el
+				@type Object
+				**/
+				el: '#view',
 
-		@method renderError
-		**/
-		renderError: function () {},
+				/**
+				Method returns the name of the loaded view.
 
-		/**
-		Method is meant to be overwritten. This method is
-		a placeholder for child views to place their custom
-		view content.
+				@method getViewName
+				@return {String} Name of the loaded view.
+				**/
+				getViewName: function () {
+					return this.name;
+				},
 
-		@method renderContent
-		@param {Object} collection Reference to ModuleCollection.
-		**/
-		renderContent: function (collection) {},
+				/**
+				Method is meant to be overwritten. This method is
+				a placeholder for child views to place their custom
+				view error content.
 
-		/**
-		Method shows the loading mask when switching views.
+				@method renderError
+				**/
+				renderError: function () {
+				},
 
-		@method showLoader
-		**/
-		showLoader: function () {
-			var loader = $('#contentLoader');
-			loader.show();
-		},
+				/**
+				Method is meant to be overwritten. This method is
+				a placeholder for child views to place their custom
+				view content.
 
-		/**
-		Method hides the loading mask when switching views.
+				@method renderContent
+				@param {Object} collection Reference to ModuleCollection.
+				**/
+				renderContent: function (collection) {
+				},
 
-		@method hideLoader
-		**/
-		hideLoader: function () {
-			var loader = $('#contentLoader');
-			loader.fadeOut();
-		},
+				/**
+				Method shows the loading mask when switching views.
 
-		/**
-		Method renders the UI for all loaded views.
+				@method showLoader
+				**/
+				showLoader: function () {
+					var loader = $('#contentLoader');
+					loader.show();
+				},
 
-		@method render
-		@override Base
-		@return {Object} Reference to loaded view.
-		**/
-		render: function () {
-			// Loader.
-			this.showLoader();
+				/**
+				Method hides the loading mask when switching views.
 
-			// Define & Initialize.
-			var collection = this.moduleCollection.toJSON(),
-				viewManager = umobile.app.viewManager,
-				currentView = viewManager.currentView.getViewName();
+				@method hideLoader
+				**/
+				hideLoader: function () {
+					var loader = $('#contentLoader');
+					loader.fadeOut();
+				},
 
-			// The render method gets called numerous time in the present architecture.
-			// We only want to move forward when actual data is available.
-			if (!_.isEmpty(collection)) {
+				/**
+				Method renders the UI for all loaded views.
 
-				// We want to make sure we are not calling loaded views that have
-				// been unloaded. To insure this, we compare the current view name
-				// on the 'this' object with the view stored in the ViewManager.
-				// The ViewManager will always have the correct view to load.
-				if (this.getViewName() === currentView) {
-					// Render main template.
-					this.$el.addClass('hidden')
-						.html(this.template(this.options))
-						.removeClass('hidden');
+				@method render
+				@override Base
+				@return {Object} Reference to loaded view.
+				**/
+				render: function () {
+					// Loader.
+					this.showLoader();
 
-					// Render custom content for the loaded view.
-					if (collection[0].fname === 'fname') {
-						this.renderError();
-					} else {
-						this.renderContent(collection);
+					// Define & Initialize.
+					var collection = this.folderCollection.toJSON(),
+					viewManager = umobile.app.viewManager,
+					currentView = viewManager.currentView.getViewName();
+
+					// The render method gets called numerous time in the present architecture.
+					// We only want to move forward when actual data is available.
+					if (!_.isEmpty(collection)) {
+
+						// We want to make sure we are not calling loaded views that have
+						// been unloaded. To insure this, we compare the current view name
+						// on the 'this' object with the view stored in the ViewManager.
+						// The ViewManager will always have the correct view to load.
+						if (this.getViewName() === currentView) {
+							// Render main template.
+							this.$el.addClass('hidden')
+							.html(this.template(this.options))
+							.removeClass('hidden');
+
+							// Render custom content for the loaded view.
+							if (collection[0].fname === 'fname') {
+								this.renderError();
+							} else {
+								this.renderContent(collection);
+							}
+
+							// Adjust height for modules
+							this.$el.children(':first').children(':nth-child(2)').css('height',
+								$(window).height() - $('.um-navbar').height());
+
+
+							// Append '#view' to '#viewLoader'.
+							$('#viewLoader').append(this.$el);
+
+							// Delegate Events.
+							this.delegateEvents(this.events);
+
+							// Loader.
+							this.hideLoader();
+						}
 					}
 
-					// Append '#view' to '#viewLoader'.
-					$('#viewLoader').append(this.$el);
+					return this;
+				},
 
-					// Delegate Events.
-					this.delegateEvents(this.events);
+				/**
+				Method is triggered when the Module Collection is reset.
 
-					// Loader.
-					this.hideLoader();
+				@method onCollectionReset
+				@override Base
+				**/
+				onCollectionReset: function () {
+					this.render();
 				}
-			}
 
-			return this;
-		},
+			});
 
-		/**
-		Method is triggered when the Module Collection is reset.
-
-		@method onCollectionReset
-		@override Base
-		**/
-		onCollectionReset: function () {
-			this.render();
-		}
-
-	});
-
-})(jQuery, _, Backbone, umobile, config);
+	})(jQuery, _, Backbone, umobile, config);
