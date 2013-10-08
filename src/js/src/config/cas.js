@@ -5,7 +5,7 @@ var config = {};
 // HTML5 testing url: http://localhost:5000
 // Android: http://10.0.2.2:8080
 // iOS: http://localhost:8080
-config.uMobileServerUrl = 'https://mysaildev.oakland.edu';
+config.uMobileServerUrl = 'https://mysail.oakland.edu';
 
 // UMOBILE SERVER CONTEXT PATH
 config.uMobileServerContext = '/uPortal';
@@ -14,7 +14,7 @@ config.uMobileServerContext = '/uPortal';
 // mockLogin, localLogin or casLogin.
 config.loginFn = 'casLogin';
 config.encryptionKey = 'umobile';
-config.casServerUrl = 'https://castest.oakland.edu';
+config.casServerUrl = 'https://cas.oakland.edu';
 
 // LOCAL STORAGE.
 config.storageFn = 'local';
