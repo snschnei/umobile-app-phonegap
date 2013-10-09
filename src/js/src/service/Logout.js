@@ -1,4 +1,4 @@
-/*global window:true, _:true, document:true, jQuery:true, umobile:true, config:true, cordova:true, console:true */
+/*global window:true, _:true, document:true, jQuery:true, umobile:true, config:true, cordova:true, debug:true */
 (function ($, _, umobile, config) {
 		'use strict';
 
@@ -33,7 +33,7 @@
 							umobile.app.viewManager.show(new umobile.view.DashboardView());
 						},
 						error: function (jqXHR, textStatus, errorThrown) {
-							console.log('Error Getting guest feed' + jqXHR + ' ' + textStatus + ' ' +  errorThrown);
+							debug.info('Error Getting guest feed' + jqXHR + ' ' + textStatus + ' ' +  errorThrown);
 						}
 					});
 			}

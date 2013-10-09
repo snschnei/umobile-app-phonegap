@@ -1,4 +1,4 @@
-/*global window:true, document:true, FastClick:true, navigator:true, FileTransfer:true, LocalFileSystem:true, $:true, _:true, umobile:true, config:true, Backbone:true, console:true */
+/*global window:true, document:true, FastClick:true, navigator:true, FileTransfer:true, LocalFileSystem:true, $:true, _:true, umobile:true, config:true, Backbone:true, debug:true */
 
 /**
 Main module for the umobile application. Namespaces
@@ -154,11 +154,11 @@ var umobile = {
 										url,
 										portlet.iconUrl,
 										function (entry) {
-											console.log('downoad complete: ' + entry.fullPath);
+											debug.info('downoad complete: ' + entry.fullPath);
 										}, function (error) {
-											console.log('download error source ' + error.source);
-											console.log('download error target ' + error.target);
-											console.log('upload error code ' + error.code);
+											debug.info('download error source ' + error.source);
+											debug.info('download error target ' + error.target);
+											debug.info('upload error code ' + error.code);
 										});
 								});
 						}
